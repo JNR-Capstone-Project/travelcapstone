@@ -1,11 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
 </head>
 <body>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+                <span th:case="${false}">
+                    <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="login btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right mt-2">
+                        <li class="px-3 py-2">
+                            <form th:action="@{/login}" method="post">
+                                <div class="form-group">
+                                    <input id="username" name="username" placeholder="Username" class="form-control form-control-sm" type="text" required="" />
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" name="password" placeholder="Password" class="form-control form-control-sm" type="password" required="" />
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                </div>
+                            </form>
+                            <button class="btn btn-primary btn-block sign"><a href="/sign-up">Sign Up!</a></button>
+                        </li>
+                    </ul>
+                </span>
+            <span th:case="${true}">
+                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" class="login btn btn-outline-secondary dropdown-toggle">Profile <span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right mt-2">
+                        <li class="px-3 py-2">
+                            <form th:action="@{/profile}" th:method="post">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Profile</button>
+                                </div>
+                            </form>
+                            <form th:action="@{/logout}" th:method="post">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Logout</button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </span>
+        </div>
+
+        <!--<nav>-->
+
+        <!--</nav>-->
+        <!--<form class="form-inline my-2 my-lg-0">-->
+        <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />-->
+        <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+        <!--</form>-->
+    </div>
+</nav>
 </body>
 </html>
