@@ -27,12 +27,6 @@ public class UserController {
         return "users/sign-up";
     }
 
-    @GetMapping("/")
-    @ResponseBody
-    public String home(){
-        return "home page";
-    }
-
 
     @PostMapping("/home/sign-up")
     public String createUser(@ModelAttribute User user, PasswordEncoder passwordEncoder){

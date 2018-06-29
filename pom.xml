@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.codeup</groupId>
-	<artifactId>blog</artifactId>
+	<artifactId>travelcapstone</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>blog</name>
-	<description>Project to learn Spring boot</description>
+	<name>travelcapstone</name>
+	<description>Final capstone project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
