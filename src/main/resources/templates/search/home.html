@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: header"></head>
+<head th:replace="partials/header :: header('Viatorem')"></head>
 <body>
-
-
-
-
 
 <div class="container">
 
@@ -13,18 +9,27 @@
     <form>
         <div class="form-group">
             <label for="origin">Select Origin</label>
-            <input type="text" class="form-control" id="origin" aria-describedby="emailHelp" placeholder="Choose a starting location" />
+            <input type="text" id="origin" aria-describedby="emailHelp" placeholder="Choose a starting location" />
             <label for="destination">Select Destination</label>
-            <input type="text" class="form-control" id="destination" placeholder="Choose an end point" />
-        </div>
-        <div class="form-group">
+            <input type="text" id="destination" placeholder="Choose an end point" />
+            <br/>
             <label for="departure">Departure Date</label>
-            <input type="date" class="form-control" id="departure" aria-describedby="emailHelp" placeholder="Select a departure date" />
+            <input type="date" id="departure" aria-describedby="emailHelp" placeholder="Select a departure date" />
             <label for="return">Return Date</label>
-            <input type="date" class="form-control" id="return" placeholder="Select a return date" />
+            <input type="date" id="return" placeholder="Select a return date" />
+            <label class="form-check-label" for="oneway">One Way</label>
+            <input type="checkbox" class="form-check-input" id="oneway" />
+            <label for="price">Name a price</label>
+            <input type="text" id="price" placeholder="0.00" />
+            <p>Select the number of travelers: <span>
+                <label for="adults">Adults</label>
+                <input type="number" id="adults" placeholder="1" />
+                <label for="children">Children</label>
+                <input type="number" id="children" placeholder="1" />
+            </span></p>
         </div>
 
-        <button type="submit" class="btn btn-primary">Search for flights!</button>
+        <button type="submit" class="btn btn-primary search">Search for flights!</button>
     </form>
 
 
