@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div class="container-fluid" >
+    <h1 id="solo"></h1>
+    <div class="card-group m-0" ></div>
+</div>
+
+<footer th:fragment="footer" class="footer">
+    <!--Test js file-->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <!--<script src="/js/jquery.js"></script>-->
+    <script type="text/javascript">
+        'use strict';
+
+        var origin = "&origin=SAT";
+        var destination = "&destination=BOS";
+        var departure_date = "&departure_date=2018-06-29";
+        var maximumPrice = "&max_price=500";
+        var currency = "&currency=USD";
+
+        var api_key = 'TXIA8oaPoUrPTKogMt0y496orBf38IqM';
+
+        var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + maximumPrice + currency;
+
+        var request=$.get(resource_url);
+
+        request.fail(function (current, status, error) {
+            console.log(status);
+            console.log(error);
+        });
+
+        request.done(function (response) {
+
+
+            //Since we are calling data out of the same array we can create a loop to put the machine to work
+            main(response);
+            console.log(response);
+
+        });
+
+
+
+        function main(response) {
+                response.list.forEach(function (results) {
+                    $("#solo").text(results);
+                    $(".card-group").html("<div class='card-body text-center'><h2>fare</h2>"+ response + "\xB0" + "</div>");
+
+                });
+
+
+
+
+
+
+
+
+        }
+
+
+
+    </script>
+</footer>
+</body>
+</html>
