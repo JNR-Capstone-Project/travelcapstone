@@ -21,25 +21,21 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/sign-up")
+    @GetMapping("/home/sign-up")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
         return "users/sign-up";
     }
 
-    @GetMapping("/")
-    @ResponseBody
-    public String home(){
-        return "home page";
-    }
 
-
-    @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user, PasswordEncoder passwordEncoder){
+    @PostMapping("/home/sign-up")
+    public String createUser(@ModelAttribute User user, PasswordEncoder passwordEncoder){
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         users.save(user);
-        return  "users/login";
+        return  "home/login";
     }
+
+
 
 }
