@@ -32,15 +32,15 @@ public class SearchController {
     }
 
     //get method for the info page ... probably the search results
-    @PostMapping("/home/search")
-    public String search(@ModelAttribute Search search) {
-        //  find a flies for the search from the api using that search, put that results in a List<Search>
-        //  and passing this list to the view results
-        return "/search/results";
-    }
+//    @PostMapping("/search")
+//    public String search(@ModelAttribute Search search) {
+//        //  find a flies for the search from the api using that search, put that results in a List<Search>
+//        //  and passing this list to the view results
+//        return "/search/results";
+//    }
 
     //post method for the search will submit a list of search objects and will be passed to the results view
-    @GetMapping("/home/search/results")
+    @GetMapping("/results")
     public String viewResults(@ModelAttribute List<Search> results, Model view) {
         view.addAttribute("", results);
         return "/search/results";
