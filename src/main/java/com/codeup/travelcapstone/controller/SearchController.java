@@ -31,7 +31,7 @@ public class SearchController {
         return "search/home";
     }
 
-    //get method for the info page ... probably the search results
+//    get method for the info page ... probably the search results
 //    @PostMapping("/search")
 //    public String search(@ModelAttribute Search search) {
 //        //  find a flies for the search from the api using that search, put that results in a List<Search>
