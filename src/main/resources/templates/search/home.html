@@ -7,11 +7,19 @@
 
 <div class="container">
 
+
+
     <h1>Welcome to Viatorem! Where should we go?</h1>
     <form>
         <div class="form-group">
-            <label for="origin">Select Origin</label>
-            <input type="text" id="origin" aria-describedby="emailHelp" placeholder="Choose a starting location" />
+            <div class="ui-widget">
+                <label for="origin">Select Origin</label>
+                <input type="text" id="origin" aria-describedby="emailHelp" placeholder="Choose a starting location" />
+            </div>
+            <div class="ui-widget" style="margin-top:2em; font-family:Arial">
+                Result:
+                <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+            </div>
             <label for="destination">Select Destination</label>
             <input type="text" id="destination" placeholder="Choose an end point" />
             <br/>
