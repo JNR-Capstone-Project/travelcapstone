@@ -6,6 +6,7 @@
 
 
 
+
 $(function() {
     function log( message ) {
         $( "<div>" ).text( message ).prependTo( "#log" );
@@ -17,7 +18,7 @@ $(function() {
                 url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                 dataType: "json",
                 data: {
-                    apikey: "<API KEY>",
+                    apikey: "",
                     term: request.term
                 },
                 success: function( data ) {
@@ -63,7 +64,7 @@ $(document).on('click', function () {
 
     var currency = "&currency=" + $("#currency").val();
 
-    var api_key = '<API KEY>';
+    var api_key = '';
 
     var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + maximumPrice + currency;
 
