@@ -17,7 +17,7 @@ $(function() {
                 url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                 dataType: "json",
                 data: {
-                    apikey: "AyZ37zgcA10ejcEYufPy2Ag3wd3dbgUq",
+                    apikey: "",
                     term: request.term
                 },
                 success: function( data ) {
@@ -61,7 +61,7 @@ $(".results").ready(function () {
 
     var currency = "&currency=USD" ;
 
-    var api_key = 'AyZ37zgcA10ejcEYufPy2Ag3wd3dbgUq';
+    var api_key = '';
 
     if($("#returnDate").val() == null) {
         var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + maximumPrice + currency;
