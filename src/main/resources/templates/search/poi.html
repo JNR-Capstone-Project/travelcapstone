@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header(${'Places of interest'})">
+    <style>
+        #poiMap{
+            height: 350px;
+            width: 550px;
+            border-color: black;
+        }
+    </style>
+</head>
+<body>
+
+<div id="poiMap"></div>
+
+<div th:replace="partials/footer :: footer"></div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2l-5CY-2Ds6dIyc8doaPHImwacbive3A"></script>
+<script>
+
+
+    /*var address = {
+        address: "300 Alamo Plaza, San Antonio, TX, 78205"
+    };*/
+    // function callback(results, status, restaurant) {
+    //     if (status === google.maps.GeocoderStatus.OK) {
+    //         // Recenter the map over the address
+    //         // results[0].geometry.location will contain an object with lat and lng
+    //         // setter method
+    //         map.setCenter(results[0].geometry.location);
+    //         map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+    //         map.setZoom(14);
+    //         var marker = new google.maps.Marker({
+    //             position: results[0].geometry.location,
+    //             map: map
+    //         });
+    //         var info = new google.maps.InfoWindow({
+    //             content: restaurant.info
+    //         });
+    //         info.open(map, marker);
+    //     } else {
+    //         // Show an error message with the status if our request fails
+    //         alert("Geocoding was not successful - STATUS: " + status);
+    //     }
+    // }
+
+
+    // //method to create the adresses for all the points
+    // var restaurants = [
+    //     {
+    //         address: "9921 Frontage Rd, San Antonio, TX 78230",
+    //         info: "Info 1"
+    //     },
+    //     {
+    //         address: "22410 US Hwy 281 N, San Antonio, TX 78259",
+    //         info: "Info 2"
+    //     },
+    //     {
+    //         address: "849 E Commerce St, San Antonio TX, 78205",
+    //         info: "Info 3"
+    //     }
+    // ];
+
+    //obtain the Poi
+
+    $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?', {
+        dataType : 'json',
+        apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+        latitude:'41.878',
+        longitude:'-87.645',
+        radius:'1',
+    }).done(function(data) {
+
+        console.log(data);
+        // for (var i = 0; i < data.points_of_interest.length; i++) {
+        //     console.log(data.points_of_interest[i]);
+        // }
+    })
+
+    // var marker;
+
+    // function placeMarker(location) {
+    //     marker.setPosition(location);
+    // }
+
+    //
+    // marker = new google.maps.Marker({
+    //     position: {
+    //         lat:  29.426791,
+    //         lng: -98.489602
+    //     },
+    //     map: map
+    // });
+
+
+
+    //
+    // // setInterval, instead of foreach
+    // restaurants.forEach(function (restaurant) {
+    //     geocoder.geocode({address: restaurant.address}, function (results, status) {
+    //         console.log(restaurant);
+    //         callback(results, status, restaurant);
+    //     });
+    // });
+
+
+</script>
+
+</body>
+</html>

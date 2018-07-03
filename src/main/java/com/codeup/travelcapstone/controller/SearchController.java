@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import sun.tools.tree.NewArrayExpression;
+//import sun.tools.tree.NewArrayExpression;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +47,7 @@ public class SearchController {
     }
 
 
+
 //    @PostMapping("/home/search/results/save")
 //    public String saveResults(@ModelAttribute Search search) {
 //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -61,4 +62,12 @@ public class SearchController {
 //
 //        return "/search/results";
 //    }
+
+
+    @GetMapping("/poi")
+    public String poi(){
+        return "/search/poi";
+    }
+
+
 }
