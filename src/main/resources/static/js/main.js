@@ -11,13 +11,15 @@ $(function() {
         $( "<div>" ).text( message ).prependTo( "#log" );
         $( "#log" ).scrollTop( 0 );
     }
-    $( "#origin" ).autocomplete({
+    $( ".airports" ).autocomplete({
         source: function( request, response ) {
             $.ajax({
                 url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                 dataType: "json",
                 data: {
-                    apikey: "TXIA8oaPoUrPTKogMt0y496orBf38IqM",
+
+                    apikey: "",
+
                     term: request.term
                 },
                 success: function( data ) {
@@ -42,16 +44,12 @@ $(function() {
 
 
 
-
-
-
-
 /* =======================================================================
                     Low flight API
 ========================================================================*/
 
 
-$(document).on('click', function () {
+$(".results").ready(function () {
 
     var origin = "&origin=" + $("#origin").val();
 
@@ -59,14 +57,23 @@ $(document).on('click', function () {
 
     var departure_date = "&departure_date=" + $("#departure").val();
 
+    var return_date = "&return_date=" + $("#returnDate").val();
+
     var maximumPrice = "&max_price=" + $("#price").val();
 
-    var currency = "&currency=" + $("#currency").val();
+    var currency = "&currency=USD" ;
 
-    var api_key = 'TXIA8oaPoUrPTKogMt0y496orBf38IqM';
 
-    var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + maximumPrice + currency;
+    var api_key = '';
 
+
+
+    if($("#returnDate").val() == null) {
+        var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + maximumPrice + currency;
+    } else {
+        var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + return_date + maximumPrice + currency;
+
+    }
 
     var request=$.get(resource_url);
     request.fail(function (current, status, error) {
@@ -88,6 +95,7 @@ $(document).on('click', function () {
             // console.log(response.results[r]);
 
             // $("#solo").html("<div class='card-body text-center'>" + response.results[r] + "\xB0" + "</div>");
+
         }
     }
 
@@ -104,7 +112,7 @@ $(document).on('click', function () {
 
 $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?', {
     dataType : 'json',
-    apikey: "v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy",
+    apikey: "",
     latitude:'41.878',
     longitude:'-87.645',
     radius:'1',

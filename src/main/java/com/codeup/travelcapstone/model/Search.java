@@ -8,23 +8,25 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "searchs")
+@Table(name = "searches")
 public class Search {
 
         @Id
         @GeneratedValue
         private long id;
         @Column(nullable = false)
-        private Date start_date;
+        private String start_date;
         @Column
-        private Date end_date;
+        private String end_date;
         @Column(nullable = false)
         private String destination;
-        @Column
+        @Column(nullable = false)
+        private String origin;
+        @Column(nullable = false)
         private long price;
-        @Column
-        private boolean non_stop;
-        @Column
+//        @Column
+//        private boolean non_stop;
+        @Column(nullable = false)
         private int children;
         @Column(nullable = false)
         private int adults;
@@ -36,13 +38,14 @@ public class Search {
     }
 
 
-    public Search(Date start_date, Date end_date, String destination, long price,
-                  boolean non_stop, int children, int adults, User user) {
+    public Search(String start_date, String end_date, String origin, String destination, long price,
+                  int children, int adults, User user) {
         this.start_date = start_date;
         this.end_date = end_date;
+        this.origin = origin;
         this.destination = destination;
         this.price = price;
-        this.non_stop = non_stop;
+//        this.non_stop = non_stop;
         this.children = children;
         this.adults = adults;
         this.user = user;
@@ -57,19 +60,19 @@ public class Search {
         this.id = id;
     }
 
-    public Date getStart_date() {
+    public String getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(String start_date) {
         this.start_date = start_date;
     }
 
-    public Date getEnd_date() {
+    public String getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(String end_date) {
         this.end_date = end_date;
     }
 
@@ -89,13 +92,13 @@ public class Search {
         this.price = price;
     }
 
-    public boolean isNon_stop() {
-        return non_stop;
-    }
-
-    public void setNon_stop(boolean non_stop) {
-        this.non_stop = non_stop;
-    }
+//    public boolean isNon_stop() {
+//        return non_stop;
+//    }
+//
+//    public void setNon_stop(boolean non_stop) {
+//        this.non_stop = non_stop;
+//    }
 
     public int getChildren() {
         return children;
@@ -119,6 +122,14 @@ public class Search {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 }
 
