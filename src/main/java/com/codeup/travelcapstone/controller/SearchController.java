@@ -32,6 +32,12 @@ public class SearchController {
         return "search/home";
     }
 
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "user/index";
+    }
+
+
     //get method for the info page ... probably the search results
     @PostMapping("/search/home")
     public String search(@ModelAttribute Search search) {

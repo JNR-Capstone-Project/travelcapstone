@@ -6,6 +6,7 @@
 
 
 
+
 $(function() {
     function log( message ) {
         $( "<div>" ).text( message ).prependTo( "#log" );
