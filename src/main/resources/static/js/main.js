@@ -11,13 +11,13 @@ $(function() {
         $( "<div>" ).text( message ).prependTo( "#log" );
         $( "#log" ).scrollTop( 0 );
     }
-    $( "#origin" ).autocomplete({
+    $( ".airports" ).autocomplete({
         source: function( request, response ) {
             $.ajax({
                 url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                 dataType: "json",
                 data: {
-                    apikey: "<API KEY>",
+                    apikey: "AyZ37zgcA10ejcEYufPy2Ag3wd3dbgUq",
                     term: request.term
                 },
                 success: function( data ) {
@@ -42,16 +42,12 @@ $(function() {
 
 
 
-
-
-
-
 /* =======================================================================
                     Low flight API
 ========================================================================*/
 
 
-$(document).on('click', function () {
+$(".results").ready(function () {
 
     var origin = "&origin=" + $("#origin").val();
 
@@ -59,14 +55,20 @@ $(document).on('click', function () {
 
     var departure_date = "&departure_date=" + $("#departure").val();
 
+    var return_date = "&return_date=" + $("#returnDate").val();
+
     var maximumPrice = "&max_price=" + $("#price").val();
 
-    var currency = "&currency=" + $("#currency").val();
+    var currency = "&currency=USD" ;
 
-    var api_key = '<API KEY>';
+    var api_key = 'AyZ37zgcA10ejcEYufPy2Ag3wd3dbgUq';
 
-    var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + maximumPrice + currency;
+    if($("#returnDate").val() == null) {
+        var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + maximumPrice + currency;
+    } else {
+        var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + return_date + maximumPrice + currency;
 
+    }
 
     var request=$.get(resource_url);
     request.fail(function (current, status, error) {
@@ -88,9 +90,6 @@ $(document).on('click', function () {
             // console.log(response.results[r]);
 
             // $("#solo").html("<div class='card-body text-center'>" + response.results[r] + "\xB0" + "</div>");
-
-
-
 
         }
     }

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: header"></head>
-
-<body>
+<head th:replace="partials/header :: header(${'Home Page'})">
+</head>
+<body class="results">
 <div class="container">
 
     <div><!--Run a for each on the results to display them -->
