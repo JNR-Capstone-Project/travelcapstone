@@ -19,9 +19,19 @@
 <script>
 
 
-    /*var address = {
-        address: "300 Alamo Plaza, San Antonio, TX, 78205"
-    };*/
+
+//   var mapOptions = {
+//       zoom: 12,
+//       center: {
+//           lat:  29.426791,
+//           lng: -98.489602
+//       },
+//       mapTypeId: google.maps.MapTypeId.TERRAIN
+//   };
+//   var mapCanvas = document.getElementById('poiMap');
+//   var map = new google.maps.Map(mapCanvas, mapOptions);
+
+
     // function callback(results, status, restaurant) {
     //     if (status === google.maps.GeocoderStatus.OK) {
     //         // Recenter the map over the address
@@ -61,21 +71,24 @@
     //     }
     // ];
 
-    //obtain the Poi
 
+
+    //obtain the Poi
     $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?', {
         dataType : 'json',
-        apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
-        latitude:'41.878',
-        longitude:'-87.645',
+        apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
+        latitude:'49.10',
+        longitude:'-123.11934',
         radius:'1',
-    }).done(function(data) {
-
+        category:'museum'
+    }).done(function(data){
         console.log(data);
-        // for (var i = 0; i < data.points_of_interest.length; i++) {
-        //     console.log(data.points_of_interest[i]);
+        // for(var i=0;i<data.points_of_interest.length;i++) {
+        //     console.log(data.points_of_interest[i].location);
         // }
-    })
+    });
+
+
 
     // var marker;
 

@@ -110,17 +110,6 @@ $(".results").ready(function () {
                     POI Map
 ========================================================================*/
 
-$.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?', {
-    dataType : 'json',
-    apikey: "",
-    latitude:'41.878',
-    longitude:'-87.645',
-    radius:'1',
-    category:'museum'
-}).done(function(data){
-    for(var i=0;i<data.points_of_interest.length;i++)
-        console.log(data.points_of_interest[i]);
-});
 
 
 
