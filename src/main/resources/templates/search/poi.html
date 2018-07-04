@@ -19,102 +19,80 @@
 <script>
 
 
+//building the map
+   var mapOptions = {
+       zoom: 12,
+       center: {
+           lat:  42.350921,
+           lng: -71.069951
+       },
+       mapTypeId: google.maps.MapTypeId.TERRAIN
+   };
+   var mapCanvas = document.getElementById('poiMap');
+   var map = new google.maps.Map(mapCanvas, mapOptions);
 
-//   var mapOptions = {
-//       zoom: 12,
-//       center: {
-//           lat:  29.426791,
-//           lng: -98.489602
-//       },
-//       mapTypeId: google.maps.MapTypeId.TERRAIN
-//   };
-//   var mapCanvas = document.getElementById('poiMap');
-//   var map = new google.maps.Map(mapCanvas, mapOptions);
-
-
-    // function callback(results, status, restaurant) {
-    //     if (status === google.maps.GeocoderStatus.OK) {
-    //         // Recenter the map over the address
-    //         // results[0].geometry.location will contain an object with lat and lng
-    //         // setter method
-    //         map.setCenter(results[0].geometry.location);
-    //         map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-    //         map.setZoom(14);
-    //         var marker = new google.maps.Marker({
-    //             position: results[0].geometry.location,
-    //             map: map
-    //         });
-    //         var info = new google.maps.InfoWindow({
-    //             content: restaurant.info
-    //         });
-    //         info.open(map, marker);
-    //     } else {
-    //         // Show an error message with the status if our request fails
-    //         alert("Geocoding was not successful - STATUS: " + status);
-    //     }
-    // }
+//setting the main marker ...should be the user destination
+   marker = new google.maps.Marker({
+       position: {
+           lat:  42.350921,
+           lng: -71.069951
+       },
+       map: map
+   });
 
 
-    // //method to create the adresses for all the points
-    // var restaurants = [
-    //     {
-    //         address: "9921 Frontage Rd, San Antonio, TX 78230",
-    //         info: "Info 1"
-    //     },
-    //     {
-    //         address: "22410 US Hwy 281 N, San Antonio, TX 78259",
-    //         info: "Info 2"
-    //     },
-    //     {
-    //         address: "849 E Commerce St, San Antonio TX, 78205",
-    //         info: "Info 3"
-    //     }
-    // ];
+//function to get a marker for each poi on the JSON
+//    function poiToMarker( data)
+//    {
+//        for (var i = 0; i < data.points_of_interest.length; i++) {
+//            {
+//                marker = new google.maps.Marker({
+//                    position: {
+//                        lat: poi.location.latitude,
+//                        lng: poi.location.longitude
+//                    },
+//                    map: map
+//                });
+//            }
+//        }
+//    }
+
+   // function myCategory(categories,category) {
+   //     var isCategory=-1
+   //     for (var i=0;i<categories.length;i++){
+   //         if (categories[i].indexOf(category) >= 0);
+   //         {
+   //             isCategory=1;
+   //         }
+   //     }
+   //     return isCategory;
+   // }
+
+
+//calling the function to set the poi markers on the map
+//     poiToMarker($poi);
 
 
 
-    //obtain the Poi
-    $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?', {
+    //obtain the Poi JSON
+   $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+        {
         dataType : 'json',
         apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
-        latitude:'49.10',
-        longitude:'-123.11934',
-        radius:'1',
-        category:'museum'
-    }).done(function(data){
+        // apikey:'v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy',
+        latitude:'42.350921',
+        longitude:'-71.069951',
+        radius:'3'
+    }).done(function(data)
+    {
         console.log(data);
-        // for(var i=0;i<data.points_of_interest.length;i++) {
-        //     console.log(data.points_of_interest[i].location);
-        // }
     });
 
 
 
-    // var marker;
-
-    // function placeMarker(location) {
-    //     marker.setPosition(location);
-    // }
-
-    //
-    // marker = new google.maps.Marker({
-    //     position: {
-    //         lat:  29.426791,
-    //         lng: -98.489602
-    //     },
-    //     map: map
-    // });
 
 
 
-    //
-    // // setInterval, instead of foreach
-    // restaurants.forEach(function (restaurant) {
-    //     geocoder.geocode({address: restaurant.address}, function (results, status) {
-    //         console.log(restaurant);
-    //         callback(results, status, restaurant);
-    //     });
-    // });
 
 
 </script>
