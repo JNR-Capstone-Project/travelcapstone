@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header(${'Places of interest'})">
+    <style>
+        #poiMap{
+            height: 350px;
+            width: 550px;
+            border-color: black;
+        }
+
+        #poiPosts{
+            width: 550px;
+            height: 1500px;
+            border: black solid 1px;
+            margin: 20px;
+
+        }
+    </style>
+</head>
+<body>
+
+<div id="poiMap"></div>
+
+<div id="poiPosts"></div>
+
+<div th:replace="partials/footer :: footer"></div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2l-5CY-2Ds6dIyc8doaPHImwacbive3A"></script>
+<script>
+
+
+
+
+//building the map
+
+// var location={ lat: 19.775221,
+//     lng: -99.885829}
+
+
+
+    var mapOptions = {
+        zoom: 12,
+        center: {
+            lat: 42.343794,
+            lng:-71.067170
+        },
+        mapTypeId: google.maps.MapTypeId.TERRAIN,
+        draggable: true
+    };
+    var mapCanvas = document.getElementById('poiMap');
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+
+//setting the main marker ...should be the user destination
+
+
+
+
+function setMarker(location) {
+    marker.setPosition(location);
+}
+
+   marker  = new google.maps.Marker({
+       position: {
+           lat: 42.3437941,
+           lng:-71.067170
+       },
+       map: map
+   });
+
+
+   function setMarker(location) {
+       marker.setPosition(location);
+
+   }
+
+
+
+
+// function to get a marker for each poi on the JSON
+   function poiToMarker( data)
+   {
+       for (var i = 0; i < data.points_of_interest.length; i++) {
+               marker = new google.maps.Marker({
+                   position: {
+                       lat: data.points_of_interest[i].location.latitude,
+                       lng: data.points_of_interest[i].location.longitude
+                   },
+                   map: map
+               });
+               $("#poiPosts").append(createReport(data.points_of_interest[i]));
+
+       }
+
+
+   }
+
+
+// obtain the Poi JSON  passing a location and setting the markers for the destination
+
+
+    $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+        {
+            dataType: 'json',
+            apikey:'TXIA8oaPoUrPTKogMt0y496orBf38IqM',
+            // apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
+            // apikey:'v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy',
+            // apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+            latitude:  42.343794,
+            longitude:  -71.067170,
+            radius: '20'
+        }).done(function (data) {
+        console.log(data);
+        poiToMarker(data);
+    });
+
+
+//creating the div for the view
+
+function createReport(poi) {
+    var htmlPlace="";
+    htmlPlace+="<div class='screen'>";
+    htmlPlace+="<h3>"+poi.title+"</h3>"+"\n";
+    htmlPlace+="<img src="+poi.main_image+">"+"\n";
+    htmlPlace+="<p> "+poi.details.description+"</p>"+"\n";
+    htmlPlace+="</div>";
+    return htmlPlace
+}
+
+
+
+</script>
+
+</body>
+</html>

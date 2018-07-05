@@ -42,7 +42,10 @@ $(function() {
                 url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                 dataType: "json",
                 data: {
-                    apikey: "TXIA8oaPoUrPTKogMt0y496orBf38IqM",
+
+
+                    apikey: "",
+
                     term: request.term
                 },
                 success: function( data ) {
@@ -86,7 +89,9 @@ $(document).on('click', function () {
 
     var currency = "&currency=USD" ;
 
-    var api_key = 'TXIA8oaPoUrPTKogMt0y496orBf38IqM';
+
+    var api_key = '';
+
 
 
     if($("#returnDate").val() == null) {
@@ -125,4 +130,8 @@ $(document).on('click', function () {
 });
 
 
+
+/* =======================================================================
+                    POI Map
+========================================================================*/
 
