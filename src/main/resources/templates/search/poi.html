@@ -7,11 +7,21 @@
             width: 550px;
             border-color: black;
         }
+
+        #poiPosts{
+            width: 550px;
+            height: 1500px;
+            border: black solid 1px;
+            margin: 20px;
+
+        }
     </style>
 </head>
 <body>
 
 <div id="poiMap"></div>
+
+<div id="poiPosts"></div>
 
 <div th:replace="partials/footer :: footer"></div>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -19,38 +29,59 @@
 <script>
 
 
+
+
 //building the map
-   var mapOptions = {
-       zoom: 12,
-       center: {
-           lat:  49.10,
-           lng: -123.11934
-       },
-       mapTypeId: google.maps.MapTypeId.TERRAIN
-   };
-   var mapCanvas = document.getElementById('poiMap');
-   var map = new google.maps.Map(mapCanvas, mapOptions);
+
+var location={ lat: 19.775221,
+    lng: -99.885829}
+
+
+
+
+    var mapOptions = {
+        zoom: 12,
+        center: {
+            lat: location.lat,
+            lng: location.lng
+        },
+        mapTypeId: google.maps.MapTypeId.TERRAIN,
+        draggable: true
+    };
+    var mapCanvas = document.getElementById('poiMap');
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+
 
 //setting the main marker ...should be the user destination
-   marker = new google.maps.Marker({
+
+
+
+
+function setMarker(location) {
+    marker.setPosition(location);
+}
+
+   marker  = new google.maps.Marker({
        position: {
-           lat:  49.10,
-           lng: -123.11934
+           lat:  location.lat,
+           lng:location.lng
        },
        map: map
    });
 
 
+   function setMarker(location) {
+       marker.setPosition(location);
+
+   }
+
 
 
 
 // function to get a marker for each poi on the JSON
-   function poiToMarker( data,category)
+   function poiToMarker( data)
    {
        for (var i = 0; i < data.points_of_interest.length; i++) {
-           if(!data.points_of_interest[i].categories.length==0
-           &&myCategory(data.points_of_interest[i].categories,category)==1)
-           {
                marker = new google.maps.Marker({
                    position: {
                        lat: data.points_of_interest[i].location.latitude,
@@ -58,57 +89,44 @@
                    },
                    map: map
                });
+               $("#poiPosts").append(createReport(data.points_of_interest[i]));
 
-           }
-           //some poi don't have any category
-           else {
-               marker = new google.maps.Marker({
-                   position: {
-                       lat: data.points_of_interest[i].location.latitude,
-                       lng: data.points_of_interest[i].location.longitude
-                   },
-                   map: map
-               });
-           }
        }
-   }
 
-   function myCategory(categories,category) {
-       var isCategory=-1
-       for (var i=0;i<categories.length;i++){
-           if (categories[i].indexOf(category) >= 0);
-           {
-               isCategory=1;
-           }
-       }
-       return isCategory;
+
    }
 
 
-//calling the function to set the poi markers on the map
-//     poiToMarker($poi);
+// obtain the Poi JSON  passing a location and setting the markers for the destination
+function poi(location) {
 
-    var categoria='';
-
-// obtain the Poi JSON
-   $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+    $.ajax('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
         {
-        dataType : 'json',
-        // apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
-        // apikey:'v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy',
-        apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
-        latitude:'49.10',
-        longitude:'-123.11934',
-        radius:'10'
-    }).done(function(data)
-    {   console.log(data);
-        poiToMarker(data,categoria);
+            dataType: 'json',
+            apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
+            // apikey:'v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy',
+            // apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+            latitude: location.lat,
+            longitude: location.lng,
+            radius: '20',
+            category: 'church'
+        }).done(function (data) {
+        console.log(data);
+        poiToMarker(data);
     });
+}
 
 
 
-
-
+function createReport(poi) {
+    var htmlPlace="";
+    htmlPlace+="<div class='screen'>";
+    htmlPlace+="<h3>"+poi.title+"</h3>"+"\n";
+    htmlPlace+="<img src="+poi.main_image+">"+"\n";
+    htmlPlace+="<p> "+poi.details.description+"</p>"+"\n";
+    htmlPlace+="</div>";
+    return htmlPlace
+}
 
 
 
