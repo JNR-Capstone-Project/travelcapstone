@@ -33,17 +33,16 @@
 
 //building the map
 
-var location={ lat: 19.775221,
-    lng: -99.885829}
-
+// var location={ lat: 19.775221,
+//     lng: -99.885829}
 
 
 
     var mapOptions = {
         zoom: 12,
         center: {
-            lat: location.lat,
-            lng: location.lng
+            lat: 42.343794,
+            lng:-71.067170
         },
         mapTypeId: google.maps.MapTypeId.TERRAIN,
         draggable: true
@@ -63,8 +62,8 @@ function setMarker(location) {
 
    marker  = new google.maps.Marker({
        position: {
-           lat:  location.lat,
-           lng:location.lng
+           lat: 42.3437941,
+           lng:-71.067170
        },
        map: map
    });
@@ -98,25 +97,25 @@ function setMarker(location) {
 
 
 // obtain the Poi JSON  passing a location and setting the markers for the destination
-function poi(location) {
 
-    $.ajax('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+
+    $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
         {
             dataType: 'json',
-            apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
+            apikey:'TXIA8oaPoUrPTKogMt0y496orBf38IqM',
+            // apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
             // apikey:'v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy',
             // apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
-            latitude: location.lat,
-            longitude: location.lng,
-            radius: '20',
-            category: 'church'
+            latitude:  42.343794,
+            longitude:  -71.067170,
+            radius: '20'
         }).done(function (data) {
         console.log(data);
         poiToMarker(data);
     });
-}
 
 
+//creating the div for the view
 
 function createReport(poi) {
     var htmlPlace="";
