@@ -32,10 +32,15 @@ public class SearchController {
         return "search/home";
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "user/index";
+    @GetMapping("/about")
+    public String aboutUs(){
+        return "search/about";
     }
+
+    @GetMapping("/contact")
+    public String contactInfo(){return "search/contact";}
+
+
 
 
     //get method for the info page ... probably the search results

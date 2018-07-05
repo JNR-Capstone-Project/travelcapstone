@@ -1,11 +1,31 @@
-.search {
-    float: right;
-}
 .ui-autocomplete-loading {
     background: white url("https://images.pexels.com/photos/1191548/pexels-photo-1191548.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350") right center no-repeat;
 }
 #city { width: 25em; }
 
-body{
-    background-color: red;
+#travel-bg{
+    background-image: url("https://images.pexels.com/photos/417054/pexels-photo-417054.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350") ;
+    opacity: 0.9;
+
+
+
+
+
+}
+.mod-fom{
+    position: absolute;
+    top: 30px;
+    right: 60px;
+
+}
+
+
+#reg-bg{
+    background-image: url("https://images.pexels.com/photos/297755/pexels-photo-297755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350") ;
+    opacity: 0.9;
+    background-repeat: repeat-x;
+
+
+
+
 }

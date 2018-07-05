@@ -21,6 +21,8 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+
     @GetMapping("/home/sign-up")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
@@ -35,6 +37,24 @@ public class UserController {
         users.save(user);
         return  "home/login";
     }
+
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "user/dashboard";
+    }
+
+
+    @GetMapping("/login")
+    public String login(){return "user/login";}
+
+
+    @GetMapping("/profile")
+    public String profile(){return "user/profile";}
+
+
+    @GetMapping("/registration")
+    public String register(){return "user/registration";}
 
 
 

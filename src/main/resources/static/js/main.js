@@ -1,5 +1,29 @@
 'use strict';
 
+
+/* =======================================================================
+                    Form validation
+========================================================================*/
+
+
+
+
+window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+}, false);
+
+
 /* =======================================================================
                     Autocomplete search bar API
 ========================================================================*/
@@ -18,7 +42,7 @@ $(function() {
                 url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                 dataType: "json",
                 data: {
-                    apikey: "",
+                    apikey: "TXIA8oaPoUrPTKogMt0y496orBf38IqM",
                     term: request.term
                 },
                 success: function( data ) {
@@ -48,7 +72,7 @@ $(function() {
 ========================================================================*/
 
 
-$(".results").ready(function () {
+$(document).on('click', function () {
 
     var origin = "&origin=" + $("#origin").val();
 
@@ -62,7 +86,8 @@ $(".results").ready(function () {
 
     var currency = "&currency=USD" ;
 
-    var api_key = '';
+    var api_key = 'TXIA8oaPoUrPTKogMt0y496orBf38IqM';
+
 
     if($("#returnDate").val() == null) {
         var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + maximumPrice + currency;
@@ -98,10 +123,6 @@ $(".results").ready(function () {
     main();
 
 });
-
-
-
-
 
 
 
