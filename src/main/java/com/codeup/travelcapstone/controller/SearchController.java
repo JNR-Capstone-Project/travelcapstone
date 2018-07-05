@@ -32,10 +32,12 @@ public class SearchController {
         return "search/home";
     }
 
+
     @GetMapping("/dashboard")
     public String dashboard() {
         return "user/index";
     }
+
 
 
     //get method for the info page ... probably the search results
@@ -48,11 +50,12 @@ public class SearchController {
     }
 
     //post method for the search will submit a list of search objects and will be passed to the results view
-    @GetMapping("/home/search/results")
+    @GetMapping("/results")
     public String viewResults(@ModelAttribute List<Search> results, Model view) {
         view.addAttribute("results", results);
         return "/search/results";
     }
+
 
 
 //    @PostMapping("/home/search/results/save")
@@ -69,4 +72,12 @@ public class SearchController {
 //
 //        return "/search/results";
 //    }
+
+
+    @GetMapping("/poi")
+    public String poi(){
+        return "/search/poi";
+    }
+
+
 }
