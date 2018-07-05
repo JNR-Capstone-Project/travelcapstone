@@ -38,11 +38,6 @@ public class SearchController {
         return "search/about";
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "user/index";
-
-    }
 
     @GetMapping("/contact")
     public String contactInfo(){return "search/contact";}
