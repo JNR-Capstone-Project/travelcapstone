@@ -1,0 +1,34 @@
+.ui-autocomplete-loading {
+    background: white url("https://images.pexels.com/photos/1191548/pexels-photo-1191548.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350") right center no-repeat;
+}
+#city { width: 25em; }
+
+#travel-bg{
+    background-image: url("https://images.pexels.com/photos/417054/pexels-photo-417054.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350") ;
+    opacity: 0.9;
+
+
+
+
+
+}
+.mod-fom{
+    position: absolute;
+    top: 30px;
+    right: 60px;
+
+}
+
+#poiMap{
+    height: 350px;
+    width: 550px;
+    border-color: black;
+}
+
+#poiPosts{
+    width: 550px;
+    height: 1500px;
+    border: black solid 1px;
+    margin: 20px;
+
+}
