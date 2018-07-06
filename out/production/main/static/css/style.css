@@ -140,7 +140,7 @@ table tr th { color: #688a7e;}
 
 .login-img-body{
 
-  background: url('../../../img/bg-1.jpg') no-repeat center center fixed;
+  background: url('/static/img/bg-1.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -154,7 +154,7 @@ table tr th { color: #688a7e;}
 
 .login-img2-body{
 
-  background: url('../../../img/bg-1.jpg') no-repeat center center fixed;
+  background: url('/static/img/bg-1.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -168,7 +168,7 @@ table tr th { color: #688a7e;}
 
 .login-img3-body{
 
-  background: url('../../../img/bg-1.jpg') no-repeat center center fixed;
+  background: url('/static/img/bg-1.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -1230,7 +1230,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
     height: 30px;
 
-    background: white url('../../../img/icons/search-line-icon.png') no-repeat 3px;
+    background: white url('/static/img/icons/search-line-icon.png') no-repeat 3px;
 
     padding-left: 24px;
 
@@ -1718,7 +1718,7 @@ div[data-role="editor-toolbar"] {
 
 .log-arrow-up {
 
-    background: url("../../../img/arrow-up.png") no-repeat;
+    background: url("/static/img/arrow-up.png") no-repeat;
 
     width: 20px;
 
@@ -3528,7 +3528,7 @@ div[data-role="editor-toolbar"] {
 
     box-shadow: none;
 
-    background: url("../../../img/search-icon.jpg") no-repeat 10px 8px;
+    background: url("/static/img/search-icon.jpg") no-repeat 10px 8px;
 
     padding:0 5px 0 35px;
 
@@ -3670,7 +3670,7 @@ div[data-role="editor-toolbar"] {
 
     font-weight: 300;
 
-    font-weight: 30px;
+
 
 }
 
@@ -3750,7 +3750,6 @@ div[data-role="editor-toolbar"] {
 
 .panel-body.chart-texture {
 
-    background: url("../../../img/chart-texture.jpg");
 
     -webkit-border-radius: 4px 4px 0px 0px;
 
@@ -4432,7 +4431,7 @@ ul.ft-link li a i {
 
     text-indent: -9999px;
 
-    background: url("../../../img/left-arrow.png") no-repeat;
+    background: url("/static/img/left-arrow.png") no-repeat;
 
     width: 6px;
 
@@ -4448,7 +4447,7 @@ ul.ft-link li a i {
 
     text-indent: -9999px;
 
-    background: url("../../../img/right-arrow.png") no-repeat;
+    background: url("/static/img/right-arrow.png") no-repeat;
 
     width: 6px;
 
@@ -4862,7 +4861,7 @@ ul.ft-link li a i {
 
 .profile-widget-img{
 
-    background: url('../../../img/backgrounds/bg-11-small.jpg') no-repeat !important;
+    background: url('/static/img/sample-img-1.jpg') no-repeat !important;
 
 }
 
@@ -5536,7 +5535,7 @@ ul.ft-link li a i {
 
 .weather-bg-img {
 
-    background: url(../../../img/backgrounds/bg-14-small.jpg) no-repeat center center;
+    background: url(/static/img/geekslabs.png) no-repeat center center;
 
     color: #fff;
 
@@ -8312,9 +8311,9 @@ table.sliders tr td {
 
     width: 80px;
 
-    -webkit-mask: url('../../../img/mask.png') 0 0 no-repeat;
+    -webkit-mask: url('/static/img/right-arrow.png') 0 0 no-repeat;
 
-    mask: url('../../../img/mask.png') 0 0 no-repeat;
+    mask: url('/static/img/left-arrow.png') 0 0 no-repeat;
 
     -webkit-user-select: none;
 
@@ -8526,9 +8525,9 @@ table.sliders tr td {
 
     -webkit-border-radius: 6px;
 
-    -webkit-mask: url('../../../img/mask.png') 0 0 no-repeat;
+    -webkit-mask: url('static/img/left-arrow.png') 0 0 no-repeat;
 
-    mask: url('../../../img/mask.png') 0 0 no-repeat;
+    mask: url('static/img/left-arrow.png') 0 0 no-repeat;
 
 }
 
@@ -8852,7 +8851,7 @@ table.sliders tr td {
 
 .has-js .label_radio {
 
-    background: url(../../../img/checkbox/radio-off.png) no-repeat;
+    background: url(static/img/sample-img-1.jpg) no-repeat;
 
 }
 
@@ -8860,7 +8859,7 @@ table.sliders tr td {
 
 .has-js .label_check {
 
-    background: url(../../../img/checkbox/check-off.png) no-repeat;
+    background: url(static/img/sample-img-1.jpg) no-repeat;
 
 }
 
@@ -8868,7 +8867,7 @@ table.sliders tr td {
 
 .has-js label.c_on {
 
-    background: url(../../../img/checkbox/check-on.png) no-repeat;
+    background: url(static/img/sample-img-1.jpg) no-repeat;
 
 }
 
@@ -8876,7 +8875,7 @@ table.sliders tr td {
 
 .has-js label.r_on {
 
-    background: url(../../../img/checkbox/radio-on.png) no-repeat;
+    background: url(static/img/sample-img-1.jpg) no-repeat;
 
 }
 
@@ -9008,11 +9007,11 @@ table.sliders tr td {
 
     background: #F5F5F5 !important;
 
-    background: -moz-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;
+    /*background: -moz-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;*/
 
-    background: -webkit-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;
+    /*background: -webkit-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;*/
 
-    background: -o-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;
+    /*background: -o-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;*/
 
     box-shadow: none;
 
@@ -9866,7 +9865,7 @@ span.customSelect.changed {
 
 .customSelectInner {
 
-    background:url(../../../img/customSelect-arrow.gif) no-repeat center right;
+    background:url(static/img/sample-img-1.jpg) no-repeat center right;
 
 }
 

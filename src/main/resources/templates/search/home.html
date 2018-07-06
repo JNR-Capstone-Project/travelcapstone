@@ -37,19 +37,19 @@
                     </a>
                 </li>
                 <li>
-                    <a class="" href="#">
+                    <a class="" href="/registration">
                         <i class="icon_profile"></i>
                         <span>Register</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="https://github.com/JNR-Capstone-Project/travelcapstone">
                         <i class="icon_profile"></i>
                         <span>Documentation</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/about">
                         <i class="icon_profile"></i>
                         <span>About us</span>
                     </a>
@@ -168,7 +168,7 @@
 
                         </div>
 
-                        <button id="lowFlight" type="submit" class="btn btn-primary" >Search flights!</button>
+                        <button id="lowFlight" type="button" class="btn btn-primary" >Search flights!</button>
 
                     </form>
 
@@ -179,11 +179,11 @@
                 <div class="container">
 
                     <h1>Look for a hotel near your area!</h1>
-                    <form th:action="@{/search/home}" method="post" th:object="${search}" class="needs-validation" th:novalidate="novalidate" >
+                    <form class="needs-validation" th:novalidate="novalidate" >
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="destination">Select Destination</label>
-                                <input th:field="*{destination}" type="text" id="hotelDestination" class=" form-control" placeholder="Where are you going?" th:required="required" />
+                                <input  type="text" id="hotelDestination" class=" form-control" placeholder="Where are you going?" th:required="required" />
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
@@ -193,14 +193,14 @@
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
                                 <label for="departure">Departure Date</label>
-                                <input th:field="*{start_date}" type="date" id="checkIn" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
+                                <input type="date" id="checkIn" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="returnDate">Return Date</label>
-                                <input th:field="*{end_date}" type="date" id="checkOut" class="form-control"  placeholder="Select a return date" th:required="required"/>
+                                <input  type="date" id="checkOut" class="form-control"  placeholder="Select a return date" th:required="required"/>
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
@@ -208,13 +208,16 @@
 
                         </div>
 
-                        <button id="cheapHotel" type="submit" class="btn btn-primary" >Search hotels!</button>
+                        <button id="cheapHotel" type="button" class="btn btn-primary" >Search hotels!</button>
 
                     </form>
 
 
                 </div>
+
+
             </div>
+
             <div id="rental" class="tab-pane">
                 <div class="container">
 
@@ -248,20 +251,52 @@
 
                         </div>
 
-                        <button id="carRental" type="submit" class="btn btn-primary" >Search hotels!</button>
+                        <button id="carRental" type="button" class="btn btn-primary" >Search car rentals!</button>
 
                     </form>
 
 
                 </div>
             </div>
-            <div id="entertainment" class="tab-pane">map POI API</div>
+
+            <div id="entertainment" class="tab-pane">
+                <form class="needs-validation" th:novalidate="novalidate">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="destination">Destination</label>
+                            <input  type="text" id="poi-loc" class=" form-control" placeholder="airport code?" th:required="required" />
+                            <div class="invalid-feedback">
+                                Invalid entry
+                            </div>
+
+                        </div>
+                    </div>
+                    <button id="ent" type="submit" class="btn btn-primary" >Search enter!</button>
+
+0
+                </form>
+
+                <div id="poiMap"></div>
+
+                <div id="poiPosts"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body hotel-card">
+
+            </div>
         </div>
     </div>
 </section>
 
 
+
 <div th:replace="partials/footer :: footer"></div>
+
 
 </body>
 </html>

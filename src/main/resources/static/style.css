@@ -19,13 +19,16 @@
 
 }
 
+#poiMap{
+    height: 350px;
+    width: 550px;
+    border-color: black;
+}
 
-#reg-bg{
-    background-image: url("https://images.pexels.com/photos/297755/pexels-photo-297755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350") ;
-    opacity: 0.9;
-    background-repeat: repeat-x;
-
-
-
+#poiPosts{
+    width: 550px;
+    height: 1500px;
+    border: black solid 1px;
+    margin: 20px;
 
 }
