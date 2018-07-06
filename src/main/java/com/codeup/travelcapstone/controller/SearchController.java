@@ -51,6 +51,7 @@ public class SearchController {
     public String search(@ModelAttribute Search search) {
         //  find a flies for the search from the api using that search, put that results in a List<Search>
         //  and passing this list to the view results
+        search.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         searchRepository.save(search);
         return "redirect:/";
     }

@@ -3,23 +3,28 @@ package com.codeup.travelcapstone.controller;
 
 import com.codeup.travelcapstone.model.User;
 import com.codeup.travelcapstone.repositories.UserRepository;
+import com.codeup.travelcapstone.repositories.Users;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
-    private UserRepository users;
+    private Users users;
     private PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository users, PasswordEncoder passwordEncoder) {
+//
+//    public UserController(UserRepository users, PasswordEncoder passwordEncoder) {
+//
+//    }
 
 
 
+    public UserController(Users users, PasswordEncoder passwordEncoder) {
 
         this.users = users;
         this.passwordEncoder = passwordEncoder;
@@ -27,24 +32,26 @@ public class UserController {
 
 
 
-    @GetMapping("/home/sign-up")
+    @GetMapping("/sign-up")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
-        return "users/sign-up";
+        return "user/registration";
     }
 
 
-    @PostMapping("/home/sign-up")
-    public String createUser(@ModelAttribute User user, PasswordEncoder passwordEncoder){
+    @PostMapping("/sign-up")
+    public String createUser(@ModelAttribute User user){
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         users.save(user);
-        return  "home/login";
+        return  "redirect:/";
     }
 
 
     @GetMapping("/dashboard")
-    public String dashboard() {
+    public String dashboard(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
         return "user/dashboard";
     }
 
@@ -55,11 +62,6 @@ public class UserController {
 
     @GetMapping("/profile")
     public String profile(){return "user/profile";}
-
-
-    @GetMapping("/registration")
-    public String register(){return "user/registration";}
-
 
 
 }

@@ -51,6 +51,10 @@
 
     <script src="/jstemp/sparklines.js"></script>
     <script src="/jstemp/jquery.slimscroll.min.js"></script>
+
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2l-5CY-2Ds6dIyc8doaPHImwacbive3A"></script>-->
+
+
     <script>
         'use strict';
         //knob
@@ -80,23 +84,24 @@
         });
 
         /* ---------- Map ---------- */
-        $(function() {
-            $('#map').vectorMap({
-                map: 'world_mill_en',
-                series: {
-                    regions: [{
-                        values: gdpData,
-                        scale: ['#000', '#000'],
-                        normalizeFunction: 'polynomial'
-                    }]
-                },
-                backgroundColor: '#eef3f7',
-                onLabelShow: function(e, el, code) {
-                    el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
-                }
-            });
-        });
+        // $(function() {
+        //     $('#map').vectorMap({
+        //         map: 'world_mill_en',
+        //         series: {
+        //             regions: [{
+        //                 values: gdpData,
+        //                 scale: ['#000', '#000'],
+        //                 normalizeFunction: 'polynomial'
+        //             }]
+        //         },
+        //         backgroundColor: '#eef3f7',
+        //         onLabelShow: function(e, el, code) {
+        //             el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+        //         }
+        //     });
+        // });
     </script>
+
 
 
 
