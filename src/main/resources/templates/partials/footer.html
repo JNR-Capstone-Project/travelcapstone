@@ -4,10 +4,10 @@
 <body>
 
 <footer th:fragment="footer" class="footer">
-    <!--Test js file-->
+    <!--Test jstemp file-->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
     <!--JS files for View-->
     <script src="/js/jquery.js"></script>
     <script src="/js/main.js"></script>
@@ -16,6 +16,90 @@
 
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+
+
+
+
+    <!-- javascripts -->
+    <script src="/jstemp/jquery.js"></script>
+    <script src="/jstemp/jquery-ui-1.10.4.min.js"></script>
+    <script src="/jstemp/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/jstemp/jquery-ui-1.9.2.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script src="/jstemp/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="/jstemp/jquery.scrollTo.min.js"></script>
+    <script src="/jstemp/jquery.nicescroll.js" type="text/javascript"></script>
+    <!-- charts scripts -->
+    <script src="/assets/jquery-knob/js/jquery.knob.js"></script>
+    <script src="/jstemp/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="/jstemp/owl.carousel.js"></script>
+
+    <script src="/jstemp/jquery.rateit.min.js"></script>
+    <!-- custom select -->
+    <script src="/jstemp/jquery.customSelect.min.js"></script>
+
+    <!--custome script for all page-->
+    <script src="/jstemp/scripts.js"></script>
+    <!-- custom script for this page-->
+
+    <script src="/jstemp/jquery.autosize.min.js"></script>
+    <script src="/jstemp/jquery.placeholder.min.js"></script>
+    <script src="/jstemp/gdp-data.js"></script>
+
+    <script src="/jstemp/sparklines.js"></script>
+    <script src="/jstemp/jquery.slimscroll.min.js"></script>
+    <script>
+        'use strict';
+        //knob
+        $(function() {
+            $(".knob").knob({
+                'draw': function() {
+                    $(this.i).val(this.cv + '%')
+                }
+            })
+        });
+
+        //carousel
+        $(document).ready(function() {
+            $("#owl-slider").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true
+
+            });
+        });
+
+        //custom select box
+
+        $(function() {
+            $('select.styled').customSelect();
+        });
+
+        /* ---------- Map ---------- */
+        $(function() {
+            $('#map').vectorMap({
+                map: 'world_mill_en',
+                series: {
+                    regions: [{
+                        values: gdpData,
+                        scale: ['#000', '#000'],
+                        normalizeFunction: 'polynomial'
+                    }]
+                },
+                backgroundColor: '#eef3f7',
+                onLabelShow: function(e, el, code) {
+                    el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+                }
+            });
+        });
+    </script>
+
+
+
 
 
 </footer>

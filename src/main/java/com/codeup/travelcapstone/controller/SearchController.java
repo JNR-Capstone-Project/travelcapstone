@@ -32,13 +32,20 @@ public class SearchController {
         return "search/home";
     }
 
-//    get method for the info page ... probably the search results
-//    @PostMapping("/search")
-//    public String search(@ModelAttribute Search search) {
-//        //  find a flies for the search from the api using that search, put that results in a List<Search>
-//        //  and passing this list to the view results
-//        return "/search/results";
-//    }
+
+    @GetMapping("/about")
+    public String aboutUs() {
+        return "search/about";
+    }
+
+
+    @GetMapping("/contact")
+    public String contactInfo(){return "search/contact";}
+
+
+
+
+
     //get method for the info page ... probably the search results
     @PostMapping("/search/home")
     public String search(@ModelAttribute Search search) {

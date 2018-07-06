@@ -1,8 +1,33 @@
 'use strict';
 
+
+/* =======================================================================
+                    Form validation
+========================================================================*/
+
+
+
+
+window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+}, false);
+
+
 /* =======================================================================
                     Autocomplete search bar API
 ========================================================================*/
+
 
 
 
@@ -17,6 +42,7 @@ $(function() {
                 url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                 dataType: "json",
                 data: {
+
 
                     apikey: "",
 
@@ -49,7 +75,7 @@ $(function() {
 ========================================================================*/
 
 
-$(".results").ready(function () {
+$(document).on('click', function () {
 
     var origin = "&origin=" + $("#origin").val();
 
@@ -62,6 +88,7 @@ $(".results").ready(function () {
     var maximumPrice = "&max_price=" + $("#price").val();
 
     var currency = "&currency=USD" ;
+
 
 
     var api_key = '';
@@ -104,14 +131,8 @@ $(".results").ready(function () {
 });
 
 
-
-
 /* =======================================================================
                     POI Map
 ========================================================================*/
-
-
-
-
 
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header(${'Home Page'})">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Welcome to Viatorem! Where should we go?</h1>
+    <form th:action="@{/search/home}" method="post" th:object="${search}">
+        <div class="form-group">
+            <label for="origin">Select Origin</label>
+            <input th:field="*{origin}" type="text" id="origin" class="airports" aria-describedby="emailHelp" placeholder="Choose a starting location" />
+            <label for="destination">Select Destination</label>
+            <input th:field="*{destination}" type="text" id="destination" class="airports" placeholder="Choose an end point" />
+            <br/>
+            <label for="departure">Departure Date</label>
+            <input th:field="*{start_date}" type="date" id="departure" aria-describedby="emailHelp" placeholder="Select a departure date" />
+            <label for="returnDate">Return Date</label>
+            <input th:field="*{end_date}" type="date" id="returnDate" placeholder="Select a return date" />
+            <!--<label class="form-check-label" for="oneway">One Way</label>-->
+            <!--<input type="checkbox" class="form-check-input" id="oneway" />-->
+            <label for="price">Name a price</label>
+            <input th:field="*{price}" type="text" id="price" placeholder="0.00" />
+            <!--<label for="currency">Currency:</label>-->
+            <!--<input type="text" id="currency" placeholder="USD"/>-->
+            <p>Select the number of travelers: <span>
+                <label for="adults">Adults</label>
+                <input th:field="*{adults}" type="number" id="adults" placeholder="1" />
+                <label for="children">Children</label>
+                <input th:field="*{children}" type="number" id="children" placeholder="1" />
+            </span></p>
+        </div>
+        <button id="lowFlight" type="submit" class="btn btn-primary search">Search for flights!</button>
+    </form>
+
+
+</div>
+
+
+<div th:replace="partials/footer :: footer"></div>
+
+</body>
+</html>
