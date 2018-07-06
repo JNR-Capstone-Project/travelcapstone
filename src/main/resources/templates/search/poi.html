@@ -21,7 +21,7 @@
 
 <div id="poiMap"></div>
 
-<div id="poiPosts"></div>
+<div id="hotels"></div>
 
 <div th:replace="partials/footer :: footer"></div>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -36,96 +36,149 @@
 // var location={ lat: 19.775221,
 //     lng: -99.885829}
 
+function airportHotel(location, check_in,check_out) {
 
 
-    var mapOptions = {
-        zoom: 12,
-        center: {
-            lat: 42.343794,
-            lng:-71.067170
-        },
-        mapTypeId: google.maps.MapTypeId.TERRAIN,
-        draggable: true
-    };
-    var mapCanvas = document.getElementById('poiMap');
-    var map = new google.maps.Map(mapCanvas, mapOptions);
+    $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
+        {
+            dataType: 'json',
+            apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+            // apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
+            // apikey:'v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy',
+            // apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+            check_in: check_in,
+            check_out: check_out,
+            location: location
+        }).done(function (data) {
+        console.log(data.results);
+        // $(".container").html(" "); linea para limpiar el html del elemnto contenedor
+        for (var i =0;i< data.results.length; i++)
+        {
+            $("#hotels").append(setHotel(data.results[i]));
 
-
-//setting the main marker ...should be the user destination
-
-
-
-
-function setMarker(location) {
-    marker.setPosition(location);
+        }
+    })
 }
 
-   marker  = new google.maps.Marker({
-       position: {
-           lat: 42.3437941,
-           lng:-71.067170
-       },
-       map: map
-   });
-
-
-   function setMarker(location) {
-       marker.setPosition(location);
-
-   }
 
 
 
 
-// function to get a marker for each poi on the JSON
-   function poiToMarker( data)
-   {
-       for (var i = 0; i < data.points_of_interest.length; i++) {
-               marker = new google.maps.Marker({
-                   position: {
-                       lat: data.points_of_interest[i].location.latitude,
-                       lng: data.points_of_interest[i].location.longitude
-                   },
-                   map: map
-               });
-               $("#poiPosts").append(createReport(data.points_of_interest[i]));
 
-       }
+airportHotel('BOS','2018-12-15','2018-12-16')
 
 
-   }
+
+//row struture for the hotel
+
+
+function setHotel(hotel)
+{
+    var htmlHotel="";
+    htmlHotel+="<tr>";
+    htmlHotel+="<td>"+hotel.property_name+"</td>";
+    htmlHotel+="<td>"+hotel.address.line1+"</td>";
+    htmlHotel+="<td>"+hotel.min_daily_rate.currency+"</td>";
+    htmlHotel+="</tr>";
+    return htmlHotel;
+
+}
+
+//     var mapOptions = {
+//         zoom: 12,
+//         center: {
+//             lat: 42.343794,
+//             lng:-71.067170
+//         },
+//         mapTypeId: google.maps.MapTypeId.TERRAIN,
+//         draggable: true
+//     };
+//     var mapCanvas = document.getElementById('poiMap');
+//     var map = new google.maps.Map(mapCanvas, mapOptions);
+//
+//
+// //setting the main marker ...should be the user destination
+//
+//
+//
+//
+// function setMarker(location) {
+//     marker.setPosition(location);
+// }
+//
+//    marker  = new google.maps.Marker({
+//        position: {
+//            lat: 42.3437941,
+//            lng:-71.067170
+//        },
+//        map: map
+//    });
+//
+//
+//    function setMarker(location) {
+//        marker.setPosition(location);
+//
+//    }
+//
+//
+//
+//
+// // function to get a marker for each poi on the JSON
+//    function poiToMarker( data)
+//    {
+//        for (var i = 0; i < data.points_of_interest.length; i++) {
+//                marker = new google.maps.Marker({
+//                    position: {
+//                        lat: data.points_of_interest[i].location.latitude,
+//                        lng: data.points_of_interest[i].location.longitude
+//                    },
+//                    map: map
+//                });
+//                $("#poiPosts").append(createReport(data.points_of_interest[i]));
+//
+//        }
+//
+//
+//    }
 
 
 // obtain the Poi JSON  passing a location and setting the markers for the destination
 
-
-    $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
-        {
-            dataType: 'json',
-            apikey:'TXIA8oaPoUrPTKogMt0y496orBf38IqM',
-            // apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
-            // apikey:'v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy',
-            // apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
-            latitude:  42.343794,
-            longitude:  -71.067170,
-            radius: '20'
-        }).done(function (data) {
-        console.log(data);
-        poiToMarker(data);
-    });
+    //
+    // $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+    //     {
+    //         dataType: 'json',
+    //         apikey:'TXIA8oaPoUrPTKogMt0y496orBf38IqM',
+    //         // apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
+    //         // apikey:'v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy',
+    //         // apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+    //         latitude:  42.343794,
+    //         longitude:  -71.067170,
+    //         radius: '20'
+    //     }).done(function (data) {
+    //     $(".container").html(" ");
+    //     $request.done(function (response) {
+    //
+    //         response.list.forEach(function (value){
+    //             $(".container").append(createReport(value));
+    //         })
+    //     });
+    //     console.log(data);
+    //     poiToMarker(data);
+    // });
 
 
 //creating the div for the view
 
-function createReport(poi) {
-    var htmlPlace="";
-    htmlPlace+="<div class='screen'>";
-    htmlPlace+="<h3>"+poi.title+"</h3>"+"\n";
-    htmlPlace+="<img src="+poi.main_image+">"+"\n";
-    htmlPlace+="<p> "+poi.details.description+"</p>"+"\n";
-    htmlPlace+="</div>";
-    return htmlPlace
-}
+// function createReport(poi) {
+//     var htmlPlace="";
+//     htmlPlace+="<div class='screen'>";
+//     htmlPlace+="<h3>"+poi.title+"</h3>"+"\n";
+//     htmlPlace+="<img src="+poi.main_image+">"+"\n";
+//     htmlPlace+="<p> "+poi.details.description+"</p>"+"\n";
+//     htmlPlace+="</div>";
+//     return htmlPlace
+// }
 
 
 
