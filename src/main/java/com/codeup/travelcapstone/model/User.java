@@ -16,6 +16,9 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private String phonenumber;
+
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 //    private List<Search> post;
 
@@ -28,12 +31,14 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+        phonenumber = copy.phonenumber;
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, String phonenumber) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.phonenumber = phonenumber;
     }
 
     public long getId() {
@@ -66,5 +71,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 }
