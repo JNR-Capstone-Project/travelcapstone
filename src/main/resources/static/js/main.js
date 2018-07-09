@@ -45,10 +45,7 @@ $(function() {
                 dataType: "json",
                 data: {
 
-
                     apikey: apikey,
-
-
                     term: request.term
                 },
                 success: function( data ) {
@@ -370,63 +367,4 @@ function airportHotel(location, check_in,check_out) {
         }
     })
 }
-
-
-
-
-
-
-
-/* =======================================================================
-                    Airport Hotel Map
-========================================================================*/
-
-// function airportHotel(location, check_in,check_out) {
-//
-//
-//     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
-//         {
-//             dataType: 'json',
-//             apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
-//             check_in: check_in,
-//             check_out: check_out,
-//             location: location
-//         }).done(function (data) {
-//         console.log(data.results);
-//         // $(".container").html(" "); line to clean the results every time for a new search load
-//         for (var i =0;i< data.results.length; i++)
-//         {
-//             $("#hotels").append(setHotel(data.results[i]));
-//
-//         }
-//     })
-// }
-//
-//
-//
-// airportHotel('BOS','2018-12-15','2018-12-16')
-//
-//
-//
-// //row struture for the hotel
-// var esta="type";
-//
-// function setHotel(hotel)
-// {
-//     var htmlHotel="";
-//     htmlHotel+="<tr>";
-//     htmlHotel+="<td>"+hotel.property_name+"</td>";
-//     htmlHotel+="<td>"+hotel.address.line1+"</td>";
-//     htmlHotel+="<td>"+hotel.contacts[0].type+": "+hotel.contacts[0].detail+"</td>";
-//     htmlHotel+="</tr>";
-//     return htmlHotel;
-//
-// }
-//
-
-
-
-
-
-
 
