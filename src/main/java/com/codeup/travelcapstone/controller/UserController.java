@@ -56,7 +56,6 @@ public class UserController {
         model.addAttribute("user", user);
         long id = user.getId();
         System.out.println(id);
-        System.out.println(searchRepo.findAllByUser(id).get(0).getOrigin());
         model.addAttribute("searches", searchRepo.findAllByUser(id));
         return "user/dashboard";
     }

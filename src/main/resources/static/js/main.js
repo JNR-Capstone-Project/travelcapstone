@@ -2,8 +2,7 @@
 
 var locationAirport;
 var airportCode;
-var apikey= '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
-
+const apiKey = document.getElementById("amadeus-API").value;
 
 /* =======================================================================
                     Form validation
@@ -46,7 +45,7 @@ $(function() {
                 data: {
 
 
-                    apikey: "",
+                    apikey: apiKey,
 
 
                     term: request.term
@@ -77,9 +76,6 @@ $(function() {
                     Low flight API
 ========================================================================*/
 
-var api_key = '';
-
-
 
 $(function () {
 
@@ -94,8 +90,8 @@ $(function () {
             var maximumPrice = "&max_price=" + $("#price").val();
             var currency = "&currency=USD" ;
             airportCode=$("#destination").val();
-            var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + return_date + maximumPrice + currency;
-            var airportLocationUrl='https://api.sandbox.amadeus.com/v1.2/location/'+$("#destination").val()+'?apikey='+api_key;
+            var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + apiKey + origin + destination + departure_date + return_date + maximumPrice + currency;
+            var airportLocationUrl='https://api.sandbox.amadeus.com/v1.2/location/'+$("#destination").val()+'?apikey='+apiKey;
 
             var request=$.get(resource_url);
             request.fail(function (current, status, error) {
@@ -271,13 +267,12 @@ $(function () {
 $(function () {
     document.getElementById("carRental").addEventListener('click', function () {
 
-        var api_key='5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
         var loc = "&location=" + airportCode;
         var pickup = "&pick_up=" + $("#pickUp").val();
         var dropoff = "&drop_off=" + $("#dropOff").val();
 
 
-        var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + api_key + loc + pickup + dropoff;
+        var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + apiKey + loc + pickup + dropoff;
 
         var request = $.get(url_rental);
         request.fail(function (current, status, error) {
@@ -384,7 +379,7 @@ $(function () {
             {
                 dataType: 'json',
 
-                apikey: '',
+                apikey: apiKey,
                 latitude: locationAirport.latitude,
                 longitude: locationAirport.longitude,
                 radius: '40'
@@ -398,7 +393,7 @@ $(function () {
 //creating the div for the view
 
         function createReport(poi) {
-            var htmlPlace = "5IomxX3j0OOD87Um4X9aTZdAgnttyJG0";
+            var htmlPlace = "";
             htmlPlace += "<div class='screen'>";
             htmlPlace += "<h3>" + poi.title + "</h3>" + "\n";
             htmlPlace += "<img src=" + poi.main_image + ">" + "\n";
@@ -421,7 +416,7 @@ function airportHotel(location, check_in,check_out) {
     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
         {
             dataType: 'json',
-            apikey: '',
+            apikey: apiKey,
             check_in: check_in,
             check_out: check_out,
             location: location
@@ -452,7 +447,7 @@ function airportHotel(location, check_in,check_out) {
 //     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
 //         {
 //             dataType: 'json',
-//             apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+//             apikey: '',
 //             check_in: check_in,
 //             check_out: check_out,
 //             location: location
@@ -488,10 +483,3 @@ function airportHotel(location, check_in,check_out) {
 //
 // }
 //
-
-
-
-
-
-
-
