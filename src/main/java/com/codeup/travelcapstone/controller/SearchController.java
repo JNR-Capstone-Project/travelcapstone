@@ -32,19 +32,13 @@ public class SearchController {
         return "search/home";
     }
 
-
     @GetMapping("/about")
     public String aboutUs() {
         return "search/about";
     }
 
-
     @GetMapping("/contact")
     public String contactInfo(){return "search/contact";}
-
-
-
-
 
     //get method for the info page ... probably the search results
     @PostMapping("/search/home")
@@ -57,11 +51,11 @@ public class SearchController {
     }
 
     //post method for the search will submit a list of search objects and will be passed to the results view
-    @GetMapping("/results")
-    public String viewResults(@ModelAttribute List<Search> results, Model view) {
-        view.addAttribute("results", results);
-        return "/search/results";
-    }
+//    @GetMapping("/results")
+//    public String viewResults(@ModelAttribute List<Search> results, Model view) {
+//        view.addAttribute("results", results);
+//        return "/search/results";
+//    }
 
 
 
