@@ -22,7 +22,7 @@
     </div>
 
     <!--logo start-->
-    <a href="dashboard.html" class="logo">Viator <span class="lite">Travel</span></a>
+    <a href="dashboard.html" class="logo">Viatorem <span class="lite">Travel</span></a>
     <!--logo end-->
 
     <div class="top-nav notification-row">
@@ -126,24 +126,18 @@
                       <th><i class="icon_calendar"></i> Departure</th>
                       <th><i class="icon_calendar"></i> Return</th>
                       <th><i class="icon_calendar"></i> price</th>
-                      <th><i class="icon_calendar"></i> currecy</th>
-                      <th><i class="icon_search"></i> one way</th>
                       <th><i class="icon_cogs"></i> adults</th>
                       <th><i class="icon_cogs"></i> children</th>
                       <th><i class="icon_cogs"></i>Action</th>
                     </tr>
-
-
-                    <tr>
-                      <td>origin</td>
-                      <td>dest</td>
-                      <td>12/12/2018</td>
-                      <td>01/20/2018</td>
-                      <td>$$$$$$</td>
-                      <td>USD</td>
-                      <td>yes/no</td>
-                      <td>1</td>
-                      <td>300</td>
+                    <tr th:each="search : ${searches}">
+                      <td><span th:text="${search.origin}"></span></td>
+                      <td><span th:text="${search.destination}"></span></td>
+                      <td><span th:text="${search.start_date}"></span></td>
+                      <td><span th:text="${search.end_date}"></span></td>
+                      <td><span th:text="${search.price}"></span></td>
+                      <td><span th:text="${search.adults}"></span></td>
+                      <td><span th:text="${search.children}"></span></td>
                       <td>
                         <div class="btn-group">
                           <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
@@ -152,8 +146,6 @@
                         </div>
                       </td>
                     </tr>
-
-
 
                     </tbody>
                   </table>

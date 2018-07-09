@@ -43,7 +43,7 @@ $(function() {
                 data: {
 
 
-                    apikey: "5IomxX3j0OOD87Um4X9aTZdAgnttyJG0",
+                    apikey: "",
 
 
                     term: request.term
@@ -74,7 +74,7 @@ $(function() {
                     Low flight API
 ========================================================================*/
 
-var api_key = '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
+var api_key = '';
 
 
 $(function () {
@@ -337,7 +337,7 @@ $(function () {
         $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
             {
                 dataType: 'json',
-                apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+                apikey:'',
                 latitude:  42.343794,
                 longitude:  -71.067170,
                 radius: '20'
@@ -376,7 +376,7 @@ function airportHotel(location, check_in,check_out) {
     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
         {
             dataType: 'json',
-            apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+            apikey: '',
             check_in: check_in,
             check_out: check_out,
             location: location
