@@ -40,28 +40,11 @@
             <br/>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_phone"></i></span>
-                <input id="phone" name="phone" placeholder="phone number" class="form-control form-control-sm" type="password" required=""/>
+                <input th:field="*{phonenumber}" id="phone" name="phone" placeholder="phone number" class="form-control form-control-sm" type="text" required=""/>
             </div>
             <br/>
             <button class="btn btn-info btn-lg btn-block" type="submit">Register</button>
         </div>
-          <br/>
-          <div class="input-group">
-              <span class="input-group-addon"><i class="icon_profile"></i></span>
-              <input th:field="*{username}" id="username" name="username" placeholder="Username" class="form-control form-control-sm" type="text" required="" />
-          </div>
-          <br/>
-          <div class="input-group">
-              <span class="input-group-addon"></span>
-              <input th:field="*{phonenumber}" id="phonenumber" name="phonenumber" placeholder="Enter a phone number" class="form-control form-control-sm" type="text" required=""/>
-          </div>
-          <br/>
-          <div class="input-group">
-              <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-              <input th:field="*{password}" id="password" name="password" placeholder="choose your password" class="form-control form-control-sm" type="password" required=""/>
-          </div>
-          <br/>
-        <button class="btn btn-info btn-lg btn-block" type="submit">Register</button>
     </form>
 </div>
 

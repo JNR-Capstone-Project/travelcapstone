@@ -46,7 +46,7 @@ $(function() {
                 data: {
 
 
-                    apikey: "5IomxX3j0OOD87Um4X9aTZdAgnttyJG0",
+                    apikey: "",
 
 
                     term: request.term
@@ -77,7 +77,7 @@ $(function() {
                     Low flight API
 ========================================================================*/
 
-var api_key = '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
+var api_key = '';
 
 
 
@@ -384,7 +384,7 @@ $(function () {
             {
                 dataType: 'json',
 
-                apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+                apikey: '',
                 latitude: locationAirport.latitude,
                 longitude: locationAirport.longitude,
                 radius: '40'
@@ -411,7 +411,30 @@ $(function () {
     });
 });
 
+/* =======================================================================
+                    Airport Hotel Map
+========================================================================*/
 
+function airportHotel(location, check_in,check_out) {
+
+
+    $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
+        {
+            dataType: 'json',
+            apikey: '',
+            check_in: check_in,
+            check_out: check_out,
+            location: location
+        }).done(function (data) {
+        console.log(data.results);
+        // $(".container").html(" "); line to clean the results every time for a new search load
+        for (var i =0;i< data.results.length; i++)
+        {
+            $("#hotels").append(setHotel(data.results[i]));
+
+        }
+    })
+}
 
 
 

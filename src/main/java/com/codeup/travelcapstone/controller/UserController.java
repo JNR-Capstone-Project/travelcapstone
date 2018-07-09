@@ -2,6 +2,7 @@ package com.codeup.travelcapstone.controller;
 
 
 import com.codeup.travelcapstone.model.User;
+import com.codeup.travelcapstone.repositories.SearchRepository;
 import com.codeup.travelcapstone.repositories.UserRepository;
 import com.codeup.travelcapstone.repositories.Users;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
+    private SearchRepository searchRepo;
 
 //
 //    public UserController(UserRepository users, PasswordEncoder passwordEncoder) {
@@ -24,8 +26,8 @@ public class UserController {
 
 
 
-    public UserController(Users users, PasswordEncoder passwordEncoder) {
-
+    public UserController(Users users, PasswordEncoder passwordEncoder, SearchRepository searchRepo) {
+        this.searchRepo = searchRepo;
         this.users = users;
         this.passwordEncoder = passwordEncoder;
     }
@@ -52,6 +54,10 @@ public class UserController {
     public String dashboard(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
+        long id = user.getId();
+        System.out.println(id);
+        System.out.println(searchRepo.findAllByUser(id).get(0).getOrigin());
+        model.addAttribute("searches", searchRepo.findAllByUser(id));
         return "user/dashboard";
     }
 
