@@ -30,7 +30,7 @@ public class Search {
         private int children;
         @Column(nullable = false)
         private int adults;
-        @ManyToOne(cascade = CascadeType.ALL)
+        @ManyToOne(cascade = CascadeType.MERGE)
         @JoinColumn(name = "user_id")
         private User user;
 
