@@ -4,6 +4,7 @@ package com.codeup.travelcapstone.controller;
 import com.codeup.travelcapstone.model.Search;
 import com.codeup.travelcapstone.model.User;
 import com.codeup.travelcapstone.repositories.SearchRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ import java.util.List;
 public class SearchController {
     private SearchRepository searchRepository;
     private UserController userController;
+    @Value("${amadeus.api}")
+    String apikey;
 
     public SearchController(SearchRepository searchRepository, UserController userController) {
         this.searchRepository = searchRepository;
@@ -29,6 +32,7 @@ public class SearchController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("search", new Search());
+        model.addAttribute("apikey", apikey);
         return "search/home";
     }
 

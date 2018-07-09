@@ -2,8 +2,7 @@
 
 var locationAirport;
 var airportCode;
-var apikey= '';
-
+const apiKey = document.getElementById("amadeus-API").value;
 
 /* =======================================================================
                     Form validation
@@ -45,8 +44,7 @@ $(function() {
                 dataType: "json",
                 data: {
 
-
-                    apikey: apikey,
+                    apikey: apiKey,
 
 
                     term: request.term
@@ -91,8 +89,8 @@ $(function () {
             var maximumPrice = "&max_price=" + $("#price").val();
             var currency = "&currency=USD";
             airportCode=$("#destination").val();
-            var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + apikey+ origin + destination + departure_date + return_date + maximumPrice + currency;
-            var airportLocationUrl='https://api.sandbox.amadeus.com/v1.2/location/'+$("#destination").val()+'?apikey='+apikey;
+            var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + apiKey + origin + destination + departure_date + return_date + maximumPrice + currency;
+            var airportLocationUrl='https://api.sandbox.amadeus.com/v1.2/location/'+$("#destination").val()+'?apikey='+apiKey;
 
             var request=$.get(resource_url);
             request.fail(function (current, status, error) {
@@ -212,7 +210,7 @@ $(function () {
         var dropoff = "&drop_off=" + $("#dropOff").val();
 
 
-        var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + apikey + loc + pickup + dropoff;
+        var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + apiKey + loc + pickup + dropoff;
 
         var request = $.get(url_rental);
         request.fail(function (current, status, error) {
@@ -319,7 +317,7 @@ $(function () {
             {
                 dataType: 'json',
 
-                apikey: apikey,
+                apikey: apiKey,
                 latitude: locationAirport.latitude,
                 longitude: locationAirport.longitude,
                 radius: '40'
@@ -356,7 +354,7 @@ function airportHotel(location, check_in,check_out) {
     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
         {
             dataType: 'json',
-            apikey: apikey,
+            apikey: apiKey,
             check_in: check_in,
             check_out: check_out,
             location: location
@@ -387,7 +385,7 @@ function airportHotel(location, check_in,check_out) {
 //     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
 //         {
 //             dataType: 'json',
-//             apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+//             apikey: '',
 //             check_in: check_in,
 //             check_out: check_out,
 //             location: location
@@ -423,10 +421,3 @@ function airportHotel(location, check_in,check_out) {
 //
 // }
 //
-
-
-
-
-
-
-
