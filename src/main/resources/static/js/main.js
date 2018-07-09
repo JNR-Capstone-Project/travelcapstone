@@ -43,7 +43,7 @@ $(function() {
                 data: {
 
 
-                    apikey: "",
+                    apikey: "5IomxX3j0OOD87Um4X9aTZdAgnttyJG0",
 
 
                     term: request.term
@@ -74,7 +74,7 @@ $(function() {
                     Low flight API
 ========================================================================*/
 
-var api_key = '';
+var api_key = '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
 
 
 $(function () {
@@ -122,22 +122,29 @@ $(function () {
             function main(response) {
 
                 console.log(response);
-
-
-
-
-
-
-                //this loop will iterate through the layers of data
-                for (var r = 0; r < 50; r++){
-                    console.log(response.results[r]);
-
-                    // $("#solo").html("<div class='card-body text-center'>" + response.results[r] + "\xB0" + "</div>");
+                for (var i =0;i< response.results.length; i++)
+                {
+                    $("#lowFly").append(setFlight(response.results[i]));
 
                 }
+
             }
 
-            main();
+            function setFlight(flight){
+
+                var htmlFlight="";
+                htmlFlight+="<tr>";
+                htmlFlight+="<td>"+"</td>";
+                htmlFlight+="<td>"+flight+"</td>";
+                htmlFlight+="<td>"+"</td>";
+                htmlFlight+="<td>"+flight.fare.total_price+"</td>";
+                htmlFlight+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
+                    "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
+                htmlFlight+="</tr>";
+                return htmlFlight;
+
+
+            }
 
         });
 
@@ -330,7 +337,7 @@ $(function () {
         $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
             {
                 dataType: 'json',
-                apikey:'',
+                apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
                 latitude:  42.343794,
                 longitude:  -71.067170,
                 radius: '20'
@@ -369,7 +376,7 @@ function airportHotel(location, check_in,check_out) {
     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
         {
             dataType: 'json',
-            apikey: '',
+            apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
             check_in: check_in,
             check_out: check_out,
             location: location
@@ -400,10 +407,16 @@ function setHotel(hotel)
     htmlHotel+="<td>"+hotel.property_name+"</td>";
     htmlHotel+="<td>"+hotel.address.line1+"</td>";
     htmlHotel+="<td>"+hotel.contacts[0].type+": "+hotel.contacts[0].detail+"</td>";
+    htmlHotel+="<td>"+hotel.total_price.amount+"</td>";
+    htmlHotel+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
+        "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
     htmlHotel+="</tr>";
     return htmlHotel;
 
 }
+
+
+
 
 
 

@@ -57,11 +57,17 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public String login(){return "user/login";}
+    public String login(){
+
+        return "user/login";}
 
 
     @GetMapping("/profile")
-    public String profile(){return "user/profile";}
+    public String profile(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
+        return "user/profile";}
+
 
 
 }

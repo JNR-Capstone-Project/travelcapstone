@@ -35,18 +35,12 @@
                           <span class="profile-ava">
                               <img alt="" src="img/avatar1_small.jpg"/>
                           </span>
-                          <span th:text="${user.username}"></span>
-                          <b class="caret"></b>
-                      </a>
+            <span th:text="${user.username}"></span>
+            <b class="caret"></b>
+          </a>
           <ul class="dropdown-menu extended logout">
             <div class="log-arrow-up"></div>
             <li class="eborder-top">
-              <a href="#"><i class="icon_wallet"></i>Search flights</a>
-            </li>
-            <li>
-              <a href="#"><i class="icon_wallet_alt"></i>Search for hotels</a>
-            </li>
-            <li>
               <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
             </li>
             <li>
@@ -68,10 +62,10 @@
       <!-- sidebar menu start-->
       <ul class="sidebar-menu">
         <li class="active">
-          <a class="" href="dashboard.html">
-                        <i class="icon_house_alt"></i>
-                        <span>Dashboard</span>
-                    </a>
+          <a class="" href="/dashboard">
+            <i class="icon_house_alt"></i>
+            <span>Dashboard</span>
+          </a>
         </li>
         <li>
           <a href="/profile">
@@ -86,37 +80,16 @@
           </a>
         </li>
 
-        <li>
-          <a href="#">
-            <i class="icon_map"></i>
-            <span>Map</span>
-          </a>
-        </li>
-        <li class="sub-menu">
-          <a href="javascript:" class="">
-                        <i class="icon_documents_alt"></i>
-                        <span>Pages</span>
-                        <span class="menu-arrow arrow_carrot-right"></span>
-                    </a>
-          <ul class="sub">
-            <li><a class="" href="profile.html">Profile</a></li>
-            <li><a class="" href="login.html"><span>Login Page</span></a></li>
-            <li><a class="" href="../search/contact.html"><span>Contact Page</span></a></li>
-            <li><a class="" href="../search/about.html">Blank Page</a></li>
-            <li><a class="" href="../404.html">404 Error</a></li>
-          </ul>
-        </li>
-
       </ul>
       <!-- sidebar menu end-->
     </div>
   </aside>
   <!--sidebar end-->
 
+
   <!--main content start-->
   <section id="main-content">
     <section class="wrapper">
-      <!--overview start-->
       <div class="row">
         <div class="col-lg-12">
           <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
@@ -127,313 +100,166 @@
         </div>
       </div>
 
-
       <div class="row">
         <div class="col-lg-12">
-      <!--collapse start-->
-      <div class="panel-group m-bot20" id="accordion">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="accordion-toggle fa fa-flag-o red" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                flight search
-              </a>
-              <div class="panel-actions">
-                <a href="dashboard.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                <a href="dashboard.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
+          <!--collapse start-->
+          <div class="panel-group m-bot20" id="accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a class="accordion-toggle fa fa-flag-o red" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    Your saved flights
+                  </a>
+                  <div class="panel-actions">
+                    <a href="dashboard.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                  </div>
+                </h4>
               </div>
-            </h4>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse in">
-            <div class="panel-body">
-              <table class="table table-striped table-advance table-hover">
-                <tbody>
-                <tr>
-                  <th><i class="icon_datareport"></i> Origin</th>
-                  <th><i class="icon_datareport"></i> Destination</th>
-                  <th><i class="icon_calendar"></i> Departure</th>
-                  <th><i class="icon_calendar"></i> Return</th>
-                  <th><i class="icon_calendar"></i> price</th>
-                  <th><i class="icon_calendar"></i> currecy</th>
-                  <th><i class="icon_search"></i> one way</th>
-                  <th><i class="icon_cogs"></i> adults</th>
-                  <th><i class="icon_cogs"></i> children</th>
-                  <th><i class="icon_cogs"></i>Action</th>
-                </tr>
+              <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                  <div class="container">
+                  <table class="table table-striped table-advance table-hover">
+                    <tbody>
+                    <tr>
+                      <th><i class="icon_datareport"></i> Origin</th>
+                      <th><i class="icon_datareport"></i> Destination</th>
+                      <th><i class="icon_calendar"></i> Departure</th>
+                      <th><i class="icon_calendar"></i> Return</th>
+                      <th><i class="icon_calendar"></i> price</th>
+                      <th><i class="icon_calendar"></i> currecy</th>
+                      <th><i class="icon_search"></i> one way</th>
+                      <th><i class="icon_cogs"></i> adults</th>
+                      <th><i class="icon_cogs"></i> children</th>
+                      <th><i class="icon_cogs"></i>Action</th>
+                    </tr>
 
 
-                <tr>
-                  <td>origin</td>
-                  <td>dest</td>
-                  <td>12/12/2018</td>
-                  <td>01/20/2018</td>
-                  <td>$$$$$$</td>
-                  <td>USD</td>
-                  <td>yes/no</td>
-                  <td>1</td>
-                  <td>300</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>origin</td>
-                  <td>dest</td>
-                  <td>12/12/2018</td>
-                  <td>01/20/2018</td>
-                  <td>$$$$$$</td>
-                  <td>USD</td>
-                  <td>yes/no</td>
-                  <td>1</td>
-                  <td>300</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>origin</td>
-                  <td>dest</td>
-                  <td>12/12/2018</td>
-                  <td>01/20/2018</td>
-                  <td>$$$$$$</td>
-                  <td>USD</td>
-                  <td>yes/no</td>
-                  <td>1</td>
-                  <td>300</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>origin</td>
-                  <td>dest</td>
-                  <td>12/12/2018</td>
-                  <td>01/20/2018</td>
-                  <td>$$$$$$</td>
-                  <td>USD</td>
-                  <td>yes/no</td>
-                  <td>1</td>
-                  <td>300</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>origin</td>
-                  <td>dest</td>
-                  <td>12/12/2018</td>
-                  <td>01/20/2018</td>
-                  <td>$$$$$$</td>
-                  <td>USD</td>
-                  <td>yes/no</td>
-                  <td>1</td>
-                  <td>300</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>origin</td>
-                  <td>dest</td>
-                  <td>12/12/2018</td>
-                  <td>01/20/2018</td>
-                  <td>$$$$$$</td>
-                  <td>USD</td>
-                  <td>yes/no</td>
-                  <td>1</td>
-                  <td>300</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
+                    <tr>
+                      <td>origin</td>
+                      <td>dest</td>
+                      <td>12/12/2018</td>
+                      <td>01/20/2018</td>
+                      <td>$$$$$$</td>
+                      <td>USD</td>
+                      <td>yes/no</td>
+                      <td>1</td>
+                      <td>300</td>
+                      <td>
+                        <div class="btn-group">
+                          <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
+                          <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+                          <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                        </div>
+                      </td>
+                    </tr>
 
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="accordion-toggle fa fa-flag-o red" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                hotel search
-              </a>
-              <div class="panel-actions">
-                <a href="dashboard.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                <a href="dashboard.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
+
+
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
               </div>
-            </h4>
-          </div>
-          <!--Div for the hotels search-->
-          <div id="collapseTwo" class="panel-collapse collapse in">
-            <div class="panel-body">
-              <table class="table table-striped table-advance bootstrap-datatable table-hover">
-                <tbody id="hotels">
-                <tr>
-                  <th><i class="icon_profile"></i> Hotel Name</th>
-                  <th><i class="icon_calendar"></i> Address</th>
-                  <th><i class="icon_pin_alt"></i> Check out</th>
-                  <th><i class="icon_pin_alt"></i> Adress</th>
-                  <th><i class="icon_email"></i> currecy</th>
-                  <th><i class="icon_tool"></i> Action</th>
-                </tr>
-                </tbody>
-              </table>
             </div>
+
           </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="accordion-toggle fa fa-flag-o red" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                Car rentals
-              </a>
-              <div class="panel-actions">
-                <a href="dashboard.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                <a href="dashboard.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-              </div>
-            </h4>
-          </div>
-          <div id="collapseThree" class="panel-collapse collapse in">
-            <div class="panel-body">
-              <table class="table table-striped table-advance bootstrap-datatable table-hover">
-                <tbody>
-                <tr>
-                  <th><i class="icon_profile"></i> location</th>
-                  <th><i class="icon_calendar"></i> check in</th>
-                  <th><i class="icon_mail_alt"></i> check out</th>
-                  <th><i class="icon_pin_alt"></i> price</th>
-                  <th><i class="icon_mobile"></i> currecy</th>
-                  <th><i class="icon_tool"></i> Action</th>
-                </tr>
-                <tr>
-                  <td>destination</td>
-                  <td>12/12/2018</td>
-                  <td>01/23/2019</td>
-                  <td>$$$$$$$$</td>
-                  <td>USD</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>destination</td>
-                  <td>12/12/2018</td>
-                  <td>01/23/2019</td>
-                  <td>$$$$$$$$</td>
-                  <td>USD</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>destination</td>
-                  <td>12/12/2018</td>
-                  <td>01/23/2019</td>
-                  <td>$$$$$$$$</td>
-                  <td>USD</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>destination</td>
-                  <td>12/12/2018</td>
-                  <td>01/23/2019</td>
-                  <td>$$$$$$$$</td>
-                  <td>USD</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>destination</td>
-                  <td>12/12/2018</td>
-                  <td>01/23/2019</td>
-                  <td>$$$$$$$$</td>
-                  <td>USD</td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
+          <!--collapse end-->
 
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      <!--collapse end-->
-
-        <br/>
-
-
-      </div>
         </div>
       </div>
 
-    <div class="text-right">
-      <div class="credits">
-        <!--
-          All the links in the footer should remain intact.
-          You can delete the links only if you purchased the pro version.
-          Licensing information: https://bootstrapmade.com/license/
-          Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-        -->
-        <!--Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
-      </div>
-    </div>
 
+
+
+      <div class="row">
+        <!-- profile-widget -->
+        <div class="col-lg-12">
+          <div class="profile-widget profile-widget-info">
+            <div class="panel-body">
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- page start-->
+      <div class="row">
+        <div class="col-lg-12">
+          <section class="panel">
+            <header class="panel-heading tab-bg-info">
+              <ul class="nav nav-tabs">
+                <li class="active">
+                  <a data-toggle="tab" href="#recent-activity">
+                    <i class="icon-home"></i>
+                    Manage your trip
+                  </a>
+                </li>
+                <li>
+                  <a data-toggle="tab" href="#profile">
+                    <i class="icon-user"></i>
+                    Find hotels
+                  </a>
+                </li>
+                <li class="">
+                  <a data-toggle="tab" href="#edit-profile">
+                    <i class="icon-envelope"></i>
+                    Find car rentals
+                  </a>
+                </li>
+                <li class="">
+                  <a data-toggle="tab" href="#find-enter">
+                    <i class="icon-envelope"></i>
+                    Find entertainment
+                  </a>
+                </li>
+              </ul>
+            </header>
+            <div class="panel-body">
+              <div class="tab-content">
+                <div id="recent-activity" class="tab-pane active">
+                  <div class="container">
+                    <form action="">
+                      <label for="reminder">
+                        <input type="text" class="textarea" id="reminder" placeholder="trip reminders"/>
+                      </label>
+
+
+                    </form>
+                  </div>
+                </div>
+                <!-- profile -->
+                <div id="profile" class="tab-pane">
+                  <di><p>content here</p></di>
+                </div>
+                <!-- edit-profile -->
+                <div id="edit-profile" class="tab-pane">
+                  <div><p>content goes here</p></div>
+                </div>
+                <div id="find-enter" class="tab-pane">
+                  <div><p>content dude here</p></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- page end-->
     </section>
-    </section>
+  </section>
   <!--main content end-->
+  <div class="text-right">
+    <div class="credits">
+      <!--
+        All the links in the footer should remain intact.
+        You can delete the links only if you purchased the pro version.
+        Licensing information: https://bootstrapmade.com/license/
+        Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+      -->
+      <!--Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
+    </div>
+  </div>
 </section>
-<!-- container section start -->
-
 <div th:replace="partials/footer :: footer"></div>
 </body>
-
 </html>
