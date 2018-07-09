@@ -46,7 +46,7 @@ $(function() {
                 data: {
 
 
-                    apikey: "",
+                    apikey: apikey,
 
 
                     term: request.term
@@ -77,9 +77,6 @@ $(function() {
                     Low flight API
 ========================================================================*/
 
-var api_key = '';
-
-
 
 $(function () {
 
@@ -92,10 +89,10 @@ $(function () {
             var departure_date = "&departure_date=" + $("#departure").val();
             var return_date = "&return_date=" + $("#returnDate").val();
             var maximumPrice = "&max_price=" + $("#price").val();
-            var currency = "&currency=USD" ;
+            var currency = "&currency=USD";
             airportCode=$("#destination").val();
-            var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + return_date + maximumPrice + currency;
-            var airportLocationUrl='https://api.sandbox.amadeus.com/v1.2/location/'+$("#destination").val()+'?apikey='+api_key;
+            var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + apikey+ origin + destination + departure_date + return_date + maximumPrice + currency;
+            var airportLocationUrl='https://api.sandbox.amadeus.com/v1.2/location/'+$("#destination").val()+'?apikey='+apikey;
 
             var request=$.get(resource_url);
             request.fail(function (current, status, error) {
@@ -210,13 +207,12 @@ $(function () {
 $(function () {
     document.getElementById("carRental").addEventListener('click', function () {
 
-        var api_key='5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
         var loc = "&location=" + airportCode;
         var pickup = "&pick_up=" + $("#pickUp").val();
         var dropoff = "&drop_off=" + $("#dropOff").val();
 
 
-        var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + api_key + loc + pickup + dropoff;
+        var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + apikey + loc + pickup + dropoff;
 
         var request = $.get(url_rental);
         request.fail(function (current, status, error) {
@@ -323,7 +319,7 @@ $(function () {
             {
                 dataType: 'json',
 
-                apikey: '',
+                apikey: apikey,
                 latitude: locationAirport.latitude,
                 longitude: locationAirport.longitude,
                 radius: '40'
@@ -337,7 +333,7 @@ $(function () {
 //creating the div for the view
 
         function createReport(poi) {
-            var htmlPlace = "5IomxX3j0OOD87Um4X9aTZdAgnttyJG0";
+            var htmlPlace = "";
             htmlPlace += "<div class='screen'>";
             htmlPlace += "<h3>" + poi.title + "</h3>" + "\n";
             htmlPlace += "<img src=" + poi.main_image + ">" + "\n";
@@ -360,7 +356,7 @@ function airportHotel(location, check_in,check_out) {
     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
         {
             dataType: 'json',
-            apikey: '',
+            apikey: apikey,
             check_in: check_in,
             check_out: check_out,
             location: location
