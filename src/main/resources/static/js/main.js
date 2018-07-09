@@ -2,7 +2,7 @@
 
 var locationAirport;
 var airportCode;
-var apikey= '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
+var apikey= '';
 
 
 /* =======================================================================
