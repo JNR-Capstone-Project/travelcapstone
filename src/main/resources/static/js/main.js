@@ -111,32 +111,7 @@ $(function () {
 
             request.done(function (response) {
                 console.log(response);
-// <<<<<<< HEAD
-//                 for (var i =0;i< response.results.length; i++)
-//                 {
-//                     $("#lowFly").append(setFlight(response.results[i]));
-//
-//                 }
-//
-//             }
-//
-//             function setFlight(flight){
-//
-//                 var htmlFlight="";
-//                 htmlFlight+="<tr>";
-//                 htmlFlight+="<td>"+ +"</td>";
-//                 htmlFlight+="<td>"+"</td>";
-//                 htmlFlight+="<td>"+"</td>";
-//                 htmlFlight+="<td>"+flight.fare.total_price+"</td>";
-//                 htmlFlight+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
-//                     "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
-//                 htmlFlight+="</tr>";
-//                 return htmlFlight;
-//
-//
-//             }
-//
-// =======
+
                for (var i=0;i<response.results.length;i++){
                    $('#flight').append(setFly(response.results[i]));
                }
@@ -156,7 +131,6 @@ $(function () {
             }
 
 
-// >>>>>>> 57287212994729dee8b186e9af9e1671abfaf7fd
         });
 
 });
@@ -175,41 +149,6 @@ $(function () {
 
 $(function () {
 
-// <<<<<<< HEAD
-//         var request = $.get(url_hotel);
-//         request.fail(function (current, status, error) {
-//             console.log(status);
-//             console.log(error);
-//         });
-//         console.log(request);
-//         request.done(function (response) {
-//             //Since we are calling data out of the same array we can create a loop to put the machine to work
-//             main(response);
-//         });
-//
-//         function main(response) {
-//
-//             for (var i =0;i< response.results.length; i++)
-//             {
-//                 $("#hotels").append(setHotel(response.results[i]));
-//
-//             }
-//
-//             function setHotel(hotel)
-//             {
-//                 var htmlHotel="";
-//                 htmlHotel+="<tr>";
-//                 htmlHotel+="<td>"+hotel.property_name+"</td>";
-//                 htmlHotel+="<td>"+hotel.address.line1+"</td>";
-//                 htmlHotel+="<td>"+hotel.contacts[0].type+": "+hotel.contacts[0].detail+"</td>";
-//                 htmlHotel+="<td>"+hotel.total_price.amount+"</td>";
-//                 htmlHotel+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
-//                     "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
-//                 htmlHotel+="</tr>";
-//                 return htmlHotel;
-//
-//             }
-// =======
     document.getElementById("cheapHotel").addEventListener('click', function () {
 
 
