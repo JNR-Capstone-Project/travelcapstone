@@ -1,12 +1,20 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/header :: header(${'Home Page'})">
 
+    <!-- =======================================================
+      Theme Name: NiceAdmin
+      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+      Author: BootstrapMade
+      Author URL: https://bootstrapmade.com
+    ======================================================= -->
 </head>
-<body>
 
+<body>
 <!-- container section start -->
 <section id="container" class="">
+
 
 
     <header class="header dark-bg">
@@ -37,15 +45,9 @@
                     </a>
                 </li>
                 <li>
-                    <a class="" href="/registration">
+                    <a class="" href="/sign-up">
                         <i class="icon_profile"></i>
                         <span>Register</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/JNR-Capstone-Project/travelcapstone">
-                        <i class="icon_profile"></i>
-                        <span>Documentation</span>
                     </a>
                 </li>
                 <li>
@@ -55,9 +57,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/contact">
+                    <a href="https://github.com/JNR-Capstone-Project/travelcapstone">
                         <i class="icon_profile"></i>
-                        <span>Contact us</span>
+                        <span>Documentation</span>
                     </a>
                 </li>
 
@@ -66,209 +68,456 @@
             <!-- sidebar menu end-->
         </div>
     </aside>
-    <!--sidebar end-->
-</section>
 
-<br/><br/><br/>
-<!--tab nav start-->
-<section class="panel pt-5 mt-5 col-10 mod-fom">
-    <header class="panel-heading tab-bg-primary ">
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a data-toggle="tab" href="#flights">Flights</a>
-            </li>
-            <li class="">
-                <a data-toggle="tab" href="#hotel">Hotel</a>
-            </li>
-            <li class="">
-                <a data-toggle="tab" href="#rental">Car Rental</a>
-            </li>
-            <li class="">
-                <a data-toggle="tab" href="#entertainment">Entertainment</a>
-            </li>
-        </ul>
-    </header>
-    <div class="panel-body">
-        <div class="tab-content">
-            <div id="flights" class="tab-pane active">
-                <div class="container">
 
-                    <h1>Welcome to Viatorem! Where should we go?</h1>
-                    <form th:action="@{/search/home}" method="post" th:object="${search}" class="needs-validation" th:novalidate="novalidate" >
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="origin">Select Origin</label>
-                                <input th:field="*{origin}" type="text" id="origin" class="airports form-control" aria-describedby="emailHelp" placeholder="Choose a starting location" th:required="required"/>
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="destination">Select Destination</label>
-                                <input th:field="*{destination}" type="text" id="destination" class="airports form-control" placeholder="Choose an end point" th:required="required" />
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="form-row">
-                             <div class="col-md-3 mb-3">
-                                 <label for="departure">Departure Date</label>
-                                 <input th:field="*{start_date}" type="date" id="departure" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
-                                 <div class="invalid-feedback">
-                                     Invalid entry
-                                 </div>
-                             </div>
-                             <div class="col-md-3 mb-3">
-                                 <label for="returnDate">Return Date</label>
-                                 <input th:field="*{end_date}" type="date" id="returnDate" class="form-control"  placeholder="Select a return date" th:required="required"/>
-                                 <div class="invalid-feedback">
-                                     Invalid entry
-                                 </div>
-                             </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="children">Children</label>
-                                <input th:field="*{children}" type="number" id="children" class="form-control"  placeholder="1" th:required="required"/>
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="adults">Adults</label>
-                                <input th:field="*{adults}" type="number" id="adults" class="form-control"  placeholder="1" th:required="required"/>
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-
-                        <!--<div class="col-md-4 mb-3">-->
-                                <!--<label for="returnDate">Return Date</label>-->
-                                <!--<input th:field="*{end_date}" type="date" id="returnDate" class="form-control"  placeholder="Select a return date" />-->
-                                <!--<div class="invalid-feedback">-->
-                                    <!--Invalid entry-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <div class="col-md-4 mb-3">
-                                <label for="price">name a price</label>
-                                <input th:field="*{price}" type="text" id="price" class="form-control"  placeholder="0.00" th:required="required"/>
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
-                            </div>
-                            <!--<div class="col-md-4 mb-3">-->
-                                <!--<label for="currency">Currency:</label>-->
-                                <!--<input type="text" id="currency" placeholder="USD"/>-->
-                                <!--<div class="invalid-feedback">-->
-                                    <!--Invalid entry-->
-                                <!--</div>-->
-                            <!--</div>-->
-
-                        </div>
-
-                        <button id="lowFlight" type="button" class="btn btn-primary" >Search flights!</button>
-
-                    </form>
-
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header text-center"> Welcome to Viator Travel! </h3>
 
                 </div>
             </div>
-            <div id="hotel" class="tab-pane">
-                <div class="container">
 
-                    <h1>Look for a hotel near your area!</h1>
-                    <form th:action="@{/search/home}" method="post" th:object="${search}" class="needs-validation" th:novalidate="novalidate" >
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="destination">Select Destination</label>
-                                <input th:field="*{destination}" type="text" id="hotelDestination" class=" form-control" placeholder="Where are you going?" th:required="required" />
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3 mb-3">
-                                <label for="departure">Departure Date</label>
-                                <input th:field="*{start_date}" type="date" id="checkIn" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="returnDate">Return Date</label>
-                                <input th:field="*{end_date}" type="date" id="checkOut" class="form-control"  placeholder="Select a return date" th:required="required"/>
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
-                            </div>
+
+            <div class="row">
+                <!-- profile-widget -->
+                <div class="col-lg-12">
+                    <div class="profile-widget profile-widget-info">
+                        <div class="panel-body">
+
 
                         </div>
-
-                        <button id="cheapHotel" type="submit" class="btn btn-primary" >Search hotels!</button>
-
-                    </form>
-
-
+                    </div>
                 </div>
             </div>
-            <div id="rental" class="tab-pane">
-                <div class="container">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading tab-bg-info">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#flights">
+                                        <i class="icon-home"></i>
+                                        Find Flights!
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#hotel">
+                                        <i class="icon-user"></i>
+                                        Find hotels
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a data-toggle="tab" href="#rental">
+                                        <i class="icon-envelope"></i>
+                                        Find car rentals
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a data-toggle="tab" href="#entertainment">
+                                        <i class="icon-envelope"></i>
+                                        Find entertainment
+                                    </a>
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div id="flights" class="tab-pane active">
+                                    <div class="container">
 
-                    <h1>Rent a car be ahead of the game!</h1>
-                    <form th:action="@{/search/home}" method="post" th:object="${search}" class="needs-validation" th:novalidate="novalidate" >
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="destination">Destination</label>
-                                <input th:field="*{destination}" type="text" id="rentalLocation" class=" form-control" placeholder="Where are you going?" th:required="required" />
-                                <div class="invalid-feedback">
-                                    Invalid entry
+                                        <h1>Welcome to Viatorem! Where should we go?</h1>
+                                        <form th:action="@{/search/home}" method="post" th:object="${search}" class="needs-validation" th:novalidate="novalidate" >
+                                            <div class="form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="origin">Select Origin</label>
+                                                    <input th:field="*{origin}" type="text" id="origin" class="airports form-control" aria-describedby="emailHelp" placeholder="Choose a starting location" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="destination">Select Destination</label>
+                                                    <input th:field="*{destination}" type="text" id="destination" class="airports form-control" placeholder="Choose an end point" th:required="required" />
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="departure">Departure Date</label>
+                                                    <input th:field="*{start_date}" type="date" id="departure" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="returnDate">Return Date</label>
+                                                    <input th:field="*{end_date}" type="date" id="returnDate" class="form-control"  placeholder="Select a return date" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="children">Children</label>
+                                                    <input th:field="*{children}" type="number" id="children" class="form-control"  placeholder="1" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="adults">Adults</label>
+                                                    <input th:field="*{adults}" type="number" id="adults" class="form-control"  placeholder="1" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+
+                                                <!--<div class="col-md-4 mb-3">-->
+                                                <!--<label for="returnDate">Return Date</label>-->
+                                                <!--<input th:field="*{end_date}" type="date" id="returnDate" class="form-control"  placeholder="Select a return date" />-->
+                                                <!--<div class="invalid-feedback">-->
+                                                <!--Invalid entry-->
+                                                <!--</div>-->
+                                                <!--</div>-->
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="price">name a price</label>
+                                                    <input th:field="*{price}" type="text" id="price" class="form-control"  placeholder="0.00" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+                                                <!--<div class="col-md-4 mb-3">-->
+                                                <!--<label for="currency">Currency:</label>-->
+                                                <!--<input type="text" id="currency" placeholder="USD"/>-->
+                                                <!--<div class="invalid-feedback">-->
+                                                <!--Invalid entry-->
+                                                <!--</div>-->
+                                                <!--</div>-->
+
+                                            </div>
+
+                                            <button id="lowFlight" type="button" class="btn btn-primary" >Search flights!</button>
+
+                                        </form>
+
+
+                                    </div>
+                                    <br/>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <!--collapse start-->
+                                            <div class="panel-group m-bot20" id="accordion">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a class="accordion-toggle fa fa-flag-o red" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                                Flights found
+                                                            </a>
+                                                            <div class="panel-actions">
+                                                                <a href="dashboard.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                                                            </div>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseOne" class="panel-collapse collapse in ">
+                                                        <div class="panel-body">
+                                                            <div class="container">
+                                                                <table class="table table-striped table-advance table-hover container col-lg-12">
+                                                                    <tbody id="lowFly">
+                                                                    <tr>
+                                                                        <th><i class="icon_datareport"></i> Origin</th>
+                                                                        <th><i class="icon_datareport"></i> Destination</th>
+                                                                        <th><i class="icon_calendar"></i> Departure</th>
+                                                                        <th><i class="icon_calendar"></i> Return</th>
+                                                                        <th><i class="icon_calendar"></i> price</th>
+                                                                        <th><i class="icon_search"></i> one way</th>
+                                                                        <th><i class="icon_cogs"></i> adults</th>
+                                                                        <th><i class="icon_cogs"></i> children</th>
+                                                                        <th><i class="icon_cogs"></i>Action</th>
+                                                                    </tr>
+
+
+                                                                    <tr>
+                                                                        <td>origin</td>
+                                                                        <td>dest</td>
+                                                                        <td>12/12/2018</td>
+                                                                        <td>01/20/2018</td>
+                                                                        <td>$$$$$$</td>
+                                                                        <td>yes/no</td>
+                                                                        <td>1</td>
+                                                                        <td>300</td>
+                                                                        <td>
+                                                                            <div class="btn-group">
+                                                                                <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+                                                                                <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+
+
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--collapse end-->
+
+                                        </div>
+                                    </div>
+
+
                                 </div>
 
+                                <div id="hotel" class="tab-pane">
+                                    <div class="container">
+
+                                        <h1>Look for a hotel near your area!</h1>
+                                        <form class="needs-validation" th:novalidate="novalidate" >
+                                            <div class="form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="destination">Select Destination</label>
+                                                    <input  type="text" id="hotelDestination" class=" form-control" placeholder="Where are you going?" th:required="required" />
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="departure">Departure Date</label>
+                                                    <input type="date" id="checkIn" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="returnDate">Return Date</label>
+                                                    <input  type="date" id="checkOut" class="form-control"  placeholder="Select a return date" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <button id="cheapHotel" type="button" class="btn btn-primary" >Search hotels!</button>
+
+                                        </form>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <!--collapse start-->
+                                            <div class="panel-group m-bot20" id="acor">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a class="accordion-toggle fa fa-flag-o red" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                                hotels found
+                                                            </a>
+                                                            <div class="panel-actions">
+                                                                <!--this will refresh the search-->
+                                                                <a href="#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                                                            </div>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseTwo" class="panel-collapse collapse in ">
+                                                        <div class="panel-body">
+                                                            <div class="container">
+                                                                <table class="table table-striped table-advance table-hover container col-lg-12">
+                                                                    <tbody id="hotels">
+                                                                    <tr>
+                                                                        <th><i class="icon_datareport"></i> Destination</th>
+                                                                        <th><i class="icon_calendar"></i> Check in</th>
+                                                                        <th><i class="icon_calendar"></i> Check out</th>
+                                                                        <th><i class="icon_calendar"></i> price</th>
+                                                                        <th><i class="icon_cogs"></i>Action</th>
+                                                                    </tr>
+
+
+                                                                    <tr>
+                                                                        <td>dest</td>
+                                                                        <td>12/12/2018</td>
+                                                                        <td>01/20/2018</td>
+                                                                        <td>$$$$$$</td>
+                                                                        <td>
+                                                                            <div class="btn-group">
+                                                                                <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+                                                                                <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+
+
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--collapse end-->
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="rental" class="tab-pane">
+                                    <div class="container">
+
+                                        <h1>Rent a car be ahead of the game!</h1>
+                                        <form th:action="@{/search/home}" method="post" th:object="${search}" class="needs-validation" th:novalidate="novalidate" >
+                                            <div class="form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="destination">Destination</label>
+                                                    <input th:field="*{destination}" type="text" id="rentalLocation" class=" form-control" placeholder="Where are you going?" th:required="required" />
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="departure">Pick up day</label>
+                                                    <input th:field="*{start_date}" type="date" id="pickUp" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="returnDate">Return Date</label>
+                                                    <input th:field="*{end_date}" type="date" id="dropOff" class="form-control"  placeholder="Select a return date" th:required="required"/>
+                                                    <div class="invalid-feedback">
+                                                        Invalid entry
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <button id="carRental" type="button" class="btn btn-primary" >Search car rentals!</button>
+
+                                        </form>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <!--collapse start-->
+                                            <div class="panel-group m-bot20" id="acording">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a class="accordion-toggle fa fa-flag-o red" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                                                Flights found
+                                                            </a>
+                                                            <div class="panel-actions">
+                                                                <a href="dashboard.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                                                            </div>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseThree" class="panel-collapse collapse in ">
+                                                        <div class="panel-body">
+                                                            <div class="container">
+                                                                <table class="table table-striped table-advance table-hover container col-lg-12">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <th><i class="icon_datareport"></i> Destination</th>
+                                                                        <th><i class="icon_calendar"></i> Check in</th>
+                                                                        <th><i class="icon_calendar"></i> Check out</th>
+                                                                        <th><i class="icon_calendar"></i> price</th>
+                                                                        <th><i class="icon_cogs"></i>Action</th>
+                                                                    </tr>
+
+
+                                                                    <tr>
+                                                                        <td>dest</td>
+                                                                        <td>12/12/2018</td>
+                                                                        <td>01/20/2018</td>
+                                                                        <td>$$$$$$</td>
+                                                                        <td>
+                                                                            <div class="btn-group">
+                                                                                <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+                                                                                <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+
+
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--collapse end-->
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="entertainment" class="tab-pane">
+                                    <form class="needs-validation" th:novalidate="novalidate">
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="destination">Destination</label>
+                                                <input  type="text" id="poi-loc" class=" form-control" placeholder="airport code?" th:required="required" />
+                                                <div class="invalid-feedback">
+                                                    Invalid entry
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <button id="ent" type="button" class="btn btn-primary" >Search enter!</button>
+
+
+                                    </form>
+
+                                    <div id="poiMap"></div>
+
+                                    <div id="poiPosts"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-3 mb-3">
-                                <label for="departure">Pick up day</label>
-                                <input th:field="*{start_date}" type="date" id="pickUp" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="returnDate">Return Date</label>
-                                <input th:field="*{end_date}" type="date" id="dropOff" class="form-control"  placeholder="Select a return date" th:required="required"/>
-                                <div class="invalid-feedback">
-                                    Invalid entry
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <button id="carRental" type="submit" class="btn btn-primary" >Search car rentals!</button>
-
-                    </form>
-
-
+                    </section>
                 </div>
             </div>
-            <div id="entertainment" class="tab-pane">
-                <div id="poiMap"></div>
 
-                <div id="poiPosts"></div>
-                <button id="ent" type="submit" class="btn btn-primary" >Search enter!</button>
-
-            </div>
+            <!-- page end-->
+        </section>
+    </section>
+    <!--main content end-->
+    <div class="text-right">
+        <div class="credits">
+            <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+            -->
+            <!--Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
         </div>
     </div>
 </section>
-
-
 <div th:replace="partials/footer :: footer"></div>
-
-
 </body>
 </html>

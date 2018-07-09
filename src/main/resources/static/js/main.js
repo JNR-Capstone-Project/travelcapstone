@@ -134,8 +134,8 @@ $(function () {
 
                 var htmlFlight="";
                 htmlFlight+="<tr>";
+                htmlFlight+="<td>"+ +"</td>";
                 htmlFlight+="<td>"+"</td>";
-                htmlFlight+="<td>"+flight+"</td>";
                 htmlFlight+="<td>"+"</td>";
                 htmlFlight+="<td>"+flight.fare.total_price+"</td>";
                 htmlFlight+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
@@ -151,10 +151,62 @@ $(function () {
 });
 
 
+// <tr>
+// <td>origin</td>
+// <td>dest</td>
+// <td>12/12/2018</td>
+// <td>01/20/2018</td>
+// <td>$$$$$$</td>
+// <td>yes/no</td>
+// <td>1</td>
+// <td>300</td>
+// <td>
+// <div class="btn-group">
+//     <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+// <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+// </div>
+// </td>
+// </tr>
 
 /* =======================================================================
                     Hotel Api
 ========================================================================*/
+
+
+
+
+/* =======================================================================
+                    Airport Hotel Map
+========================================================================*/
+
+// function airportHotel(location, check_in,check_out) {
+//
+//
+//     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
+//         {
+//             dataType: 'json',
+//             apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+//             check_in: check_in,
+//             check_out: check_out,
+//             location: location
+//         }).done(function (data) {
+//         console.log(data.results);
+//         // $(".container").html(" "); line to clean the results every time for a new search load
+//         for (var i =0;i< data.results.length; i++)
+//         {
+//             $("#hotels").append(setHotel(data.results[i]));
+//
+//         }
+//     })
+// }
+//
+//
+//
+//
+// //row struture for the hotel
+// var esta="type";
+//
+
 
 
 
@@ -182,19 +234,26 @@ $(function () {
 
         function main(response) {
 
-            for(var i = 0; i <= response.results.length; i++){
-                console.log(response.results[i].property_name);
-                $('.hotel-card').append(
-                    "<h2 class='hotel-car-des'>" + response.results[i].property_name + "\xB0" +
-                    "</h2>" + "<p class='block'>" + response.results[i].contacts[0].detail + "\xB0" +
-                    "</p><br/><p class='block'>" + response.results[i].contacts[1].detail + "\xB0" +
-                    "</p><br/><p class='block'>" + response.results[i].contacts[2].detail + "\xB0" +   "</p>");
-
-
-
+            for (var i =0;i< response.results.length; i++)
+            {
+                $("#hotels").append(setHotel(response.results[i]));
 
             }
 
+            function setHotel(hotel)
+            {
+                var htmlHotel="";
+                htmlHotel+="<tr>";
+                htmlHotel+="<td>"+hotel.property_name+"</td>";
+                htmlHotel+="<td>"+hotel.address.line1+"</td>";
+                htmlHotel+="<td>"+hotel.contacts[0].type+": "+hotel.contacts[0].detail+"</td>";
+                htmlHotel+="<td>"+hotel.total_price.amount+"</td>";
+                htmlHotel+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
+                    "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
+                htmlHotel+="</tr>";
+                return htmlHotel;
+
+            }
 
 
 
@@ -365,55 +424,6 @@ $(function () {
 
 });
 
-
-/* =======================================================================
-                    Airport Hotel Map
-========================================================================*/
-
-function airportHotel(location, check_in,check_out) {
-
-
-    $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
-        {
-            dataType: 'json',
-            apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
-            check_in: check_in,
-            check_out: check_out,
-            location: location
-        }).done(function (data) {
-        console.log(data.results);
-        // $(".container").html(" "); line to clean the results every time for a new search load
-        for (var i =0;i< data.results.length; i++)
-        {
-            $("#hotels").append(setHotel(data.results[i]));
-
-        }
-    })
-}
-
-
-
-airportHotel('BOS','2018-12-15','2018-12-16')
-
-
-
-//row struture for the hotel
-var esta="type";
-
-function setHotel(hotel)
-{
-    var htmlHotel="";
-    htmlHotel+="<tr>";
-    htmlHotel+="<td>"+hotel.property_name+"</td>";
-    htmlHotel+="<td>"+hotel.address.line1+"</td>";
-    htmlHotel+="<td>"+hotel.contacts[0].type+": "+hotel.contacts[0].detail+"</td>";
-    htmlHotel+="<td>"+hotel.total_price.amount+"</td>";
-    htmlHotel+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
-        "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
-    htmlHotel+="</tr>";
-    return htmlHotel;
-
-}
 
 
 

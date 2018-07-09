@@ -1,6 +1,7 @@
 'use strict';
 
 
+
 /* =======================================================================
                     Form validation
 ========================================================================*/
@@ -44,6 +45,7 @@ $(function() {
 
                     apikey: "5IomxX3j0OOD87Um4X9aTZdAgnttyJG0",
 
+
                     term: request.term
                 },
                 success: function( data ) {
@@ -72,7 +74,11 @@ $(function() {
                     Low flight API
 ========================================================================*/
 
+var api_key = '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
+
+
 $(function () {
+
 
 
         document.getElementById("lowFlight").addEventListener('click', function () {
@@ -91,7 +97,7 @@ $(function () {
             var currency = "&currency=USD" ;
 
 
-            var api_key = '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
+
 
 
             // if(return_date.val() == null) {
@@ -116,25 +122,140 @@ $(function () {
             function main(response) {
 
                 console.log(response);
-                //this loop will iterate through the layers of data
-                for (var r = 0; r < 50; r++){
-                    // console.log(response.results[r]);
-
-                    // $("#solo").html("<div class='card-body text-center'>" + response.results[r] + "\xB0" + "</div>");
+                for (var i =0;i< response.results.length; i++)
+                {
+                    $("#lowFly").append(setFlight(response.results[i]));
 
                 }
+
             }
 
-            main();
+            function setFlight(flight){
+
+                var htmlFlight="";
+                htmlFlight+="<tr>";
+                htmlFlight+="<td>"+"</td>";
+                htmlFlight+="<td>"+flight+"</td>";
+                htmlFlight+="<td>"+"</td>";
+                htmlFlight+="<td>"+flight.fare.total_price+"</td>";
+                htmlFlight+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
+                    "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
+                htmlFlight+="</tr>";
+                return htmlFlight;
+
+
+            }
 
         });
 
 });
 
 
+
+/* =======================================================================
+                    Hotel Api
+========================================================================*/
+
+
+
+
+$(function () {
+    document.getElementById("cheapHotel").addEventListener('click', function () {
+
+        var location = "&location=" + $("#hotelDestination").val();
+        var checkIn = "&check_in=" + $("#checkIn").val();
+        var checkOut = "&check_out=" + $("#checkOut").val();
+
+        var url_hotel = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=" + api_key + location + checkIn + checkOut;
+
+
+        var request = $.get(url_hotel);
+        request.fail(function (current, status, error) {
+            console.log(status);
+            console.log(error);
+        });
+        console.log(request);
+        request.done(function (response) {
+            //Since we are calling data out of the same array we can create a loop to put the machine to work
+            main(response);
+        });
+
+        function main(response) {
+
+            for(var i = 0; i <= response.results.length; i++){
+                console.log(response.results[i].property_name);
+                $('.hotel-card').append(
+                    "<h2 class='hotel-car-des'>" + response.results[i].property_name + "\xB0" +
+                    "</h2>" + "<p class='block'>" + response.results[i].contacts[0].detail + "\xB0" +
+                    "</p><br/><p class='block'>" + response.results[i].contacts[1].detail + "\xB0" +
+                    "</p><br/><p class='block'>" + response.results[i].contacts[2].detail + "\xB0" +   "</p>");
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+        }
+
+        main();
+
+
+
+
+
+    });
+});
+
+/* =======================================================================
+                    car rental
+========================================================================*/
+
+$(function () {
+    document.getElementById("carRental").addEventListener('click', function () {
+
+        var loc = "&location=" + $("#rentalLocation").val();
+        var pickup = "&pick_up=" + $("#pickUp").val();
+        var dropoff = "&drop_off=" + $("#dropOff").val();
+
+        var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + api_key + loc + pickup + dropoff;
+
+        var request = $.get(url_rental);
+        request.fail(function (current, status, error) {
+            console.log(status);
+            console.log(error);
+        });
+        console.log(request);
+        request.done(function (response) {
+            //Since we are calling data out of the same array we can create a loop to put the machine to work
+            main(response);
+        });
+
+        function main(response) {
+
+            console.log(response);
+
+        }
+
+        main();
+
+
+
+    });
+});
+
+
+
 /* =======================================================================
                     POI Map
 ========================================================================*/
+
 
 
 $(function () {
@@ -174,7 +295,7 @@ $(function () {
             marker.setPosition(location);
         }
 
-        marker  = new google.maps.Marker({
+        new google.maps.Marker({
             position: {
                 lat: 42.3437941,
                 lng:-71.067170
@@ -195,7 +316,7 @@ $(function () {
         function poiToMarker( data)
         {
             for (var i = 0; i < data.points_of_interest.length; i++) {
-                marker = new google.maps.Marker({
+                new google.maps.Marker({
                     position: {
                         lat: data.points_of_interest[i].location.latitude,
                         lng: data.points_of_interest[i].location.longitude
@@ -216,10 +337,7 @@ $(function () {
         $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
             {
                 dataType: 'json',
-                apikey:'TXIA8oaPoUrPTKogMt0y496orBf38IqM',
-                // apikey: '8XVJrEZAxpKF0vkSXh9HGpKGVAxVEGhD',
-                // apikey:'v6aAEJ4TnGgvIJhW6cKrX7wW0hCVwsfy',
-                // apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+                apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
                 latitude:  42.343794,
                 longitude:  -71.067170,
                 radius: '20'
@@ -243,11 +361,61 @@ $(function () {
 
 
 
-
-
     });
 
 });
+
+
+/* =======================================================================
+                    Airport Hotel Map
+========================================================================*/
+
+function airportHotel(location, check_in,check_out) {
+
+
+    $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
+        {
+            dataType: 'json',
+            apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
+            check_in: check_in,
+            check_out: check_out,
+            location: location
+        }).done(function (data) {
+        console.log(data.results);
+        // $(".container").html(" "); line to clean the results every time for a new search load
+        for (var i =0;i< data.results.length; i++)
+        {
+            $("#hotels").append(setHotel(data.results[i]));
+
+        }
+    })
+}
+
+
+
+airportHotel('BOS','2018-12-15','2018-12-16')
+
+
+
+//row struture for the hotel
+var esta="type";
+
+function setHotel(hotel)
+{
+    var htmlHotel="";
+    htmlHotel+="<tr>";
+    htmlHotel+="<td>"+hotel.property_name+"</td>";
+    htmlHotel+="<td>"+hotel.address.line1+"</td>";
+    htmlHotel+="<td>"+hotel.contacts[0].type+": "+hotel.contacts[0].detail+"</td>";
+    htmlHotel+="<td>"+hotel.total_price.amount+"</td>";
+    htmlHotel+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
+        "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
+    htmlHotel+="</tr>";
+    return htmlHotel;
+
+}
+
+
 
 
 

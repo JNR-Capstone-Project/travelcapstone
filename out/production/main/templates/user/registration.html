@@ -13,49 +13,59 @@
 
 <body id="travel-bg">
 <div class="container">
-    <h1 class="text-center">This is how joining us would help you MANAGE your trip </h1>
+
+    <h1 class="text-center mt-5 pt-5">This is how joining us would help you MANAGE your trip </h1>
     <p class="text-center">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab deleniti ea libero officiis, tempore voluptas. Autem ducimus expedita id in incidunt libero necessitatibus recusandae. Asperiores delectus natus nisi possimus quasi!
-        <br/>
-
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi eius laudantium nam numquam ratione. Aliquam atque esse nisi similique. Deserunt dignissimos dolorem et itaque minus pariatur placeat rem repellendus. Reprehenderit.
-    </p>
-
+        </p>
 </div>
-
-
-
-
-
 <div class="container">
 
-            <form class="register-form" th:action="@{/register}" method="post">
-              <div class="login-wrap mt-5">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="icon_profile"></i></span>
-                  <input id="email" name="email" placeholder="enter your email!" class="form-control form-control-sm" type="text" required="" />
-                </div>
-                  <br/>
-                  <div class="input-group">
-                      <span class="input-group-addon"><i class="icon_profile"></i></span>
-                      <input id="username" name="username" placeholder="Username" class="form-control form-control-sm" type="text" required="" />
-                  </div>
-                  <br/>
-                  <div class="input-group">
-                      <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                      <input id="password" name="password" placeholder="choose your password" class="form-control form-control-sm" type="password" required=""/>
-                      <span class="input-group-addon"><i class="icon_key"></i></span>
-                      <input id="re-passsword" name="re-password" placeholder="confirm your password" class="form-control form-control-sm" type="text" required="" />
-                  </div>
-                <div class="input-group">
-
-                </div>
-                  <br/>
-
-                <button class="btn btn-info btn-lg btn-block" type="submit">Register</button>
-              </div>
-            </form>
+    <form class="login-form" th:action="@{/sign-up}" method="post" th:object="${user}" style="position: relative; top: -100px;">
+        <div class="login-wrap mt-5">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_profile"></i></span>
+                <input th:field="*{email}" id="email" name="email" placeholder="enter your email!" class="form-control form-control-sm" type="text" required="" />
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_profile"></i></span>
+                <input th:field="*{username}" id="username" name="username" placeholder="Username" class="form-control form-control-sm" type="text" required="" />
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                <input th:field="*{password}" id="password" name="password" placeholder="choose your password" class="form-control form-control-sm" type="password" required=""/>
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_phone"></i></span>
+                <input id="phone" name="phone" placeholder="phone number" class="form-control form-control-sm" type="password" required=""/>
+            </div>
+            <br/>
+            <button class="btn btn-info btn-lg btn-block" type="submit">Register</button>
+        </div>
+          <br/>
+          <div class="input-group">
+              <span class="input-group-addon"><i class="icon_profile"></i></span>
+              <input th:field="*{username}" id="username" name="username" placeholder="Username" class="form-control form-control-sm" type="text" required="" />
+          </div>
+          <br/>
+          <div class="input-group">
+              <span class="input-group-addon"></span>
+              <input th:field="*{phonenumber}" id="phonenumber" name="phonenumber" placeholder="Enter a phone number" class="form-control form-control-sm" type="text" required=""/>
+          </div>
+          <br/>
+          <div class="input-group">
+              <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+              <input th:field="*{password}" id="password" name="password" placeholder="choose your password" class="form-control form-control-sm" type="password" required=""/>
+          </div>
+          <br/>
+        <button class="btn btn-info btn-lg btn-block" type="submit">Register</button>
+    </form>
 </div>
+
+
 
 
 <div class="text-right">

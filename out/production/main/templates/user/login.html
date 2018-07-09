@@ -14,8 +14,7 @@
 <body id="travel-bg">
 
   <div class="container" th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
-                <span th:case="${false}">
-
+        <span th:case="${false}">
             <form class="login-form" th:action="@{/login}" method="post">
               <div class="login-wrap">
                 <p class="login-img"><i class="icon_lock_alt"></i></p>
@@ -28,34 +27,24 @@
                   <input id="password" name="password" placeholder="Password" class="form-control form-control-sm" type="password" required=""/>
                 </div>
                 <label class="checkbox">
-                        <input type="checkbox" value="remember-me"/> Remember me
-                        <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+
+                        <span class="pull-right"> <a href="/sign-up"> new member?</a></span>
                     </label>
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-                <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
               </div>
             </form>
-
-                </span>
+        </span>
 
     <span th:case="${true}">
-                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" class="login btn btn-outline-secondary dropdown-toggle">Profile <span class="caret"></span></button>
-                    <ul class="dropdown-menu dropdown-menu-right mt-2">
-                        <li class="px-3 py-2">
-                            <form th:action="@{/profile}" th:method="post">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Profile</button>
-                                </div>
-                            </form>
-                            <form th:action="@{/logout}" th:method="post">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Logout</button>
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </span>
-
+        <form class="login-form"  th:action="@{/logout}" th:method="post">
+            <div class="login-wrap">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="icon_profile"></i></span>
+                <button type="submit" th:href="end.session" class="btn btn-primary btn-block">Logout</button>
+                </div>
+            </div>
+        </form>
+    </span>
   </div>
 
 
