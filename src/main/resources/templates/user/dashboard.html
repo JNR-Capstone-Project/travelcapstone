@@ -192,6 +192,7 @@
               <div class="tab-content">
                 <div id="recent-activity" class="tab-pane active">
                   <div class="container">
+                    <h6>Create a Reminder</h6>
                     <form th:action="@{/dashboard}" method="post" th:object="${reminder}">
                         <select th:field="*{category}">
                           <option value="Flight">Flight</option>
@@ -204,6 +205,21 @@
                         <input th:field="*{date}" type="datetime-local" />
                       <button type="submit" class="btn btn-primary">Create Reminder</button>
                     </form>
+                    <p>Your reminders</p>
+                    <table class="table table-striped table-advance table-hover">
+                      <tbody>
+                        <tr>
+                          <th>Category</th>
+                          <th>Reminder</th>
+                          <th>Date</th>
+                        </tr>
+                      <tr th:each="reminder: ${reminders}">
+                        <td><span th:text="${reminder.category}"></span></td>
+                        <td><span th:text="${reminder.action}"></span></td>
+                        <td><span th:text="${reminder.date}"></span></td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
                 <!-- profile -->

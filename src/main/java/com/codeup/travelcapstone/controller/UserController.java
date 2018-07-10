@@ -61,6 +61,7 @@ public class UserController {
         long id = user.getId();
         model.addAttribute("searches", searchRepo.findAllByUser(id));
         model.addAttribute("reminder", new Reminder());
+        model.addAttribute("reminders", reminderRepo.findAllByUser(id));
         return "user/dashboard";
     }
 
