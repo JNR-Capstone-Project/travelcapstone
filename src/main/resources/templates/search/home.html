@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+<!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />-->
 <head th:replace="partials/header :: header(${'Home Page'})">
 
     <!-- =======================================================
@@ -25,7 +25,7 @@
         </div>
 
         <!--logo start-->
-        <a href="/login" class="logo">Viator <span class="lite">Travel</span></a>
+        <a href="/" class="logo">Viatores <span class="lite">Travel</span></a>
         <!--logo end-->
 
         <div class="top-nav notification-row">
@@ -39,7 +39,10 @@
     <aside>
         <div id="sidebar" class="nav-collapse">
             <!-- sidebar menu start-->
-            <ul class="sidebar-menu">
+
+            <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+                <span th:case="${false}">
+                    <ul class="sidebar-menu">
                 <li class="">
                     <a href="/login">
                         <i class="icon_profile"></i>
@@ -64,9 +67,32 @@
                         <span>Documentation</span>
                     </a>
                 </li>
-
-
             </ul>
+                </span>
+                <span th:case="${true}">
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a class="" href="/dashboard">
+                                <i class="icon_house_alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/about">
+                                <i class="icon_profile"></i>
+                                <span>About us</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/JNR-Capstone-Project/travelcapstone">
+                                <i class="icon_profile"></i>
+                                <span>Documentation</span>
+                            </a>
+                        </li>
+                    </ul>
+                </span>
+            </div>
+
             <!-- sidebar menu end-->
         </div>
     </aside>
@@ -77,7 +103,7 @@
         <section class="wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header text-center"> Welcome to Viatorem Travel! </h3>
+                    <h3 class="page-header text-center"> Welcome to Viatores Travel! </h3>
 
                 </div>
             </div>
