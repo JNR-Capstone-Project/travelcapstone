@@ -37,21 +37,23 @@
                               <!--<img alt="" src="img/avatar1_small.jpg"/>-->
                           </span>
             <span th:text="${user.username}"></span>
-            <b class="caret"></b>
           </a>
           <ul class="dropdown-menu extended logout">
+            <li>
+              <a href="/profile">
+                <i class="icon_profile"></i>
+                <span>Profile</span>
+              </a>
+            </li>
             <div class="log-arrow-up"></div>
             <li class="eborder-top">
               <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
-            </li>
-            <li>
-              <a href="#"><i class="icon_key_alt"></i> Documentation</a>
             </li>
           </ul>
         </li>
         <!-- user login dropdown end -->
       </ul>
-      <!-- notificatoin dropdown end-->
+      <!-- notification dropdown end-->
     </div>
   </header>
   <!--sidebar-->

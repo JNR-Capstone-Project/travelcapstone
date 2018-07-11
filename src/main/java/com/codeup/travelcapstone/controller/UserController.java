@@ -77,6 +77,12 @@ public class UserController {
 
         return "user/login";}
 
+    @GetMapping("/logout")
+    public String logout(){
+
+        return "redirect:/login";
+    }
+
 
     @GetMapping("/profile")
     public String profile(Model model){
