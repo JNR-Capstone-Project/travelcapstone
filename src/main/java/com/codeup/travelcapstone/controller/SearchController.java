@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 //import sun.tools.tree.NewArrayExpression;
 
 import java.util.ArrayList;
@@ -55,35 +52,12 @@ public class SearchController {
         return "redirect:/";
     }
 
-
-
-
-
-
-
-    //post method for the search will submit a list of search objects and will be passed to the results view
-//    @GetMapping("/results")
-//    public String viewResults(@ModelAttribute List<Search> results, Model view) {
-//        view.addAttribute("results", results);
-//        return "/search/results";
-//    }
-
-
-
-//    @PostMapping("/home/search/results/save")
-//    public String saveResults(@ModelAttribute Search search) {
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if (user != null) {
-//            //if the user is logged should be able to save the results as search
-//            ArrayList<Search> toSave = new ArrayList<>();
-//            toSave.add(search);
-////            searchRepository.save()
-//        } else {
-//            //redirect the user to the registration view if there's a view for
-//        }
-//
-//        return "/search/results";
-//    }
+    @GetMapping("/search/edit")
+    public String searchUpdate(@RequestParam Long id, Model model){
+        Search search=searchRepository.findSearchById(id);
+        model.addAttribute(search);
+        return "user/dashboard";
+    }
 
 
     @GetMapping("/poi")

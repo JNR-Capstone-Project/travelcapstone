@@ -191,9 +191,7 @@ $(function () {
             htmlHotel += "</tr>";
             return htmlHotel;
 
-
         }
-
 
     });
 
