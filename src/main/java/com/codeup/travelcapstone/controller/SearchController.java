@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 //import sun.tools.tree.NewArrayExpression;
 
@@ -53,6 +54,12 @@ public class SearchController {
         searchRepository.save(search);
         return "redirect:/";
     }
+
+
+
+
+
+
 
     //post method for the search will submit a list of search objects and will be passed to the results view
 //    @GetMapping("/results")
