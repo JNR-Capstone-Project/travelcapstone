@@ -228,7 +228,30 @@
                   <div><p>content goes here</p></div>
                 </div>
                 <div id="find-enter" class="tab-pane">
-                  <div><p>content dude here</p></div>
+                  <div>
+                    <div id="entertainment" class="tab-pane">
+                      <form class="needs-validation" th:novalidate="novalidate">
+                        <div class="form-row">
+                          <div class="col-md-4 mb-3">
+                            <label for="poi-loc">Destination</label>
+                            <input  type="text" id="poi-loc" class=" form-control" placeholder="airport code?" th:required="required" />
+                            <div class="invalid-feedback">
+                              Invalid entry
+                            </div>
+
+                          </div>
+                        </div>
+                        <button id="ent" type="button" class="btn btn-primary" >Search enter!</button>
+
+
+                      </form>
+
+                    </div>
+
+                    <div id="poiMap"></div>
+
+                    <div id="poiPosts"></div>
+                  </div>
                 </div>
               </div>
             </div>
