@@ -4,6 +4,7 @@ package com.codeup.travelcapstone.controller;
 import com.codeup.travelcapstone.model.Search;
 import com.codeup.travelcapstone.model.User;
 import com.codeup.travelcapstone.repositories.SearchRepository;
+import com.codeup.travelcapstone.repositories.Users;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,12 +19,14 @@ import java.util.List;
 public class SearchController {
     private SearchRepository searchRepository;
     private UserController userController;
+    private Users users;
     @Value("${amadeus.api}")
     String apikey;
 
-    public SearchController(SearchRepository searchRepository, UserController userController) {
+    public SearchController(SearchRepository searchRepository, UserController userController, Users users) {
         this.searchRepository = searchRepository;
         this.userController = userController;
+        this.users=users;
     }
 
     //get method for the home page
@@ -45,18 +48,20 @@ public class SearchController {
     //get method for the info page ... probably the search results
     @PostMapping("/search/home")
     public String search(@ModelAttribute Search search) {
-        //  find a flies for the search from the api using that search, put that results in a List<Search>
+        //  find a flights for the search from the api using that search, put that results in a List<Search>
         //  and passing this list to the view results
-        search.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        User userSession=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user= users.findUsersById(userSession.getId());
+        search.setUser(user);
         searchRepository.save(search);
         return "redirect:/";
     }
 
-    @GetMapping("/search/edit")
-    public String searchUpdate(@RequestParam Long id, Model model){
-        Search search=searchRepository.findSearchById(id);
-        model.addAttribute(search);
-        return "user/dashboard";
+    @PostMapping("/search/edit")
+    public String searchUpdate(@RequestParam Long editSavedSearch, Model model){
+        Search search = searchRepository.findSearchById(editSavedSearch);
+        model.addAttribute("mySearch",search);
+        return "redirect:/dashboard";
     }
 
 

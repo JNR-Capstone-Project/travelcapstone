@@ -1,11 +1,12 @@
 package com.codeup.travelcapstone.controller;
 
 
+import com.codeup.travelcapstone.model.Search;
 import com.codeup.travelcapstone.model.User;
 import com.codeup.travelcapstone.repositories.SearchRepository;
 import com.codeup.travelcapstone.repositories.UserRepository;
 import com.codeup.travelcapstone.repositories.Users;
-import org.apache.http.util.TextUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
     private SearchRepository searchRepo;
+    @Value("${amadeus.api}")
+    String apikey;
 
 
 
@@ -49,7 +52,9 @@ public class UserController {
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("apikey", apikey);
         model.addAttribute("user", user);
+        model.addAttribute("mySearch",new Search());
         long id = user.getId();
         System.out.println(id);
         model.addAttribute("searches", searchRepo.findAllByUser(id));

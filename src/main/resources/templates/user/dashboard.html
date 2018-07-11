@@ -3,6 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/header :: header(${'Home Page'})">
 
+
 <!-- =======================================================
   Theme Name: NiceAdmin
   Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -12,6 +13,7 @@
 </head>
 
 <body>
+<input type="hidden" id="amadeus-API" th:value="${apikey}" />
 <!-- container section start -->
 <section id="container" class="">
 
@@ -103,7 +105,7 @@
       <div class="row">
         <div class="col-lg-12">
           <!--collapse start-->
-          <div class="panel-group m-bot20" id="accordion">
+          <div class="panel-group m-bot20" id="accordion" th:object="${searches}">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
@@ -138,77 +140,138 @@
                       <td><span th:text="${search.price}"></span></td>
                       <td><span th:text="${search.adults}"></span></td>
                       <td><span th:text="${search.children}"></span></td>
+                      <td><span th:text="${search.id}" ></span></td>
                       <td>
                         <div class="btn-group">
-                          <a class="btn btn-primary editSavedSearch"><i class="icon_plus_alt2"></i></a>
-                          <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+                            <form th:action="@{/search/edit}" method="post">
+                          <button  type="submit" class="btn btn-success" name="editSavedSearch" id="editSavedSearch" th:value="${search.id}" ><i class="icon_plus_alt2"></i></button>
                           <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                            </form>
                         </div>
                       </td>
                     </tr>
+                    <form  id="editionForm" th:object="${mySearch}">
+                        <h1>Edit Search</h1>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="origin">Select Origin</label>
+                                <input th:value="*{origin}"  type="text" id="origin" class="airports form-control" aria-describedby="emailHelp" placeholder="" th:required="required"/>
+                                <div class="invalid-feedback">
+                                    Invalid entry
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="destination">Select Destination</label>
+                                <input th:value="*{destination}" type="text" id="destination" class="airports form-control" placeholder="Choose an end point" th:required="required" />
+                                <div class="invalid-feedback">
+                                    Invalid entry
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-3 mb-3">
+                                <label for="departure">Departure Date</label>
+                                <input  th:value="*{start_date}" type="date" id="departure" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
+                                <div class="invalid-feedback">
+                                    Invalid entry
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="returnDate">Return Date</label>
+                                <input th:value="*{end_date}" type="date" id="returnDate" class="form-control"  placeholder="Select a return date" th:required="required"/>
+                                <div class="invalid-feedback">
+                                    Invalid entry
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="children">Children</label>
+                                <input  th:value="*{children}" type="number" id="children" class="form-control"  placeholder="1" th:required="required"/>
+                                <div class="invalid-feedback">
+                                    Invalid entry
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="adults">Adults</label>
+                                <input  th:value="*{adults}" type="number" id="adults" class="form-control"  placeholder="1" th:required="required"/>
+                                <div class="invalid-feedback">
+                                    Invalid entry
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="price">name a price</label>
+                                <input th:value="*{price}" type="text" id="price" class="form-control"  placeholder="0.00" th:required="required"/>
+                                <div class="invalid-feedback">
+                                    Invalid entry
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
                     </tbody>
                   </table>
                     <!--for to edit the search-->
-                    <h1>Edit Search</h1>
-                    <form th:action="@{search/edit}" method="post" th:object="${search}" class="needs-validation" th:novalidate="novalidate">
-                      <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                          <label for="origin">Select Origin</label>
-                          <input th:field="${search.origin}" type="text" id="origin" class="airports form-control" aria-describedby="emailHelp" placeholder="Choose a starting location" th:required="required"/>
-                          <div class="invalid-feedback">
-                            Invalid entry
-                          </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label for="destination">Select Destination</label>
-                          <input th:field="${search.destination}" type="text" id="destination" class="airports form-control" placeholder="Choose an end point" th:required="required" />
-                          <div class="invalid-feedback">
-                            Invalid entry
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="col-md-3 mb-3">
-                          <label for="departure">Departure Date</label>
-                          <input th:field="${search.start_date}" type="date" id="departure" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
-                          <div class="invalid-feedback">
-                            Invalid entry
-                          </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                          <label for="returnDate">Return Date</label>
-                          <input th:field="${search.end_date}" type="date" id="returnDate" class="form-control"  placeholder="Select a return date" th:required="required"/>
-                          <div class="invalid-feedback">
-                            Invalid entry
-                          </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                          <label for="children">Children</label>
-                          <input th:field="${search.children}" type="number" id="children" class="form-control"  placeholder="1" th:required="required"/>
-                          <div class="invalid-feedback">
-                            Invalid entry
-                          </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                          <label for="adults">Adults</label>
-                          <input th:field="${search.adults}" type="number" id="adults" class="form-control"  placeholder="1" th:required="required"/>
-                          <div class="invalid-feedback">
-                            Invalid entry
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                          <label for="price">name a price</label>
-                          <input th:field="${search.price}" type="text" id="price" class="form-control"  placeholder="0.00" th:required="required"/>
-                          <div class="invalid-feedback">
-                            Invalid entry
-                          </div>
-                        </div>
-                      </div>
-                      <button id="lowFlight" type="button" class="btn btn-primary">Search flights!</button>
-                      <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
+                    <!--<form  >-->
+                        <!--<h1>Edit Search</h1>-->
+                      <!--<div class="form-row">-->
+                        <!--<div class="col-md-4 mb-3">-->
+                          <!--<label for="origin">Select Origin</label>-->
+                          <!--<input th:text="${search.origin}" type="text" id="origin" class="airports form-control" aria-describedby="emailHelp" placeholder="" th:required="required"/>-->
+                          <!--<div class="invalid-feedback">-->
+                            <!--Invalid entry-->
+                          <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-4 mb-3">-->
+                          <!--<label for="destination">Select Destination</label>-->
+                          <!--<input  type="text" id="destination" class="airports form-control" placeholder="Choose an end point" th:required="required" />-->
+                          <!--<div class="invalid-feedback">-->
+                            <!--Invalid entry-->
+                          <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="form-row">-->
+                        <!--<div class="col-md-3 mb-3">-->
+                          <!--<label for="departure">Departure Date</label>-->
+                          <!--<input  type="date" id="departure" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>-->
+                          <!--<div class="invalid-feedback">-->
+                            <!--Invalid entry-->
+                          <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-3 mb-3">-->
+                          <!--<label for="returnDate">Return Date</label>-->
+                          <!--<input  type="date" id="returnDate" class="form-control"  placeholder="Select a return date" th:required="required"/>-->
+                          <!--<div class="invalid-feedback">-->
+                            <!--Invalid entry-->
+                          <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-3 mb-3">-->
+                          <!--<label for="children">Children</label>-->
+                          <!--<input  type="number" id="children" class="form-control"  placeholder="1" th:required="required"/>-->
+                          <!--<div class="invalid-feedback">-->
+                            <!--Invalid entry-->
+                          <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-3 mb-3">-->
+                          <!--<label for="adults">Adults</label>-->
+                          <!--<input  type="number" id="adults" class="form-control"  placeholder="1" th:required="required"/>-->
+                          <!--<div class="invalid-feedback">-->
+                            <!--Invalid entry-->
+                          <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="form-row">-->
+                        <!--<div class="col-md-4 mb-3">-->
+                          <!--<label for="price">name a price</label>-->
+                          <!--<input  type="text" id="price" class="form-control"  placeholder="0.00" th:required="required"/>-->
+                          <!--<div class="invalid-feedback">-->
+                            <!--Invalid entry-->
+                          <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<button id="lowFlight" type="button" class="btn btn-primary">Search flights!</button>-->
+                      <!--<button type="submit" class="btn btn-primary">Save changes</button>-->
+                    <!--</form>-->
                   </div>
                 </div>
               </div>

@@ -78,7 +78,7 @@ $(function() {
 ========================================================================*/
 
 
-$(function () {
+// $(function () {
 
 
         document.getElementById("lowFlight").addEventListener('click', function () {
@@ -130,7 +130,7 @@ $(function () {
 
         });
 
-});
+// });
 
 
 /* =======================================================================
@@ -177,7 +177,7 @@ $(function () {
         }
 
 
-        airportHotel(location, checkIn, checkOut)
+        airportHotel(location, checkIn, checkOut);
 
 
 //row struture for the hotel
@@ -348,24 +348,34 @@ $(function () {
                     Airport Hotel Map
 ========================================================================*/
 
-function airportHotel(location, check_in,check_out) {
+// function airportHotel(location, check_in,check_out) {
+//
+//
+//     $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
+//         {
+//             dataType: 'json',
+//             apikey: apiKey,
+//             check_in: check_in,
+//             check_out: check_out,
+//             location: location
+//         }).done(function (data) {
+//         console.log(data.results);
+//         // $(".container").html(" "); line to clean the results every time for a new search load
+//         for (var i =0;i< data.results.length; i++)
+//         {
+//             $("#hotels").append(setHotel(data.results[i]));
+//
+//         }
+//     })
+// }
+document.getElementById("#editSavedSearch").addEventListener('click', function () {
+// $("#editSavedSearch").click(function() {
+    // var id = $(this).find("td:last-child").text();
+    console.log("hello from the bottom");
+});
 
 
-    $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
-        {
-            dataType: 'json',
-            apikey: apiKey,
-            check_in: check_in,
-            check_out: check_out,
-            location: location
-        }).done(function (data) {
-        console.log(data.results);
-        // $(".container").html(" "); line to clean the results every time for a new search load
-        for (var i =0;i< data.results.length; i++)
-        {
-            $("#hotels").append(setHotel(data.results[i]));
+$(function () {
 
-        }
-    })
-}
 
+});
