@@ -171,14 +171,14 @@ $(function () {
                 htmlFly += "<td>$" + fly.fare.total_price + "</td>";
                 if(airline === 'AA'){
 
-                    htmlFly += "<td><a href='https://www.aa.com/homePage.do' ><img src='https://vignette.wikia.nocookie.net/logopedia/images/d/d7/American_Airlines_logo.svg/revision/latest/scale-to-width-down/340?cb=20130728031212' alt='none' class='logo'/>" + "</a></td>";
+                    htmlFly += "<td><a href='https://www.aa.com/homePage.do' ><img src='https://vignette.wikia.nocookie.net/logopedia/images/d/d7/American_Airlines_logo.svg/revision/latest/scale-to-width-down/340?cb=20130728031212' alt='none' class='logo2'/>" + "</a></td>";
                 }
                 if(airline === 'UA'){
-                    htmlFly += "<td><a href='https://www.united.com/ual/en/us/'><img src='https://vignette.wikia.nocookie.net/logopedia/images/0/0a/United_Airlines_2010.svg/revision/latest/scale-to-width-down/250?cb=20180505152143' alt='none' class='logo'/>"  + "</a></td>";
+                    htmlFly += "<td><a href='https://www.united.com/ual/en/us/'><img src='https://vignette.wikia.nocookie.net/logopedia/images/0/0a/United_Airlines_2010.svg/revision/latest/scale-to-width-down/250?cb=20180505152143' alt='none' class='logo2'/>"  + "</a></td>";
 
                 }
                 if (airline === 'DL'){
-                    htmlFly += "<td><a href='https://www.delta.com/flight-search/book-a-flight'><img src='https://vignette.wikia.nocookie.net/logopedia/images/c/cc/DLCON.gif/revision/latest/thumbnail-down/width/98/height/20?cb=20101015204631' alt='none' class='logo'/>" + "</a></td>";
+                    htmlFly += "<td><a href='https://www.delta.com/flight-search/book-a-flight'><img src='https://vignette.wikia.nocookie.net/logopedia/images/c/cc/DLCON.gif/revision/latest/thumbnail-down/width/98/height/20?cb=20101015204631' alt='none' class='logo2'/>" + "</a></td>";
 
                 }
 
