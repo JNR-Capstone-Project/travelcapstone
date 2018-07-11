@@ -111,22 +111,93 @@ $(function () {
 
                for (var i=0;i<response.results.length;i++){
                    $('#flight').append(setFly(response.results[i]));
+
+
                }
+
 
             });
 
             function setFly(fly) {
                 var htmlFly = "";
+                var trim = fly.itineraries[0].outbound.flights[0].departs_at.slice(11,16);
+                var xtrim = fly.itineraries[0].inbound.flights[0].departs_at.slice(11,16);
+                var airline = fly.itineraries[0].outbound.flights[0].marketing_airline;
+
+
+// fetch
+                var hours = Number(trim.split(':')[0]);
+                var minutes = Number(trim.split(':')[1]);
+
+                var xhours = Number(xtrim.split(':')[0]);
+                var xminutes = Number(xtrim.split(':')[1]);
+
+// calculate
+                var timeValue;
+                var timeV;
+
+                if (hours  > 0 && hours  <= 12) {
+                    timeValue= "" + hours;
+
+                } else if (hours  > 12) {
+                    timeValue= "" + (hours - 12);
+
+                } else if (hours == 0) {
+                    timeValue= "12";
+
+                }
+
+                if (xhours > 0 && xhours <= 12) {
+                    timeV = "" + xhours;
+                } else if ( xhours > 12) {
+                    timeV = "" + (xhours - 12)
+                } else if (xhours == 0) {
+                    timeV = "12";
+                }
+
+
+                timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+                timeValue += (hours >= 12) ? " P.M" : " A.M";  // get AM/PM
+
+                timeV += (xminutes < 10) ? ":0" + xminutes : ":" + xminutes;
+                timeV += (xhours >= 12) ? " P.M" : " A.M";  // get AM/PM
+
+
                 htmlFly += "<tr>";
+                htmlFly += "<td>" + fly.itineraries[0].outbound.flights[0].flight_number + "</td>";
+                htmlFly += "<td>" + timeValue + "</td>";
+                htmlFly += "<td>" + fly.itineraries[0].outbound.duration + "</td>";
                 htmlFly += "<td>" + fly.itineraries[0].inbound.flights[0].flight_number + "</td>";
-                htmlFly += "<td>" + fly.itineraries[0].inbound.flights[0].operating_airline + "</td>";
-                htmlFly += "<td>" + fly.itineraries[0].inbound.flights[0].departs_at + "</td>";
+                htmlFly += "<td>" + timeV + "</td>";
                 htmlFly += "<td>" + fly.itineraries[0].inbound.duration + "</td>";
+                htmlFly += "<td>$" + fly.fare.total_price + "</td>";
+                if(airline === 'AA'){
+
+                    htmlFly += "<td><a href='https://www.aa.com/homePage.do' ><img src='https://vignette.wikia.nocookie.net/logopedia/images/d/d7/American_Airlines_logo.svg/revision/latest/scale-to-width-down/340?cb=20130728031212' alt='none' class='logo'/>" + "</a></td>";
+                }
+                if(airline === 'UA'){
+                    htmlFly += "<td><a href='https://www.united.com/ual/en/us/'><img src='https://vignette.wikia.nocookie.net/logopedia/images/0/0a/United_Airlines_2010.svg/revision/latest/scale-to-width-down/250?cb=20180505152143' alt='none' class='logo'/>"  + "</a></td>";
+
+                }
+                if (airline === 'DL'){
+                    htmlFly += "<td><a href='https://www.delta.com/flight-search/book-a-flight'><img src='https://vignette.wikia.nocookie.net/logopedia/images/c/cc/DLCON.gif/revision/latest/thumbnail-down/width/98/height/20?cb=20101015204631' alt='none' class='logo'/>" + "</a></td>";
+
+                }
+
+
+
                 htmlFly += "</tr>";
                 return htmlFly;
 
             }
 
+
+        // <th><i class="fa fa-building-o"></i>Departure</th>
+        //     <th><i class="icon_pin_alt"></i>Duration</th>
+        //     <th><i class="fa fa-money"></i> Return</th>
+        //     <th><i class="fa fa-money"></i> Duration</th>
+        //     <th><i class="icon_mobile"></i> Price</th>
+        //     <th><i class="icon_tool"></i> Book with Airline</th>
 
         });
 
@@ -162,7 +233,7 @@ $(function () {
             $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
                 {
                     dataType: 'json',
-                    apikey: apikey,
+                    apikey: apiKey,
                     check_in: check_in,
                     check_out: check_out,
                     location: location
@@ -184,10 +255,26 @@ $(function () {
 
         function setHotel(hotel) {
             var htmlHotel = "";
+            var contact;
+
+            for (var i = 0; i < hotel.contacts.length; i ++){
+               var set = hotel.contacts[i];
+
+            }
+
+            if(set.type === 'URL'){
+               contact = "<td>" + '<a href="url:' + hotel.contacts[2].detail + '">'+ hotel.contacts[2].detail +"</a>" + "</td>";
+            }
+            else{
+                contact = "<td>" + '<a href="tel:' + hotel.contacts[0].detail + '">' + hotel.contacts[0].detail + "</a>" + "</td>"
+            }
+
+
             htmlHotel += "<tr>";
             htmlHotel += "<td>" + hotel.property_name + "</td>";
-            htmlHotel += "<td>" + hotel.address.line1 + "</td>";
-            htmlHotel += "<td>" + hotel.contacts[0].type + ": " + '<a th:href="tel:' + hotel.contacts[0].detail + '">'+ hotel.contacts[0].detail +"</a>" + "</td>";
+            htmlHotel += "<td>" + hotel.address.line1 + ', '+ hotel.address.city +' '+  hotel.address.postal_code   +"</td>";
+            htmlHotel += contact;
+            htmlHotel += "<td>" + "$" +hotel.total_price.amount + "</td>";
             htmlHotel += "</tr>";
             return htmlHotel;
 
@@ -236,6 +323,7 @@ $(function () {
             htmlRental += "<tr>";
             htmlRental += "<td>" + rental.provider.company_name + "</td>";
             htmlRental += "<td>" + rental.address.line1+ "</td>";
+            htmlRental += "<td>" + rental.cars[0].estimated_total.amount +  "</td>";
             htmlRental += "</tr>";
             return htmlRental
         }
