@@ -1,7 +1,9 @@
 package com.codeup.travelcapstone.controller;
 
 
+import com.codeup.travelcapstone.model.Reminder;
 import com.codeup.travelcapstone.model.User;
+import com.codeup.travelcapstone.repositories.ReminderRepository;
 import com.codeup.travelcapstone.repositories.SearchRepository;
 import com.codeup.travelcapstone.repositories.UserRepository;
 import com.codeup.travelcapstone.repositories.Users;
@@ -19,13 +21,15 @@ public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
     private SearchRepository searchRepo;
+    private ReminderRepository reminderRepo;
 
 
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, SearchRepository searchRepo) {
+    public UserController(Users users, PasswordEncoder passwordEncoder, SearchRepository searchRepo, ReminderRepository reminderRepo) {
         this.searchRepo = searchRepo;
         this.users = users;
         this.passwordEncoder = passwordEncoder;
+        this.reminderRepo = reminderRepo;
     }
 
 
@@ -51,11 +55,18 @@ public class UserController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
         long id = user.getId();
-        System.out.println(id);
         model.addAttribute("searches", searchRepo.findAllByUser(id));
+        model.addAttribute("reminder", new Reminder());
+        model.addAttribute("reminders", reminderRepo.findAllByUser(id));
         return "user/dashboard";
     }
 
+    @PostMapping("/dashboard")
+    public String saveReminder(@ModelAttribute Reminder reminder){
+        reminder.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        reminderRepo.save(reminder);
+        return "redirect:/dashboard";
+    }
 
     @GetMapping("/login")
     public String login(){
