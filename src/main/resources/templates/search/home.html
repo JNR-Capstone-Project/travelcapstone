@@ -36,60 +36,63 @@
 
 
     <!--sidebar start-->
-    <aside>
-        <div id="sidebar" class="nav-collapse">
-            <!-- sidebar menu start-->
 
+            <!-- sidebar menu start-->
             <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
                 <span th:case="${false}">
-                    <ul class="sidebar-menu">
-                <li class="">
-                    <a href="/login">
-                        <i class="icon_profile"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/about">
-                        <i class="icon_profile"></i>
-                        <span>About us</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/JNR-Capstone-Project/travelcapstone">
-                        <i class="icon_profile"></i>
-                        <span>Documentation</span>
-                    </a>
-                </li>
-            </ul>
+                    <aside>
+                        <div id="sidebar" class="nav-collapse">
+                            <ul class="sidebar-menu">
+                                <li class="">
+                                    <a href="/login">
+                                        <i class="icon_profile"></i>
+                                        <span>Login</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/about">
+                                        <i class="icon_profile"></i>
+                                        <span>About us</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/JNR-Capstone-Project/travelcapstone">
+                                        <i class="icon_profile"></i>
+                                        <span>Documentation</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
                 </span>
                 <span th:case="${true}">
-                    <ul class="sidebar-menu">
-                        <li>
-                            <a class="" href="/dashboard">
-                                <i class="icon_house_alt"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/about">
-                                <i class="icon_profile"></i>
-                                <span>About us</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/JNR-Capstone-Project/travelcapstone">
-                                <i class="icon_profile"></i>
-                                <span>Documentation</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <aside>
+                        <div id="sidebar" class="nav-collapse">
+                            <ul class="sidebar-menu">
+                                <li>
+                                    <a class="" href="/dashboard">
+                                        <i class="icon_house_alt"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/about">
+                                        <i class="icon_profile"></i>
+                                        <span>About us</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/JNR-Capstone-Project/travelcapstone">
+                                        <i class="icon_profile"></i>
+                                        <span>Documentation</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
                 </span>
             </div>
-
             <!-- sidebar menu end-->
-        </div>
-    </aside>
 
 
     <!--main content start-->
