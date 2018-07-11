@@ -14,4 +14,6 @@ public interface SearchRepository extends CrudRepository<Search,Long>{
     value="Select * from searches WHERE user_id = ?")
     List<Search> findAllByUser(long user_id);
 
+
+    Search findSearchById(long search_id);
 }
