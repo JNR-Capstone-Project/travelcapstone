@@ -121,24 +121,29 @@
                       <th><i class="icon_calendar"></i> price</th>
                       <th><i class="icon_cogs"></i> adults</th>
                       <th><i class="icon_cogs"></i> children</th>
-                      <th><i class="icon_cogs"></i>Action</th>
+                      <th><i class="icon_cogs"></i> id</th>
+                      <th class="row"><i class="icon_cogs"></i>Action</th>
                     </tr>
                     <tr th:each="search : ${searches}">
-                      <td><span th:text="${search.origin}"></span></td>
-                      <td><span th:text="${search.destination}"></span></td>
-                      <td><span th:text="${search.start_date}"></span></td>
-                      <td><span th:text="${search.end_date}"></span></td>
-                      <td><span th:text="${search.price}"></span></td>
-                      <td><span th:text="${search.adults}"></span></td>
-                      <td><span th:text="${search.children}"></span></td>
-                      <td><span th:text="${search.id}" ></span></td>
-                      <td>
-                        <div class="btn-group">
-                            <form th:action="@{/search/edit}" method="post">
-                          <button  type="submit" class="btn btn-success" name="editSavedSearch" id="editSavedSearch" th:value="${search.id}" ><i class="icon_plus_alt2"></i></button>
-                          <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                            </form>
-                        </div>
+                      <td th:text="${search.origin}"></td>
+                      <td th:text="${search.destination}"></td>
+                      <td th:text="${search.start_date}"></td>
+                      <td th:text="${search.end_date}"></td>
+                      <td th:text="${search.price}"></td>
+                      <td th:text="${search.adults}"></td>
+                      <td th:text="${search.children}"></td>
+                      <td th:text="${search.id}" ></td>
+                      <td class="row">
+                          <form th:action="@{/search/edit}" method="post">
+                                  <button  type="submit" class="btn btn-success" name="editSavedSearch" id="editSavedSearch" th:value="${search.id}" ><i class="icon_plus_alt2"></i></button>
+                                  <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                          </form>
+                          <div class="form-check">
+                              <input type="radio" class="form-check-input" name="gridRadios" th:id="'gridRadios'+ ${search.id}" th:value="'option'+ ${search.id}" />
+                              <label th:for="'gridRadios'+ ${search.id}">  .. .    Details</label>
+                          </div>
+
+
                       </td>
                     </tr>
                     <form  id="editionForm" th:object="${mySearch}">
@@ -295,19 +300,19 @@
                   </a>
                 </li>
                 <li>
-                  <a data-toggle="tab" href="#profile">
+                  <a data-toggle="tab" href="#dash-hotel">
                     <i class="icon-user"></i>
                     Find hotels
                   </a>
                 </li>
                 <li class="">
-                  <a data-toggle="tab" href="#edit-profile">
+                  <a data-toggle="tab" href="#dash-rental">
                     <i class="icon-envelope"></i>
                     Find car rentals
                   </a>
                 </li>
-                <li class="">
-                  <a data-toggle="tab" href="#find-enter">
+                <li class="" id="dash-poi-tag">
+                  <a data-toggle="tab" href="#dash-poi" >
                     <i class="icon-envelope"></i>
                     Find entertainment
                   </a>
@@ -349,40 +354,28 @@
                   </div>
                 </div>
                 <!-- profile -->
-                <div id="profile" class="tab-pane">
+                <div id="dash-hotel" class="tab-pane">
                   <di><p>content here</p></di>
                 </div>
                 <!-- edit-profile -->
-                <div id="edit-profile" class="tab-pane">
+                <div id="dash-rental" class="tab-pane">
                   <div><p>content goes here</p></div>
                 </div>
-                <div id="find-enter" class="tab-pane">
-                  <div>
-                    <div id="entertainment" class="tab-pane">
-                      <form class="needs-validation" th:novalidate="novalidate">
-                        <div class="form-row">
-                          <div class="col-md-4 mb-3">
-                            <label for="poi-loc">Destination</label>
-                            <input  type="text" id="poi-loc" class=" form-control" placeholder="airport code?" th:required="required" />
-                            <div class="invalid-feedback">
-                              Invalid entry
-                            </div>
 
-                          </div>
+                    <div id="dash-poi" class="tab-pane">
+
+                        <div class="row">
+                            <div id="poiMap" class="container-fluid col-lg-12"></div>
+
+                            <div id="poiPosts"></div>
+
+
                         </div>
-                        <button id="ent" type="button" class="btn btn-primary" >Search enter!</button>
-
-
-                      </form>
 
                     </div>
 
-                    <div id="poiMap"></div>
 
-                    <div id="poiPosts"></div>
-                  </div>
                 </div>
-              </div>
             </div>
           </section>
         </div>
