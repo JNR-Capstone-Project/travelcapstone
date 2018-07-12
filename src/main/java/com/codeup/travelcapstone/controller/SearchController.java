@@ -82,6 +82,45 @@ public class SearchController {
     }
 
 
+
+
+//    this controller will redirect the user to the dashboard an will retrieve the updated edited search
+
+    @PostMapping("/search/saveEdit")
+    public String saveUpdate(@ModelAttribute Search mySearch){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mySearch.setUser(user);
+        searchRepository.save(mySearch);
+        return "redirect:/dashboard";
+    }
+
+
+
+
+//    this controller will redirect the user to the search view and will display the the results for this edited search
+
+//    @PostMapping("/search/saveEdit")
+//    public String saveUpdate(@ModelAttribute Search mySearch, Model model){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        mySearch.setUser(user);
+//        model.addAttribute("search",mySearch);
+//        return "search/home";
+//    }
+
+
+
+
+
+    @PostMapping("/search/deleteSearch")
+    public String delete(@RequestParam Long deleteSearch){
+        System.out.println("id from search to be deleted :"+deleteSearch);
+        searchRepository.delete(deleteSearch);
+//        searchRepository.deleteSearchById(deleteSearch);
+        return "redirect:/dashboard";
+    }
+
+
+
     @GetMapping("/poi")
     public String poi(){
         return "/search/poi";

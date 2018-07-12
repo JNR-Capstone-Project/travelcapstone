@@ -121,7 +121,8 @@
                       <th><i class="icon_calendar"></i> price</th>
                       <th><i class="icon_cogs"></i> adults</th>
                       <th><i class="icon_cogs"></i> children</th>
-                      <th><i class="icon_cogs"></i>Action</th>
+                      <th><i class="icon_cogs"></i><span>Edit</span><span>Delete</span></th>
+
                     </tr>
                     <tr th:each="search : ${searches}">
                       <td><span th:text="${search.origin}"></span></td>
@@ -131,29 +132,41 @@
                       <td><span th:text="${search.price}"></span></td>
                       <td><span th:text="${search.adults}"></span></td>
                       <td><span th:text="${search.children}"></span></td>
-                      <td><span th:text="${search.id}" ></span></td>
                       <td>
                         <div class="btn-group">
                             <form th:action="@{/search/edit}" method="post">
+                                <label for="editSavedSearch">
                           <button  type="submit" class="btn btn-success" name="editSavedSearch" id="editSavedSearch" th:value="${search.id}" ><i class="icon_plus_alt2"></i></button>
-                          <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                                Edit Search</label>
+                            </form>
+                            <form th:action="@{/search/deleteSearch}" method="post">
+                                <label for="deleteSearch">
+                          <button type="submit" class="btn btn-danger" name="deleteSearch" id="deleteSearch" th:value="${search.id}"><i class="icon_close_alt2"></i></button>
+                               Delete Search</label>
                             </form>
                         </div>
                       </td>
                     </tr>
-                    <form  id="editionForm" th:object="${mySearch}">
+                    <form  th:action="@{/search/saveEdit}" id="editionForm" th:object="${mySearch}" method="post">
                         <h1>Edit Search</h1>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="origin">Select Origin</label>
-                                <input th:value="*{origin}"  type="text" id="origin" class="airports form-control" aria-describedby="emailHelp" placeholder="" th:required="required"/>
+                                <input th:field="*{origin}"  type="text" id="origin" class="airports form-control" aria-describedby="emailHelp" placeholder="" th:required="required"/>
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="destination">Select Destination</label>
-                                <input th:value="*{destination}" type="text" id="destination" class="airports form-control" placeholder="Choose an end point" th:required="required" />
+                                <input th:field="*{destination}" type="text" id="destination" class="airports form-control" placeholder="Choose an end point" th:required="required" />
+                                <div class="invalid-feedback">
+                                    Invalid entry
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3" style="display: none">
+                                <label for="destination">Id</label>
+                                <input th:field="*{id}" type="text" id="id" class="airports form-control" placeholder="id" th:required="required" />
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
@@ -162,28 +175,28 @@
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
                                 <label for="departure">Departure Date</label>
-                                <input  th:value="*{start_date}" type="date" id="departure" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
+                                <input  th:field="*{start_date}" type="date" id="departure" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="returnDate">Return Date</label>
-                                <input th:value="*{end_date}" type="date" id="returnDate" class="form-control"  placeholder="Select a return date" th:required="required"/>
+                                <input th:field="*{end_date}" type="date" id="returnDate" class="form-control"  placeholder="Select a return date" th:required="required"/>
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="children">Children</label>
-                                <input  th:value="*{children}" type="number" id="children" class="form-control"  placeholder="1" th:required="required"/>
+                                <input  th:field="*{children}" type="number" id="children" class="form-control"  placeholder="1" th:required="required"/>
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="adults">Adults</label>
-                                <input  th:value="*{adults}" type="number" id="adults" class="form-control"  placeholder="1" th:required="required"/>
+                                <input  th:field="*{adults}" type="number" id="adults" class="form-control"  placeholder="1" th:required="required"/>
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
@@ -192,82 +205,27 @@
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="price">name a price</label>
-                                <input th:value="*{price}" type="text" id="price" class="form-control"  placeholder="0.00" th:required="required"/>
+                                <input th:field="*{price}" type="text" id="price" class="form-control"  placeholder="0.00" th:required="required"/>
                                 <div class="invalid-feedback">
                                     Invalid entry
                                 </div>
                             </div>
                         </div>
+                        <!--<div>-->
+                            <!--<input th:value="*{id}"  id="id" name="id"/>-->
+                        <!--</div>-->
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
                         <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
                     </form>
                     </tbody>
                   </table>
-                    <!--for to edit the search-->
-                    <!--<form  >-->
-                        <!--<h1>Edit Search</h1>-->
-                      <!--<div class="form-row">-->
-                        <!--<div class="col-md-4 mb-3">-->
-                          <!--<label for="origin">Select Origin</label>-->
-                          <!--<input th:text="${search.origin}" type="text" id="origin" class="airports form-control" aria-describedby="emailHelp" placeholder="" th:required="required"/>-->
-                          <!--<div class="invalid-feedback">-->
-                            <!--Invalid entry-->
-                          <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-4 mb-3">-->
-                          <!--<label for="destination">Select Destination</label>-->
-                          <!--<input  type="text" id="destination" class="airports form-control" placeholder="Choose an end point" th:required="required" />-->
-                          <!--<div class="invalid-feedback">-->
-                            <!--Invalid entry-->
-                          <!--</div>-->
-                        <!--</div>-->
-                      <!--</div>-->
-                      <!--<div class="form-row">-->
-                        <!--<div class="col-md-3 mb-3">-->
-                          <!--<label for="departure">Departure Date</label>-->
-                          <!--<input  type="date" id="departure" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>-->
-                          <!--<div class="invalid-feedback">-->
-                            <!--Invalid entry-->
-                          <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-3 mb-3">-->
-                          <!--<label for="returnDate">Return Date</label>-->
-                          <!--<input  type="date" id="returnDate" class="form-control"  placeholder="Select a return date" th:required="required"/>-->
-                          <!--<div class="invalid-feedback">-->
-                            <!--Invalid entry-->
-                          <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-3 mb-3">-->
-                          <!--<label for="children">Children</label>-->
-                          <!--<input  type="number" id="children" class="form-control"  placeholder="1" th:required="required"/>-->
-                          <!--<div class="invalid-feedback">-->
-                            <!--Invalid entry-->
-                          <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-3 mb-3">-->
-                          <!--<label for="adults">Adults</label>-->
-                          <!--<input  type="number" id="adults" class="form-control"  placeholder="1" th:required="required"/>-->
-                          <!--<div class="invalid-feedback">-->
-                            <!--Invalid entry-->
-                          <!--</div>-->
-                        <!--</div>-->
-                      <!--</div>-->
-                      <!--<div class="form-row">-->
-                        <!--<div class="col-md-4 mb-3">-->
-                          <!--<label for="price">name a price</label>-->
-                          <!--<input  type="text" id="price" class="form-control"  placeholder="0.00" th:required="required"/>-->
-                          <!--<div class="invalid-feedback">-->
-                            <!--Invalid entry-->
-                          <!--</div>-->
-                        <!--</div>-->
-                      <!--</div>-->
-                      <!--<button id="lowFlight" type="button" class="btn btn-primary">Search flights!</button>-->
-                      <!--<button type="submit" class="btn btn-primary">Save changes</button>-->
-                    <!--</form>-->
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
           <!--collapse end-->
 
