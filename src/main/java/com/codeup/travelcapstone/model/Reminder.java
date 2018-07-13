@@ -14,6 +14,10 @@ public class Reminder {
     private String action;
     @Column(nullable = false)
     private String date;
+    @Column
+    private String simpleDate;
+    @Column
+    private String simpleTime;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private User user;
@@ -54,10 +58,12 @@ public class Reminder {
 
     }
 
-    public Reminder(String category, String action, String date, User user) {
+    public Reminder(String category, String action, String date, String simpleDate, String simpleTime, User user) {
         this.category = category;
         this.action = action;
         this.date = date;
+        this.simpleDate = simpleDate;
+        this.simpleTime = simpleTime;
         this.user = user;
     }
 
@@ -67,5 +73,21 @@ public class Reminder {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getSimpleDate() {
+        return simpleDate;
+    }
+
+    public void setSimpleDate(String simpleDate) {
+        this.simpleDate = simpleDate;
+    }
+
+    public String getSimpleTime() {
+        return simpleTime;
+    }
+
+    public void setSimpleTime(String simpleTime) {
+        this.simpleTime = simpleTime;
     }
 }
