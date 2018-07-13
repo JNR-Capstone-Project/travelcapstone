@@ -327,7 +327,7 @@ $(function () {
                     Selecting destination for Map
 ========================================================================*/
 
-$(function () {
+// $(function () {
 
         // if(document.getElementById("dash") === null){
         //     console.log("test for days");
