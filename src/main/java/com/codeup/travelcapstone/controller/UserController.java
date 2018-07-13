@@ -69,6 +69,8 @@ public class UserController {
     @PostMapping("/dashboard")
     public String saveReminder(@ModelAttribute Reminder reminder){
         reminder.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        reminder.setSimpleTime(reminder.getDate().substring(12, 16));
+        reminder.setSimpleDate(reminder.getDate().substring(0, 10));
         reminderRepo.save(reminder);
         return "redirect:/dashboard";
     }
