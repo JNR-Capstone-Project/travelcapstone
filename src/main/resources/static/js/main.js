@@ -447,3 +447,35 @@ $(function () {
     });
     }
 });
+
+//display edit form
+
+$(".edit").click(function(e){
+    e.preventDefault();
+    $("#editionForm").removeClass("hidden");
+    var searchData = $(this).parent().parent().parent();
+    var searchOrigin = searchData.children('.searchOrigin').text();
+    var searchDestination = searchData.children('.searchDestination').text();
+    var searchStartDate = searchData.children('.searchStartDate').text();
+    var searchEndDate = searchData.children('.searchEndDate').text();
+    var searchPrice = searchData.children('.searchPrice').text();
+    var searchAdults = searchData.children('.searchAdults').text();
+    var searchChildren = searchData.children('.searchChildren').text();
+    var searchId = searchData.children('.searchId').text();
+
+    $("input[name='origin']").val(searchOrigin);
+    $("input[name='destination']").val(searchDestination);
+    $("input[name='start_date']").val(searchStartDate);
+    $("input[name='end_date']").val(searchEndDate);
+    $("input[name='price']").val(searchPrice);
+    $("input[name='children']").val(searchChildren);
+    $("input[name='adults']").val(searchAdults);
+    $("input[name='id']").val(searchId);
+
+
+    console.log(searchData);
+    console.log(searchAdults, searchChildren)
+
+});
+
+
