@@ -35,3 +35,7 @@
     background-color: #374B55;
     border: none;
 }
+
+.hidden {
+    display: none;
+}
