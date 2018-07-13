@@ -58,6 +58,8 @@ public class SearchController {
         User userSession=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user= users.findUsersById(userSession.getId());
         search.setUser(user);
+        search.setSimpleDateStart(search.getStart_date().substring(0, 10));
+        search.setSimpleDateEnd(search.getEnd_date().substring(0, 10));
         searchRepository.save(search);
         return "redirect:/";
     }
@@ -90,6 +92,8 @@ public class SearchController {
     public String saveUpdate(@ModelAttribute Search mySearch){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         mySearch.setUser(user);
+        mySearch.setSimpleDateStart(mySearch.getStart_date().substring(0, 10));
+        mySearch.setSimpleDateEnd(mySearch.getEnd_date().substring(0, 10));
         searchRepository.save(mySearch);
         return "redirect:/dashboard";
     }

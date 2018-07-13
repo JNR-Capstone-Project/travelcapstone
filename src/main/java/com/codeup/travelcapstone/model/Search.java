@@ -30,6 +30,10 @@ public class Search {
         private int children;
         @Column(nullable = false)
         private int adults;
+        @Column
+        private String simpleDateStart;
+        @Column
+        private String simpleDateEnd;
         @ManyToOne(cascade = CascadeType.MERGE)
         @JoinColumn(name = "user_id")
         private User user;
@@ -40,7 +44,7 @@ public class Search {
 
 
     public Search(String start_date, String end_date, String origin, String destination, long price,
-                  int children, int adults, User user) {
+                  int children, int adults, String simpleDateStart, String simpleDateEnd, User user) {
         this.start_date = start_date;
         this.end_date = end_date;
         this.origin = origin;
@@ -49,6 +53,8 @@ public class Search {
 //        this.non_stop = non_stop;
         this.children = children;
         this.adults = adults;
+        this.simpleDateStart = simpleDateStart;
+        this.simpleDateEnd = simpleDateEnd;
         this.user = user;
     }
 
@@ -131,6 +137,22 @@ public class Search {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+
+    public String getSimpleDateStart() {
+        return simpleDateStart;
+    }
+
+    public void setSimpleDateStart(String simpleDateStart) {
+        this.simpleDateStart = simpleDateStart;
+    }
+
+    public String getSimpleDateEnd() {
+        return simpleDateEnd;
+    }
+
+    public void setSimpleDateEnd(String simpleDateEnd) {
+        this.simpleDateEnd = simpleDateEnd;
     }
 }
 
