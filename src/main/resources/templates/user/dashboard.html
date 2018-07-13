@@ -123,15 +123,15 @@
                       <th><i class="icon_cogs"></i> children</th>
                       <th><i class="icon_cogs"></i><span>Edit</span><span>Delete</span></th>
                     </tr>
-                    <tr th:each="search : ${searches}">
+                    <tr th:each="search : ${searches}" class="rows">
                       <td th:text="${search.origin}"></td>
-                      <td th:text="${search.destination}"></td>
+                      <td th:text="${search.destination}" th:value="${search.id}"></td>
                       <td th:text="${search.start_date}"></td>
                       <td th:text="${search.end_date}"></td>
                       <td th:text="${search.price}"></td>
                       <td th:text="${search.adults}"></td>
                       <td th:text="${search.children}"></td>
-                      <td style="display: none" th:text="${search.id}" ></td>
+                      <!--<td style="display: none" th:text="${search.id}" ></td>-->
                       <td class="row">
                           <div class="btn-group">
                               <form th:action="@{/search/edit}" method="post">
@@ -145,10 +145,10 @@
                                       Delete Search</label>
                               </form>
                           </div>
-                          <div class="form-check">
-                              <input type="radio" class="form-check-input" name="gridRadios" th:id="'gridRadios'+ ${search.id}" th:value="'option'+ ${search.id}" />
-                              <label th:for="'gridRadios'+ ${search.id}">  .. .    Details</label>
-                          </div>
+                          <!--<div class="form-check">-->
+                              <!--<input type="radio" class="form-check-input" name="gridRadios" th:id="'gridRadios'+ ${search.id}" th:value="'option'+ ${search.id}" />-->
+                              <!--<label th:for="'gridRadios'+ ${search.id}">  .. .    Details</label>-->
+                          <!--</div>-->
                       </td>
                     </tr>
                     <form  th:action="@{/search/saveEdit}" id="editionForm" th:object="${mySearch}" method="post">
@@ -316,23 +316,27 @@
                     <div id="dash-poi" class="tab-pane">
 
                         <div class="row">
-                            <div id="poiMap" class="container-fluid col-lg-12"></div>
-                          </div>
-                        </div>
-                        <button id="ent" type="button" class="subbtn btn btn-primary" >Search enter!</button>
+                            <div id="poiMap" class="container-fluid col-lg-12">
 
-                            <div id="poiPosts"></div>
+                            </div>
+
+                             <button id="ent" type="button" class="subbtn btn btn-primary" >Search enter!</button>
+
+                             <div id="poiPosts" class="col-lg-12"></div>
+                        </div>
+
+
+                    </div>
 
 
                         </div>
 
                     </div>
-
+                </section>
+              </div>
+             </div>
+                         <!-- page end-->
           </section>
-                </div>
-            </div>
-      <!-- page end-->
-    </section>
   </section>
   <!--main content end-->
   <div class="text-right">

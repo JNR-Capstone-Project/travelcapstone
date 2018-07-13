@@ -1,6 +1,6 @@
 'use strict';
 
-
+const apiKey = document.getElementById("amadeus-API").value;
 
 /* =======================================================================
                     Form validation
@@ -43,7 +43,8 @@ $(function() {
                 data: {
 
 
-                    apikey: "5IomxX3j0OOD87Um4X9aTZdAgnttyJG0",
+                    apikey: apiKey,
+
 
 
                     term: request.term
@@ -74,143 +75,201 @@ $(function() {
                     Low flight API
 ========================================================================*/
 
-var api_key = '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0';
-
 
 $(function () {
 
 
+    if(document.getElementById("lowFlight") === null){
+
+        console.log("just checking");
+
+
+    } else {
 
         document.getElementById("lowFlight").addEventListener('click', function () {
 
 
             var origin = "&origin=" + $("#origin").val();
-
             var destination = "&destination=" + $("#destination").val();
-
             var departure_date = "&departure_date=" + $("#departure").val();
-
             var return_date = "&return_date=" + $("#returnDate").val();
-
             var maximumPrice = "&max_price=" + $("#price").val();
+            var currency = "&currency=USD";
+            var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + apiKey + origin + destination + departure_date + return_date + maximumPrice + currency;
 
-            var currency = "&currency=USD" ;
-
-
-
-
-
-            // if(return_date.val() == null) {
-            //     var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + maximumPrice + currency;
-            // } else {
-               var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + api_key + origin + destination + departure_date + return_date + maximumPrice + currency;
-
-            // }
-
-            var request=$.get(resource_url);
+            var request = $.get(resource_url);
             request.fail(function (current, status, error) {
                 console.log(status);
                 console.log(error);
             });
 
-            console.log(request);
+
             request.done(function (response) {
-                //Since we are calling data out of the same array we can create a loop to put the machine to work
-                main(response);
-            });
-
-            function main(response) {
-
                 console.log(response);
-                for (var i =0;i< response.results.length; i++)
-                {
-                    $("#lowFly").append(setFlight(response.results[i]));
+
+                for (var i = 0; i < response.results.length; i++) {
+                    $('#flight').append(setFly(response.results[i]));
+
 
                 }
 
+
+            });
+
+            function setFly(fly) {
+                var htmlFly = "";
+                var trim = fly.itineraries[0].outbound.flights[0].departs_at.slice(11, 16);
+                var xtrim = fly.itineraries[0].inbound.flights[0].departs_at.slice(11, 16);
+                var airline = fly.itineraries[0].outbound.flights[0].marketing_airline;
+
+
+// fetch
+                var hours = Number(trim.split(':')[0]);
+                var minutes = Number(trim.split(':')[1]);
+
+                var xhours = Number(xtrim.split(':')[0]);
+                var xminutes = Number(xtrim.split(':')[1]);
+
+// calculate
+                var timeValue;
+                var timeV;
+
+                if (hours > 0 && hours <= 12) {
+                    timeValue = "" + hours;
+
+                } else if (hours > 12) {
+                    timeValue = "" + (hours - 12);
+
+                } else if (hours == 0) {
+                    timeValue = "12";
+
+                }
+
+                if (xhours > 0 && xhours <= 12) {
+                    timeV = "" + xhours;
+                } else if (xhours > 12) {
+                    timeV = "" + (xhours - 12)
+                } else if (xhours == 0) {
+                    timeV = "12";
+                }
+
+
+                timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+                timeValue += (hours >= 12) ? " P.M" : " A.M";  // get AM/PM
+
+                timeV += (xminutes < 10) ? ":0" + xminutes : ":" + xminutes;
+                timeV += (xhours >= 12) ? " P.M" : " A.M";  // get AM/PM
+
+
+                htmlFly += "<tr>";
+                htmlFly += "<td>" + fly.itineraries[0].outbound.flights[0].flight_number + "</td>";
+                htmlFly += "<td>" + timeValue + "</td>";
+                htmlFly += "<td>" + fly.itineraries[0].outbound.duration + "</td>";
+                htmlFly += "<td>" + fly.itineraries[0].inbound.flights[0].flight_number + "</td>";
+                htmlFly += "<td>" + timeV + "</td>";
+                htmlFly += "<td>" + fly.itineraries[0].inbound.duration + "</td>";
+                htmlFly += "<td>$" + fly.fare.total_price + "</td>";
+                if (airline === 'AA') {
+
+                    htmlFly += "<td><a href='https://www.aa.com/homePage.do' ><img src='https://vignette.wikia.nocookie.net/logopedia/images/d/d7/American_Airlines_logo.svg/revision/latest/scale-to-width-down/340?cb=20130728031212' alt='none' class='logo2'/>" + "</a></td>";
+                }
+                if (airline === 'UA') {
+                    htmlFly += "<td><a href='https://www.united.com/ual/en/us/'><img src='https://vignette.wikia.nocookie.net/logopedia/images/0/0a/United_Airlines_2010.svg/revision/latest/scale-to-width-down/250?cb=20180505152143' alt='none' class='logo2'/>" + "</a></td>";
+
+                }
+                if (airline === 'DL') {
+                    htmlFly += "<td><a href='https://www.delta.com/flight-search/book-a-flight'><img src='https://vignette.wikia.nocookie.net/logopedia/images/c/cc/DLCON.gif/revision/latest/thumbnail-down/width/98/height/20?cb=20101015204631' alt='none' class='logo2'/>" + "</a></td>";
+
+                }
+
+
+                htmlFly += "</tr>";
+                return htmlFly;
+
             }
 
-            function setFlight(flight){
-
-                var htmlFlight="";
-                htmlFlight+="<tr>";
-                htmlFlight+="<td>"+"</td>";
-                htmlFlight+="<td>"+flight+"</td>";
-                htmlFlight+="<td>"+"</td>";
-                htmlFlight+="<td>"+flight.fare.total_price+"</td>";
-                htmlFlight+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
-                    "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
-                htmlFlight+="</tr>";
-                return htmlFlight;
-
-
-            }
 
         });
 
+    }
 });
 
-
-
 /* =======================================================================
-                    Hotel Api
+                    Airport Hotel Map
 ========================================================================*/
 
-
-
-
 $(function () {
-    document.getElementById("cheapHotel").addEventListener('click', function () {
 
-        var location = "&location=" + $("#hotelDestination").val();
-        var checkIn = "&check_in=" + $("#checkIn").val();
-        var checkOut = "&check_out=" + $("#checkOut").val();
+    if(document.getElementById("cheapHotel") === null){
+        console.log("check 1 2");
 
-        var url_hotel = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=" + api_key + location + checkIn + checkOut;
+    } else {
 
-
-        var request = $.get(url_hotel);
-        request.fail(function (current, status, error) {
-            console.log(status);
-            console.log(error);
-        });
-        console.log(request);
-        request.done(function (response) {
-            //Since we are calling data out of the same array we can create a loop to put the machine to work
-            main(response);
-        });
-
-        function main(response) {
-
-            for(var i = 0; i <= response.results.length; i++){
-                console.log(response.results[i].property_name);
-                $('.hotel-card').append(
-                    "<h2 class='hotel-car-des'>" + response.results[i].property_name + "\xB0" +
-                    "</h2>" + "<p class='block'>" + response.results[i].contacts[0].detail + "\xB0" +
-                    "</p><br/><p class='block'>" + response.results[i].contacts[1].detail + "\xB0" +
-                    "</p><br/><p class='block'>" + response.results[i].contacts[2].detail + "\xB0" +   "</p>");
+        document.getElementById("cheapHotel").addEventListener('click', function () {
 
 
+            var location = airportCode;
+            console.log(airportCode);
+            var checkIn = $("#checkIn").val();
+            console.log(checkIn);
+            var checkOut = $("#checkOut").val();
+            console.log(checkOut);
 
 
+            function airportHotel(location, check_in, check_out) {
+
+                $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
+                    {
+                        dataType: 'json',
+                        apikey: apiKey,
+                        check_in: check_in,
+                        check_out: check_out,
+                        location: location
+                    }).done(function (data) {
+                    console.log(data.results);
+                    // $(".container").html(" "); line to clean the results every time for a new search load
+                    for (var i = 0; i < data.results.length; i++) {
+                        $("#hotels").append(setHotel(data.results[i]));
+
+                    }
+                });
             }
 
 
+            airportHotel(location, checkIn, checkOut);
 
 
+//row struture for the hotel
+
+            function setHotel(hotel) {
+                var htmlHotel = "";
+                var contact;
+
+                for (var i = 0; i < hotel.contacts.length; i++) {
+                    var set = hotel.contacts[i];
+
+                }
+
+                if (set.type === 'URL') {
+                    contact = "<td>" + '<a href="url:' + hotel.contacts[2].detail + '">' + hotel.contacts[2].detail + "</a>" + "</td>";
+                }
+                else {
+                    contact = "<td>" + '<a href="tel:' + hotel.contacts[0].detail + '">' + hotel.contacts[0].detail + "</a>" + "</td>"
+                }
 
 
+                htmlHotel += "<tr>";
+                htmlHotel += "<td>" + hotel.property_name + "</td>";
+                htmlHotel += "<td>" + hotel.address.line1 + ', ' + hotel.address.city + ' ' + hotel.address.postal_code + "</td>";
+                htmlHotel += contact;
+                htmlHotel += "<td>" + "$" + hotel.total_price.amount + "</td>";
+                htmlHotel += "</tr>";
+                return htmlHotel;
 
+            }
 
-        }
-
-        main();
-
-
-
-
-
-    });
+        });
+    }
 });
 
 /* =======================================================================
@@ -218,13 +277,18 @@ $(function () {
 ========================================================================*/
 
 $(function () {
+    if(document.getElementById("carRental") === null){
+        console.log("test for days");
+
+    } else {
     document.getElementById("carRental").addEventListener('click', function () {
 
-        var loc = "&location=" + $("#rentalLocation").val();
+        var loc = "&location=" + airportCode;
         var pickup = "&pick_up=" + $("#pickUp").val();
         var dropoff = "&drop_off=" + $("#dropOff").val();
 
-        var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + api_key + loc + pickup + dropoff;
+
+        var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + apiKey + loc + pickup + dropoff;
 
         var request = $.get(url_rental);
         request.fail(function (current, status, error) {
@@ -233,21 +297,28 @@ $(function () {
         });
         console.log(request);
         request.done(function (response) {
-            //Since we are calling data out of the same array we can create a loop to put the machine to work
-            main(response);
+            console.log(response);
+            for (var i=0;i<response.results.length;i++){
+                $("#cars").append(setRental(response.results[i]));
+            }
+
         });
 
-        function main(response) {
 
-            console.log(response);
+        //function to create the rental Entity
+        function setRental(rental) {
 
+            var htmlRental = "";
+            htmlRental += "<tr>";
+            htmlRental += "<td>" + rental.provider.company_name + "</td>";
+            htmlRental += "<td>" + rental.address.line1+ "</td>";
+            htmlRental += "<td>" + rental.cars[0].estimated_total.amount +  "</td>";
+            htmlRental += "</tr>";
+            return htmlRental
         }
 
-        main();
-
-
-
     });
+    }
 });
 
 
@@ -259,168 +330,116 @@ $(function () {
 
 
 $(function () {
-
-    document.getElementById("ent").addEventListener('click', function () {
-
-
-
-//building the map
-
-// var location={ lat: 19.775221,
-//     lng: -99.885829}
+    if(document.getElementById('poiPosts') === null ){
+        console.log('this is chill');
+    }else{
 
 
+        window.addEventListener('load', function () {
 
-        var mapOptions = {
-            zoom: 12,
-            center: {
-                lat: 42.343794,
-                lng:-71.067170
-            },
-            mapTypeId: google.maps.MapTypeId.TERRAIN,
-            draggable: true
-        };
-        var mapCanvas = document.getElementById('poiMap');
-        var map = new google.maps.Map(mapCanvas, mapOptions);
+            $('input:radio').on('click', function (e) {
+               console.log(e.target());
+               console.log(e.getElement('//*[@id="collapseOne"]/div/div/table/tbody/tr[2]/td[2]'));
+            });
+
+            var locationAirport = 'BOS';
+            var airportLocationUrl = 'https://api.sandbox.amadeus.com/v1.2/location/' + locationAirport + '?apikey=' + apiKey;
+
+            var airportLocation = $.get(airportLocationUrl);
+            airportLocation.done(function (response) {
+                locationAirport = response.airports[0].location;
+
+                //building the map
+                var mapOptions = {
+                    zoom: 12,
+                    center: {
+                        lat: locationAirport.latitude,
+                        lng: locationAirport.longitude
+                    },
+                    mapTypeId: google.maps.MapTypeId.TERRAIN,
+                    draggable: true
+                };
+                var mapCanvas = document.getElementById('poiMap');
+                var map = new google.maps.Map(mapCanvas, mapOptions);
+                // obtain the Poi JSON  passing a location and setting the markers for the destination
+
+
+                $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+                    {
+                        dataType: 'json',
+
+                        apikey: apiKey,
+                        latitude: locationAirport.latitude,
+                        longitude: locationAirport.longitude,
+                        radius: '40'
+                    }).done(function (data) {
+                    console.log(data);
+                    poiToMarker(data);
+
+
+                });
+                new google.maps.Marker({
+                    position: {
+                        lat: locationAirport.latitude,
+                        lng: locationAirport.longitude
+                    },
+                    map: map
+                });
+
 
 
 //setting the main marker ...should be the user destination
 
 
+                function setMarker(location) {
+                    marker.setPosition(location);
+                }
 
 
+                // function to get a marker for each poi on the JSON
+                function poiToMarker(data) {
+                    for (var i = 0; i < data.points_of_interest.length; i++) {
+
+                        console.log(data[0]);
+
+                        // new google.maps.Marker({
+                        //     position: {
+                        //         lat: location[0].latitude,
+                        //         lng: location[1].longitude
+                        //     },
+                        //     map: map
+                        // });
 
 
-        function setMarker(location) {
-            marker.setPosition(location);
-        }
+                        $("#poiPosts").append(createReport(data.points_of_interest[i]));
 
-        new google.maps.Marker({
-            position: {
-                lat: 42.3437941,
-                lng:-71.067170
-            },
-            map: map
-        });
+                    }
 
+                }
 
-        function setMarker(location) {
-            marker.setPosition(location);
-
-        }
-
-
-
-
-// function to get a marker for each poi on the JSON
-        function poiToMarker( data)
-        {
-            for (var i = 0; i < data.points_of_interest.length; i++) {
-                new google.maps.Marker({
-                    position: {
-                        lat: data.points_of_interest[i].location.latitude,
-                        lng: data.points_of_interest[i].location.longitude
-                    },
-                    map: map
-                });
-                $("#poiPosts").append(createReport(data.points_of_interest[i]));
-
-            }
-
-
-        }
-
-
-// obtain the Poi JSON  passing a location and setting the markers for the destination
-
-
-        $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
-            {
-                dataType: 'json',
-                apikey:'5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
-                latitude:  42.343794,
-                longitude:  -71.067170,
-                radius: '20'
-            }).done(function (data) {
-            console.log(data);
-            poiToMarker(data);
-        });
-
+                console.log("que onda, vas a sevir on no?");
 
 //creating the div for the view
 
-        function createReport(poi) {
-            var htmlPlace="";
-            htmlPlace+="<div class='screen'>";
-            htmlPlace+="<h3>"+poi.title+"</h3>"+"\n";
-            htmlPlace+="<img src="+poi.main_image+">"+"\n";
-            htmlPlace+="<p> "+poi.details.description+"</p>"+"\n";
-            htmlPlace+="</div>";
-            return htmlPlace
-        }
+                function createReport(poi) {
+                    var htmlPlace = "";
+                    htmlPlace += "<div class='screen'>";
+                    htmlPlace += "<h3>" + poi.title + "</h3>" + "\n";
+                    htmlPlace += "<img src=" + poi.main_image + ">" + "\n";
+                    htmlPlace += "<p> " + poi.details.description + "</p>" + "\n";
+                    htmlPlace += "</div>";
+                    return htmlPlace
+                }
+
+
+
+
+            });
+
+
 
 
 
     });
-
+    }
 });
-
-
-/* =======================================================================
-                    Airport Hotel Map
-========================================================================*/
-
-function airportHotel(location, check_in,check_out) {
-
-
-    $.get('https://api.sandbox.amadeus.com/v1.2/hotels/search-airport',
-        {
-            dataType: 'json',
-            apikey: '5IomxX3j0OOD87Um4X9aTZdAgnttyJG0',
-            check_in: check_in,
-            check_out: check_out,
-            location: location
-        }).done(function (data) {
-        console.log(data.results);
-        // $(".container").html(" "); line to clean the results every time for a new search load
-        for (var i =0;i< data.results.length; i++)
-        {
-            $("#hotels").append(setHotel(data.results[i]));
-
-        }
-    })
-}
-
-
-
-airportHotel('BOS','2018-12-15','2018-12-16')
-
-
-
-//row struture for the hotel
-var esta="type";
-
-function setHotel(hotel)
-{
-    var htmlHotel="";
-    htmlHotel+="<tr>";
-    htmlHotel+="<td>"+hotel.property_name+"</td>";
-    htmlHotel+="<td>"+hotel.address.line1+"</td>";
-    htmlHotel+="<td>"+hotel.contacts[0].type+": "+hotel.contacts[0].detail+"</td>";
-    htmlHotel+="<td>"+hotel.total_price.amount+"</td>";
-    htmlHotel+="<td><div class='btn-group'><a class='btn btn-success' href='#'><i class='icon_check_alt'></i></a>" +
-        "<a class='btn btn-danger' href='#'><i class='icon_check_alt2'></i></a></div></td>";
-    htmlHotel+="</tr>";
-    return htmlHotel;
-
-}
-
-
-
-
-
-
-
-
-
-

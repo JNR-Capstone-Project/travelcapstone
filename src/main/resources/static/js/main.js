@@ -335,7 +335,31 @@ $(function () {
     }else{
 
 
-        document.getElementById('poiPosts').addEventListener('click', function () {
+        window.addEventListener('load', function () {
+
+
+            // $('.rows').on('click', function (e) {
+            //     e.preventDefault();
+            //
+            //     var destination = this.children('sear')
+            //    console.log(this);
+            //
+            //
+            //
+            // });
+
+
+
+            // $('table').on('click', function (ev) {
+            //    var target, flightId, destination;
+            //
+            //    target = $(event.target);
+            //    destination = target.parent().id('td');
+            //    alert(destination );
+            //     console.log(destination);
+            //
+            // });
+
 
             var locationAirport = 'BOS';
             var airportLocationUrl = 'https://api.sandbox.amadeus.com/v1.2/location/' + locationAirport + '?apikey=' + apiKey;
@@ -369,9 +393,6 @@ $(function () {
                         radius: '40'
                     }).done(function (data) {
                     console.log(data);
-
-
-
                     poiToMarker(data);
 
 
@@ -413,17 +434,9 @@ $(function () {
 
                     }
 
-
                 }
 
-
-
-
-
-
                 console.log("que onda, vas a sevir on no?");
-
-
 
 //creating the div for the view
 
@@ -436,6 +449,8 @@ $(function () {
                     htmlPlace += "</div>";
                     return htmlPlace
                 }
+
+
 
 
             });
