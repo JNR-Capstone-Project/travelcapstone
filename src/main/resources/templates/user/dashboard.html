@@ -194,18 +194,18 @@
                     <tr th:each="search : ${searches}">
                       <td th:text="${search.origin}" class="searchOrigin"></td>
                       <td th:text="${search.destination}" class="searchDestination"></td>
-                      <td th:text="${search.start_date}" class="searchStartDate"></td>
-                      <td th:text="${search.end_date}" class="searchEndDate"></td>
+                      <td th:text="${search.simpleDateStart}" class="searchStartDate"></td>
+                      <td th:text="${search.simpleDateEnd}" class="searchEndDate"></td>
                       <td th:text="${search.price}" class="searchPrice"></td>
                       <td th:text="${search.adults}" class="searchAdults"></td>
                       <td th:text="${search.children}" class="searchChildren"></td>
                       <td style="display: none" th:text="${search.id}" class="searchId"></td>
                       <td class="row">
                           <div class="btn-group">
-                              <!--<form th:action="@{/search/edit}" method="post">-->
-                                      <button  type="submit" class="btn btn-success edit" name="editSavedSearch" th:id="'editSavedSearch' + ${search.id}" th:value="${search.id}" ><i class="icon_plus_alt2"></i></button>
+
+                                      <button  type="button" class="btn btn-success edit" name="editSavedSearch" th:id="'editSavedSearch' + ${search.id}" th:value="${search.id}" ><i class="icon_plus_alt2"></i></button>
                                       Edit Search
-                              <!--</form>-->
+
                               <form th:action="@{/search/deleteSearch}" method="post">
                                       <button type="submit" class="btn btn-danger" name="deleteSearch" th:id="'deleteSearch' + ${search.id}" th:value="${search.id}"><i class="icon_close_alt2"></i></button>
                                       Delete Search
@@ -297,7 +297,7 @@
                       <tr th:each="reminder: ${reminders}">
                         <td><span th:text="${reminder.category}"></span></td>
                         <td><span th:text="${reminder.action}"></span></td>
-                        <td><span th:text="${reminder.date}"></span></td>
+                          <td><span th:text="${reminder.simpleDate}"><span th:text="${reminder.simpleTime}"></span></span></td>
                       </tr>
                       </tbody>
                     </table>
