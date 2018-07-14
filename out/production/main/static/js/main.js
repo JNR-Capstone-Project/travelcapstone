@@ -1,5 +1,5 @@
 'use strict';
-
+var airportCode;
 const apiKey = document.getElementById("amadeus-API").value;
 
 /* =======================================================================
@@ -96,7 +96,7 @@ $(function () {
             var maximumPrice = "&max_price=" + $("#price").val();
             var currency = "&currency=USD";
             var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + apiKey + origin + destination + departure_date + return_date + maximumPrice + currency;
-
+            airportCode=$("#destination").val();
             var request = $.get(resource_url);
             request.fail(function (current, status, error) {
                 console.log(status);
@@ -328,29 +328,54 @@ $(function () {
 ========================================================================*/
 
 $(function () {
-    if(document.getElementById('rad') === null){
-        console.log('did it work?')
 
-    } else  {
+        if(document.getElementById("dash") === null){
+            console.log("test for days");
 
-        document.getElementById('rad').addEventListener('click', function (e) {
+        } else {
+            $(document).ready(function(){
+                $("dash").delegate("tr.rows", "click", function(){
+                    alert("Click!");
+                });
+            });
 
-            e.preventDefault();
-
-            var searchData =  $(this).parent().parent().parent();
-            var searchDestination = searchData.children('.searchDestination').text();
-
-            // var destination = this.parent().children('searchOrigin').text();
-            console.log(searchDestination);
-
-
-
-        });
-
-
-    }
+        }
 });
 
+
+
+            // $("tbody tr").click(function () {
+            //     $('.selected').removeClass('selected');
+            //     $(this).addClass("selected");
+            //     var product = $('.p',this).html();
+            //     var infRate =$('.i',this).html();
+            //     var note =$('.n',this).html();
+            //     alert(product +','+ infRate+','+ note);
+            // });
+
+            // document.getElementById('rad').addEventListener('click', function (e) {
+            //
+            //     e.preventDefault();
+            //
+            //     var searchData =  $(this).parent().parent().parent();
+            //     var searchDestination = searchData.children('.searchDestination').text();
+            //
+            //     // var destination = this.parent().children('searchOrigin').text();
+            //     console.log(searchDestination);
+            //
+            //
+            //
+            // });
+
+            // $('table').on('click', function (ev) {
+            //    var target, flightId, destination;
+            //
+            //    target = $(event.target);
+            //    destination = target.parent().id('td');
+            //    alert(destination );
+            //     console.log(destination);
+            //
+            // });
 
 
 /* =======================================================================
@@ -365,15 +390,7 @@ $(function () {
     }else{
         document.getElementById('dash-poi-tag').addEventListener('click', function () {
 
-            // $('table').on('click', function (ev) {
-            //    var target, flightId, destination;
-            //
-            //    target = $(event.target);
-            //    destination = target.parent().id('td');
-            //    alert(destination );
-            //     console.log(destination);
-            //
-            // });
+
 
 
             var locationAirport = 'BOS';
@@ -398,20 +415,20 @@ $(function () {
                 // obtain the Poi JSON  passing a location and setting the markers for the destination
 
 
-                $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
-                    {
-                        dataType: 'json',
-
-                        apikey: apiKey,
-                        latitude: locationAirport.latitude,
-                        longitude: locationAirport.longitude,
-                        radius: '40'
-                    }).done(function (data) {
-                    console.log(data);
-                    poiToMarker(data);
-
-
-                });
+                // $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+                //     {
+                //         dataType: 'json',
+                //
+                //         apikey: apiKey,
+                //         latitude: locationAirport.latitude,
+                //         longitude: locationAirport.longitude,
+                //         radius: '40'
+                //     }).done(function (data) {
+                //     console.log(data);
+                //     poiToMarker(data);
+                //
+                //
+                // });
                 new google.maps.Marker({
                     position: {
                         lat: locationAirport.latitude,

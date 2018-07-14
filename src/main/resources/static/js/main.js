@@ -1,5 +1,5 @@
 'use strict';
-
+var airportCode;
 const apiKey = document.getElementById("amadeus-API").value;
 
 /* =======================================================================
@@ -96,7 +96,7 @@ $(function () {
             var maximumPrice = "&max_price=" + $("#price").val();
             var currency = "&currency=USD";
             var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + apiKey + origin + destination + departure_date + return_date + maximumPrice + currency;
-
+            airportCode=$("#destination").val();
             var request = $.get(resource_url);
             request.fail(function (current, status, error) {
                 console.log(status);
@@ -171,14 +171,14 @@ $(function () {
                 htmlFly += "<td>$" + fly.fare.total_price + "</td>";
                 if (airline === 'AA') {
 
-                    htmlFly += "<td><a href='https://www.aa.com/homePage.do' ><img src='https://vignette.wikia.nocookie.net/logopedia/images/d/d7/American_Airlines_logo.svg/revision/latest/scale-to-width-down/340?cb=20130728031212' alt='none' class='logo2'/>" + "</a></td>";
+                    htmlFly += "<td class='pl-5 text-center'><a href='https://www.aa.com/homePage.do'  ><img  src='https://vignette.wikia.nocookie.net/logopedia/images/d/d7/American_Airlines_logo.svg/revision/latest/scale-to-width-down/340?cb=20130728031212' alt='none' class='logo2'/>" + "</a></td>";
                 }
                 if (airline === 'UA') {
-                    htmlFly += "<td><a href='https://www.united.com/ual/en/us/'><img src='https://vignette.wikia.nocookie.net/logopedia/images/0/0a/United_Airlines_2010.svg/revision/latest/scale-to-width-down/250?cb=20180505152143' alt='none' class='logo2'/>" + "</a></td>";
+                    htmlFly += "<td class='pl-5 text-center'><a href='https://www.united.com/ual/en/us/' ><img  src='https://vignette.wikia.nocookie.net/logopedia/images/0/0a/United_Airlines_2010.svg/revision/latest/scale-to-width-down/250?cb=20180505152143' alt='none' class='logo2'/>" + "</a></td>";
 
                 }
                 if (airline === 'DL') {
-                    htmlFly += "<td><a href='https://www.delta.com/flight-search/book-a-flight'><img src='https://vignette.wikia.nocookie.net/logopedia/images/c/cc/DLCON.gif/revision/latest/thumbnail-down/width/98/height/20?cb=20101015204631' alt='none' class='logo2'/>" + "</a></td>";
+                    htmlFly += "<td class='pl-5 text-center'><a href='https://www.delta.com/flight-search/book-a-flight' ><img  src='https://vignette.wikia.nocookie.net/logopedia/images/c/cc/DLCON.gif/revision/latest/thumbnail-down/width/98/height/20?cb=20101015204631' alt='none' class='logo2'/>" + "</a></td>";
 
                 }
 
@@ -250,13 +250,13 @@ $(function () {
 
                 }
 
-                if (set.type === 'URL') {
-                    contact = "<td>" + '<a href="url:' + hotel.contacts[2].detail + '">' + hotel.contacts[2].detail + "</a>" + "</td>";
-                }
-                else {
-                    contact = "<td>" + '<a href="tel:' + hotel.contacts[0].detail + '">' + hotel.contacts[0].detail + "</a>" + "</td>"
-                }
-
+                // if (set.type === 'URL') {
+                //     contact = "<td>" + '<a href="url:' + hotel.contacts[2].detail + '">' + hotel.contacts[2].detail + "</a>" + "</td>";
+                // }
+                // else {
+                    contact = "<td>" + '<a href="tel:' + hotel.contacts[0].detail + '">' + hotel.contacts[0].detail + "</a>" + "</td>";
+                // }
+                //
 
                 htmlHotel += "<tr>";
                 htmlHotel += "<td>" + hotel.property_name + "</td>";
@@ -327,176 +327,130 @@ $(function () {
                     Selecting destination for Map
 ========================================================================*/
 
-// $(function () {
-
-        // if(document.getElementById("dash") === null){
-        //     console.log("test for days");
-        //
-        // } else {
-        //     document.getElementById("dash").addEventListener("click", function (e) {
-        //         e.preventDefault();
-        //
-        //         var data = $(this);
-        //
-        //
-        //         var dude = $('tr.rows td:eq(1)').text();
-        //         console.log(data);
-        //
-        //     }, false);
-
-            // $("tbody tr").click(function () {
-            //     $('.selected').removeClass('selected');
-            //     $(this).addClass("selected");
-            //     var product = $('.p',this).html();
-            //     var infRate =$('.i',this).html();
-            //     var note =$('.n',this).html();
-            //     alert(product +','+ infRate+','+ note);
-            // });
-
-            // document.getElementById('rad').addEventListener('click', function (e) {
-            //
-            //     e.preventDefault();
-            //
-            //     var searchData =  $(this).parent().parent().parent();
-            //     var searchDestination = searchData.children('.searchDestination').text();
-            //
-            //     // var destination = this.parent().children('searchOrigin').text();
-            //     console.log(searchDestination);
-            //
-            //
-            //
-            // });
-
-            // $('table').on('click', function (ev) {
-            //    var target, flightId, destination;
-            //
-            //    target = $(event.target);
-            //    destination = target.parent().id('td');
-            //    alert(destination );
-            //     console.log(destination);
-            //
-            // });
-//         }
-// });
-
-
-
-/* =======================================================================
-                    POI Map
-========================================================================*/
-
-
+var globalDest;
 
 $(function () {
-    if(document.getElementById('dash-poi-tag') === null ){
-        console.log('this is chill');
-    }else{
-        document.getElementById('dash-poi-tag').addEventListener('click', function () {
+
+        if(document.getElementById("dash") === null){
+
+            console.log("test for days");
+
+        } else {
+
+            $(document).ready(function() {
+                $( "#dash tbody tr td.searchDestination" ).on( "click", function( event ) {
+
+                     globalDest = this.innerText;
+                    console.log(globalDest);
 
 
+                    /* =======================================================================
+                                        POI Map
+                    ========================================================================*/
+
+                                var locationAirport = globalDest;
+                                var airportLocationUrl = 'https://api.sandbox.amadeus.com/v1.2/location/' + locationAirport + '?apikey=' + apiKey;
+
+                                var airportLocation = $.get(airportLocationUrl);
+                                airportLocation.done(function (response) {
+                                    locationAirport = response.airports[0].location;
+
+                                    //building the map
+                                    var mapOptions = {
+                                        zoom: 12,
+                                        center: {
+                                            lat: locationAirport.latitude,
+                                            lng: locationAirport.longitude
+                                        },
+                                        mapTypeId: google.maps.MapTypeId.TERRAIN,
+                                        draggable: true
+                                    };
+                                    var mapCanvas = document.getElementById('poiMap');
+                                    var map = new google.maps.Map(mapCanvas, mapOptions);
+                                    // obtain the Poi JSON  passing a location and setting the markers for the destination
 
 
-            var locationAirport = 'BOS';
-            var airportLocationUrl = 'https://api.sandbox.amadeus.com/v1.2/location/' + locationAirport + '?apikey=' + apiKey;
+                                    $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+                                        {
+                                            dataType: 'json',
 
-            var airportLocation = $.get(airportLocationUrl);
-            airportLocation.done(function (response) {
-                locationAirport = response.airports[0].location;
-
-                //building the map
-                var mapOptions = {
-                    zoom: 12,
-                    center: {
-                        lat: locationAirport.latitude,
-                        lng: locationAirport.longitude
-                    },
-                    mapTypeId: google.maps.MapTypeId.TERRAIN,
-                    draggable: true
-                };
-                var mapCanvas = document.getElementById('poiMap');
-                var map = new google.maps.Map(mapCanvas, mapOptions);
-                // obtain the Poi JSON  passing a location and setting the markers for the destination
+                                            apikey: apiKey,
+                                            latitude: locationAirport.latitude,
+                                            longitude: locationAirport.longitude,
+                                            radius: '40'
+                                        }).done(function (data) {
+                                        console.log(data);
+                                        poiToMarker(data);
 
 
-                $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
-                    {
-                        dataType: 'json',
-
-                        apikey: apiKey,
-                        latitude: locationAirport.latitude,
-                        longitude: locationAirport.longitude,
-                        radius: '40'
-                    }).done(function (data) {
-                    console.log(data);
-                    poiToMarker(data);
-
-
-                });
-                new google.maps.Marker({
-                    position: {
-                        lat: locationAirport.latitude,
-                        lng: locationAirport.longitude
-                    },
-                    map: map
-                });
+                                    });
+                                    new google.maps.Marker({
+                                        position: {
+                                            lat: locationAirport.latitude,
+                                            lng: locationAirport.longitude
+                                        },
+                                        map: map
+                                    });
 
 
 
 //setting the main marker ...should be the user destination
 
 
-                function setMarker(location) {
-                    marker.setPosition(location);
-                }
+                                    function setMarker(location) {
+                                        marker.setPosition(location);
+                                    }
 
 
-                // function to get a marker for each poi on the JSON
-                function poiToMarker(data) {
-                    for (var i = 0; i < data.points_of_interest.length; i++) {
+                                    // function to get a marker for each poi on the JSON
+                                    function poiToMarker(data) {
+                                        for (var i = 0; i < data.points_of_interest.length; i++) {
 
-                        console.log(data[0]);
+                                            console.log(data[0]);
 
-                        // new google.maps.Marker({
-                        //     position: {
-                        //         lat: location[0].latitude,
-                        //         lng: location[1].longitude
-                        //     },
-                        //     map: map
-                        // });
+                                            // new google.maps.Marker({
+                                            //     position: {
+                                            //         lat: location[0].latitude,
+                                            //         lng: location[1].longitude
+                                            //     },
+                                            //     map: map
+                                            // });
 
 
-                        $("#poiPosts").append(createReport(data.points_of_interest[i]));
+                                            $("#poiPosts").append(createReport(data.points_of_interest[i]));
 
-                    }
+                                        }
 
-                }
+                                    }
 
-                console.log("que onda, vas a sevir on no?");
+                                    console.log("que onda, vas a sevir on no?");
 
 //creating the div for the view
 
-                function createReport(poi) {
-                    var htmlPlace = "";
-                    htmlPlace += "<div class='screen'>";
-                    htmlPlace += "<h3>" + poi.title + "</h3>" + "\n";
-                    htmlPlace += "<img src=" + poi.main_image + ">" + "\n";
-                    htmlPlace += "<p> " + poi.details.description + "</p>" + "\n";
-                    htmlPlace += "</div>";
-                    return htmlPlace
-                }
+                                    function createReport(poi) {
+                                        var htmlPlace = "";
+                                        htmlPlace += "<div class='screen'>";
+                                        htmlPlace += "<h3>" + poi.title + "</h3>" + "\n";
+                                        htmlPlace += "<img src=" + poi.main_image + ">" + "\n";
+                                        htmlPlace += "<p> " + poi.details.description + "</p>" + "\n";
+                                        htmlPlace += "</div>";
+                                        return htmlPlace
+                                    }
 
 
 
+
+                                });
+
+
+
+                });
 
             });
 
-
-
-
-
-    });
-    }
+        }
 });
+
 
 
 /* =======================================================================
