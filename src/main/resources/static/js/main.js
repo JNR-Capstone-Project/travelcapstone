@@ -338,10 +338,10 @@ $(function () {
     } else {
 
         $(document).ready(function() {
-            $( "#dash tbody tr td.searchDestination" ).on( "click", function( event ) {
+            $( "#dash tbody tr" ).on( "click", function( event ) {
 
 
-                globalDest = this.innerText;
+                globalDest = this.innerText.slice(4,7);
                 console.log(globalDest);
 
                 /* =======================================================================
