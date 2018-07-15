@@ -369,21 +369,21 @@ $(function () {
                     var map = new google.maps.Map(mapCanvas, mapOptions);
                     // obtain the Poi JSON  passing a location and setting the markers for the destination
 
-                    //
-                    // $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
-                    //     {
-                    //         dataType: 'json',
-                    //
-                    //         apikey: apiKey,
-                    //         latitude: locationAirport.latitude,
-                    //         longitude: locationAirport.longitude,
-                    //         radius: '40'
-                    //     }).done(function (data) {
-                    //     console.log(data);
-                    //     poiToMarker(data);
-                    //
-                    //
-                    // });
+
+                    $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+                        {
+                            dataType: 'json',
+
+                            apikey: apiKey,
+                            latitude: locationAirport.latitude,
+                            longitude: locationAirport.longitude,
+                            radius: '40'
+                        }).done(function (data) {
+                        console.log(data);
+                        poiToMarker(data);
+
+
+                    });
                     new google.maps.Marker({
                         position: {
                             lat: locationAirport.latitude,
@@ -427,17 +427,16 @@ $(function () {
 
 //creating the div for the view
 
+
+
                     function createReport(poi) {
                         var htmlPlace = "";
-                        htmlPlace += "<div class='screen'>";
-                        htmlPlace += "<h3>" + poi.title + "</h3>" + "\n";
-                        htmlPlace += "<img src=" + poi.main_image + ">" + "\n";
-                        htmlPlace += "<p> " + poi.details.description + "</p>" + "\n";
-                        htmlPlace += "</div>";
+                        htmlPlace += "<div class='card col-lg-4'><img class='card-img-top' src=" + poi.main_image + ">" + "\n";
+                        htmlPlace += "<div class='card-body'><h4 class='card-title'>"+ poi.title + "</h4>" + "\n";
+                        htmlPlace += "<p class='card-text'>" + poi.details.description + "</p> " + "\n";
+                        htmlPlace += "</div></div>";
                         return htmlPlace
                     }
-
-
 
 
                 });
