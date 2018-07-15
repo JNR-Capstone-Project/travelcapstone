@@ -2,6 +2,7 @@
 var airportCode;
 const apiKey = document.getElementById("amadeus-API").value;
 
+
 /* =======================================================================
                     Form validation
 ========================================================================*/
@@ -41,12 +42,7 @@ $(function() {
                 url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                 dataType: "json",
                 data: {
-
-
                     apikey: apiKey,
-
-
-
                     term: request.term
                 },
                 success: function( data ) {
@@ -209,9 +205,7 @@ $(function () {
 
 
             var location = airportCode;
-            console.log(airportCode);
             var checkIn = $("#checkIn").val();
-            console.log(checkIn);
             var checkOut = $("#checkOut").val();
             console.log(checkOut);
 
@@ -338,7 +332,9 @@ $(function () {
     } else {
 
         $(document).ready(function() {
+
             $( "#dash tbody tr" ).on( "click", function( event ) {
+
 
 
                 globalDest = this.innerText.slice(4,7);
@@ -347,13 +343,14 @@ $(function () {
                 /* =======================================================================
                                     POI Map
                 ========================================================================*/
-
-                var locationAirport = globalDest;
-                var airportLocationUrl = 'https://api.sandbox.amadeus.com/v1.2/location/' + locationAirport + '?apikey=' + apiKey;
+                var poiResults;
+                var locationAirport ;
+                var airportLocationUrl = 'https://api.sandbox.amadeus.com/v1.2/location/' +  globalDest + '?apikey=' + apiKey;
 
                 var airportLocation = $.get(airportLocationUrl);
                 airportLocation.done(function (response) {
                     locationAirport = response.airports[0].location;
+                    console.log(locationAirport)
 
                     //building the map
                     var mapOptions = {
@@ -384,6 +381,7 @@ $(function () {
 
 
                     });
+//setting a marker on the destination
                     new google.maps.Marker({
                         position: {
                             lat: locationAirport.latitude,
@@ -392,40 +390,42 @@ $(function () {
                         map: map
                     });
 
+// obtain the Poi JSON  passing a location and setting the markers for the destination
 
+                    poiResults=$.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+                        {
+                            dataType: 'json',
+                            apikey: apiKey,
+                            latitude: locationAirport.latitude,
+                            longitude: locationAirport.longitude,
+                            radius: '40'
+                        });
+                    poiResults.done(function (data) {
+                        poiToMarker(data);
 
-//setting the main marker ...should be the user destination
+                    });
 
-
-                    function setMarker(location) {
-                        marker.setPosition(location);
-                    }
 
 
                     // function to get a marker for each poi on the JSON
                     function poiToMarker(data) {
                         for (var i = 0; i < data.points_of_interest.length; i++) {
+                            // console.log(data.points_of_interest[i]+ "  : thi is from the poi ");
+                            //descomento esto para poder posicionar cada marcados en el mapa
+                            new google.maps.Marker({
+                                position: {
+                                    lat: data.points_of_interest[i].location.latitude,
+                                    lng: data.points_of_interest[i].location.longitude
+                                },
+                                map: map
+                            });
 
-                            console.log(data[0]);
-
-                            // new google.maps.Marker({
-                            //     position: {
-                            //         lat: location[0].latitude,
-                            //         lng: location[1].longitude
-                            //     },
-                            //     map: map
-                            // });
-
-
-                            $("#poiPosts").append(createReport(data.points_of_interest[i]));
+                            // $("#poiPosts").append(createReport(data.points_of_interest[i]));
 
                         }
-
                     }
 
-                    console.log("que onda, vas a sevir on no?");
-
-//creating the div for the view
+                    //adding the hatm for the poi
 
 
 
@@ -438,10 +438,7 @@ $(function () {
                         return htmlPlace
                     }
 
-
                 });
-
-
 
             });
 
@@ -457,59 +454,70 @@ $(function () {
 
 
 $(function () {
+
     if(document.getElementById('dash') === null){
         console.log("testing again");
     } else{
 
         $("#dash tbody tr").on('click', function() {
 
-        var dest = this.innerText.slice(4,7);
-        var start = this.innerText.slice(8,19);
-        var end = this.innerText.slice(19,30);
+            var dest = this.innerText.slice(4,7);
+            var start = this.innerText.slice(8,19);
+            var end = this.innerText.slice(19,30);
             console.log(dest);
             console.log(start);
             console.log(end);
-            var airportLocationUrl = 'https://api.sandbox.amadeus.com/v1.2/location/' + dest + '?apikey=' + apiKey;
 
+            var airportLocationUrl = 'https://api.sandbox.amadeus.com/v1.2/location/' + dest + '?apikey=' + apiKey;
             var airportLocation = $.get(airportLocationUrl);
+            console.log("this is the airport location: "+airportLocation);
             airportLocation.done(function (response) {
                 dest = response.airports[0].location;
 
+
             });
+            var request = 'https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=' + apiKey + '&location=' + dest + '&check_in=' +start + '&check_out=' +end;
+            var hotel = $.get(request);
+            hotel.done(function (response) {
 
-        var request = 'https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=' + apiKey + '&location=' + dest + '&check_in=' +start + '&check_out=' +end;
-        var hotel = $.get(request);
-        hotel.done(function (response) {
+                var mapOptions = {
+                    zoom: 12,
+                    center: {
+                        lat: dest.latitude,
+                        lng: dest.longitude
+                    },
+                    mapTypeId: google.maps.MapTypeId.TERRAIN,
+                    draggable: true
+                };
+                var mapCanvas = document.getElementById('hotel-map');
+                var mapH = new google.maps.Map(mapCanvas, mapOptions);
+                new google.maps.Marker({
+                    position: {
+                        lat: dest.latitude,
+                        lng: dest.longitude
+                    },
+                    map: mapH
+                });
 
 
-            for (var i = 0; i < response.results.length; i++) {
+                for (var i = 0; i < response.results.length; i++) {
 
-                console.log(response.results[i].location.latitude);
-                console.log(response.results[i].location.longitude);
-            }
+                    new google.maps.Marker({
+                        position: {
+                            lat: response.results[i].location.latitude,
+                            lng: response.results[i].location.longitude
+                        },
+                        map: mapH
+                    });
+
+                    // console.log(response.results[i].location.latitude);
+                    // console.log(response.results[i].location.longitude);
+                }
+
+
+            });
 
             //building the map
-            var mapOptions = {
-                zoom: 12,
-                center: {
-                    lat: dest.latitude,
-                    lng: dest.longitude
-                },
-                mapTypeId: google.maps.MapTypeId.TERRAIN,
-                draggable: true
-            };
-            var mapCanvas = document.getElementById('hotel-map');
-            var map = new google.maps.Map(mapCanvas, mapOptions);
-            new google.maps.Marker({
-                position: {
-                    lat: dest.latitude,
-                    lng: dest.longitude
-                },
-                map: map
-            });
-
-
-        });
 
         });
     }
@@ -546,8 +554,8 @@ $(".edit").click(function(e){
     $("input[name='id']").val(searchId);
 
 
-    console.log(searchData);
-    console.log(searchAdults, searchChildren)
+    // console.log(searchData);
+    // console.log(searchAdults, searchChildren)
 
 });
 
