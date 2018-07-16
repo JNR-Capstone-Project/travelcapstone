@@ -373,7 +373,7 @@ $(function () {
                         map: map
                     });
 
-// obtain the Poi JSON  passing a location and setting the markers for the destination
+// obtaining the Poi JSON  passing a location and setting the markers for the destination
 
                     poiResults=$.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
                         {
@@ -403,13 +403,13 @@ $(function () {
                                 map: map
                             });
 
-                            // $("#poiPosts").append(createReport(data.points_of_interest[i]));
+                            $("#poiPosts").append(createReport(data.points_of_interest[i]));
 
                         }
                     }
 
-                    //adding the hatm for the poi
 
+                    //adding the html for the poi
                     function createReport(poi) {
                         var htmlPlace = "";
                         htmlPlace += "<div class='screen'>";
