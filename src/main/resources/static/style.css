@@ -2,9 +2,8 @@
 
 #travel-bg{
 
-    background-image: url("https://images.pexels.com/photos/417054/pexels-photo-417054.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350") ;
+    background-image: url("https://images.pexels.com/photos/59519/pexels-photo-59519.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     opacity: 0.9;
-
 
 
 
@@ -43,4 +42,12 @@
 
 .hidden {
     display: none;
+}
+.dude{
+    position: absolute;
+    top: 25%;
+    left: 25%;
+}
+.group{
+    margin: 3%;
 }

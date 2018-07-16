@@ -364,6 +364,23 @@ $(function () {
                     };
                     var mapCanvas = document.getElementById('poiMap');
                     var map = new google.maps.Map(mapCanvas, mapOptions);
+                    // obtain the Poi JSON  passing a location and setting the markers for the destination
+
+
+                    $.get('https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle?',
+                        {
+                            dataType: 'json',
+
+                            apikey: apiKey,
+                            latitude: locationAirport.latitude,
+                            longitude: locationAirport.longitude,
+                            radius: '40'
+                        }).done(function (data) {
+                        console.log(data);
+                        poiToMarker(data);
+
+
+                    });
 //setting a marker on the destination
                     new google.maps.Marker({
                         position: {
@@ -379,8 +396,10 @@ $(function () {
                         {
                             dataType: 'json',
                             apikey: apiKey,
-                            latitude: locationAirport.latitude,
-                            longitude: locationAirport.longitude,
+                            // latitude: locationAirport.latitude,
+                            latitude: 42.36 ,
+                            // longitude: locationAirport.longitude,
+                            longitude: 71.017,
                             radius: '40'
                         });
                     poiResults.done(function (data) {
@@ -388,6 +407,7 @@ $(function () {
 
                     });
 
+                    // 42.36514&longitude=-71.01777
 
 
                     // function to get a marker for each poi on the JSON
@@ -409,14 +429,15 @@ $(function () {
                     }
 
 
+
                     //adding the html for the poi
+
                     function createReport(poi) {
                         var htmlPlace = "";
-                        htmlPlace += "<div class='screen'>";
-                        htmlPlace += "<h3>" + poi.title + "</h3>" + "\n";
-                        htmlPlace += "<img src=" + poi.main_image + ">" + "\n";
-                        htmlPlace += "<p> " + poi.details.description + "</p>" + "\n";
-                        htmlPlace += "</div>";
+                        htmlPlace += "<div class='card col-lg-4'><div class='container'><img class='card-img-top' src=" + poi.main_image + "></div>" + "\n";
+                        htmlPlace += "<div class='card-body'><h4 class='card-title'>"+ poi.title + "</h4>" + "\n";
+                        htmlPlace += "<p class='card-text'>" + poi.details.description + "</p> " + "\n";
+                        htmlPlace += "</div></div>";
                         return htmlPlace
                     }
 
