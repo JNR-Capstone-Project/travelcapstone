@@ -396,8 +396,10 @@ $(function () {
                         {
                             dataType: 'json',
                             apikey: apiKey,
-                            latitude: locationAirport.latitude,
-                            longitude: locationAirport.longitude,
+                            // latitude: locationAirport.latitude,
+                            latitude: 42.36 ,
+                            // longitude: locationAirport.longitude,
+                            longitude: 71.017,
                             radius: '40'
                         });
                     poiResults.done(function (data) {
@@ -405,6 +407,7 @@ $(function () {
 
                     });
 
+                    // 42.36514&longitude=-71.01777
 
 
                     // function to get a marker for each poi on the JSON
@@ -420,7 +423,7 @@ $(function () {
                                 map: map
                             });
 
-                            // $("#poiPosts").append(createReport(data.points_of_interest[i]));
+                            $("#poiPosts").append(createReport(data.points_of_interest[i]));
 
                         }
                     }
@@ -431,7 +434,7 @@ $(function () {
 
                     function createReport(poi) {
                         var htmlPlace = "";
-                        htmlPlace += "<div class='card col-lg-4'><img class='card-img-top' src=" + poi.main_image + ">" + "\n";
+                        htmlPlace += "<div class='card col-lg-4'><div class='container'><img class='card-img-top' src=" + poi.main_image + "></div>" + "\n";
                         htmlPlace += "<div class='card-body'><h4 class='card-title'>"+ poi.title + "</h4>" + "\n";
                         htmlPlace += "<p class='card-text'>" + poi.details.description + "</p> " + "\n";
                         htmlPlace += "</div></div>";
