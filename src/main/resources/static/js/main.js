@@ -94,13 +94,16 @@ $(function () {
             var resource_url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + apiKey + origin + destination + departure_date + return_date + maximumPrice + currency;
             airportCode=$("#destination").val();
             var request = $.get(resource_url);
+            $(".loading").show();
             request.fail(function (current, status, error) {
+                $(".loading").hide();
                 console.log(status);
                 console.log(error);
             });
 
 
             request.done(function (response) {
+                $(".loading").hide();
                 console.log(response);
 
                 for (var i = 0; i < response.results.length; i++) {
@@ -220,6 +223,7 @@ $(function () {
                         check_out: check_out,
                         location: location
                     }).done(function (data) {
+                    $(".loading").hide();
                     console.log(data.results);
                     // $(".container").html(" "); line to clean the results every time for a new search load
                     for (var i = 0; i < data.results.length; i++) {
@@ -284,17 +288,20 @@ $(function () {
 
             var url_rental = "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + apiKey + loc + pickup + dropoff;
 
-            var request = $.get(url_rental);
-            request.fail(function (current, status, error) {
-                console.log(status);
-                console.log(error);
-            });
-            console.log(request);
-            request.done(function (response) {
-                console.log(response);
-                for (var i=0;i<response.results.length;i++){
-                    $("#cars").append(setRental(response.results[i]));
-                }
+        var request = $.get(url_rental);
+        $(".loading").show();
+        request.fail(function (current, status, error) {
+            $(".loading").hide();
+            console.log(status);
+            console.log(error);
+        });
+        console.log(request);
+        request.done(function (response) {
+            $(".loading").hide();
+            console.log(response);
+            for (var i=0;i<response.results.length;i++){
+                $("#cars").append(setRental(response.results[i]));
+            }
 
             });
 
@@ -562,4 +569,14 @@ $(".edit").click(function(e){
 
 });
 
+$(".loading").hide();
 
+// $(document).ajaxStart(function() {
+//     console.log("Ajax request started");
+//     $("#loading").show();
+// });
+//
+// $(document).ajaxStop(function() {
+//     console.log("Ajax request ended");
+//     $("#loading").hide();
+// });
