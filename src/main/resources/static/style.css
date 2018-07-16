@@ -43,11 +43,12 @@
 .hidden {
     display: none;
 }
-.dude{
-    position: absolute;
-    top: 25%;
-    left: 25%;
-}
+
 .group{
-    margin: 3%;
+    margin: 2%;
+}
+.bg-image{
+    background-image: url("https://images.pexels.com/photos/210307/pexels-photo-210307.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500");
+    height: 100%;
+    width: 100%;
 }

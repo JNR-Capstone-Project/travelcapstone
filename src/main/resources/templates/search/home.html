@@ -97,12 +97,18 @@
 
     <!--main content start-->
     <section id="main-content">
-        <section class="wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="page-header text-center"> Welcome to Viatores Travel! </h3>
+        <section class="wrapper ">
+            <div class="container-fluid ">
+                <div class="jumbotron jumbotron-fluid bg-image">
+
+                        <h1 class="text-center" style="color: whitesmoke;" ><strong> Welcome to Viatores Travel</strong></h1>
+                        <p class="text-center" style="color: whitesmoke;" > Join our group of Viator junkies and plan your trip</p>
 
                 </div>
+                <!--<div class="col-lg-12">-->
+                    <!--<h3 class="page-header text-center"> Welcome to Viatores Travel! </h3>-->
+
+                <!--</div>-->
             </div>
 
 
@@ -149,23 +155,23 @@
                                 <!--</li>-->
                             </ul>
                         </header>
-                        <div class="panel-body">
+                        <div class="panel-body bg-image">
                             <div class="tab-content">
                                 <div id="flights" class="tab-pane active">
-                                    <div class="container">
+                                    <div class="container ">
 
-                                        <h1>Where should we go?</h1>
+                                        <h1 style="color: black"><strong>Where should we go?</strong></h1>
                                         <form th:action="@{search/home}" method="post" th:object="${search}" class="needs-validation" th:novalidate="novalidate" >
                                             <div class="form-row">
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="origin">Select Origin</label>
+                                                    <label for="origin" style="color: black">Select Origin</label>
                                                     <input th:field="*{origin}" type="text" id="origin" class="airports form-control" aria-describedby="emailHelp" placeholder="Choose a starting location" th:required="required"/>
                                                     <div class="invalid-feedback">
                                                         Invalid entry
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="destination">Select Destination</label>
+                                                    <label for="destination" style="color: black" >Select Destination</label>
                                                     <input th:field="*{destination}" type="text" id="destination" class="airports form-control" placeholder="Choose an end point" th:required="required" />
                                                     <div class="invalid-feedback">
                                                         Invalid entry
@@ -174,28 +180,28 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-3 mb-3">
-                                                    <label for="departure">Departure Date</label>
+                                                    <label for="departure" style="color: black" >Departure Date</label>
                                                     <input th:field="*{start_date}" type="date" id="departure" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
                                                     <div class="invalid-feedback">
                                                         Invalid entry
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
-                                                    <label for="returnDate">Return Date</label>
+                                                    <label for="returnDate" style="color: black">Return Date</label>
                                                     <input th:field="*{end_date}" type="date" id="returnDate" class="form-control"  placeholder="Select a return date" th:required="required"/>
                                                     <div class="invalid-feedback">
                                                         Invalid entry
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
-                                                    <label for="children">Children</label>
+                                                    <label for="children" style="color: black">Children</label>
                                                     <input th:field="*{children}" type="number" id="children" class="form-control"  placeholder="1" th:required="required"/>
                                                     <div class="invalid-feedback">
                                                         Invalid entry
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
-                                                    <label for="adults">Adults</label>
+                                                    <label for="adults" style="color: black">Adults</label>
                                                     <input th:field="*{adults}" type="number" id="adults" class="form-control"  placeholder="1" th:required="required"/>
                                                     <div class="invalid-feedback">
                                                         Invalid entry
@@ -204,7 +210,7 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-4 mb-3">
-                                                    <label for="price">Name a Price</label>
+                                                    <label for="price" style="color: black">Name a Price</label>
                                                     <input th:field="*{price}" type="text" id="price" class="form-control"  placeholder="0.00" th:required="required"/>
                                                     <div class="invalid-feedback">
                                                         Invalid entry
@@ -269,11 +275,11 @@
                                 <div id="hotel" class="tab-pane">
                                     <div class="container">
 
-                                        <h1>Look for a hotel near your area!</h1>
+                                        <h1 style="color: black"><strong>Look for a hotel near your area!</strong></h1>
                                         <form class="needs-validation" th:novalidate="novalidate" >
                                             <div class="form-row">
                                                 <div class="col-md-4 mb-3" style="display: none">
-                                                    <label for="destination">Select Destination</label>
+                                                    <label for="destination"  style="color: black;">Select Destination</label>
                                                     <input  type="text" id="hotelDestination" class=" form-control" placeholder="Where are you going?" th:required="required" />
                                                     <div class="invalid-feedback">
                                                         Invalid entry
@@ -283,14 +289,14 @@
 
                                             </div>
                                             <div class="form-row">
-                                                <div class="col-md-3 mb-3">
+                                                <div class="col-md-3 mb-3"  style="color: black;">
                                                     <label for="departure">Departure Date</label>
                                                     <input type="date" id="checkIn" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
                                                     <div class="invalid-feedback">
                                                         Invalid entry
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3 mb-3">
+                                                <div class="col-md-3 mb-3" style="color: black;">
                                                     <label for="returnDate">Return Date</label>
                                                     <input  type="date" id="checkOut" class="form-control"  placeholder="Select a return date" th:required="required"/>
                                                     <div class="invalid-feedback">
@@ -350,11 +356,11 @@
                                 <div id="rental" class="tab-pane">
                                     <div class="container">
 
-                                        <h1>Rent a car, be ahead of the game!</h1>
+                                        <h1 style="color: black"><strong> Rent a car, be ahead of the game!</strong></h1>
                                         <form th:action="@{/search/home}" method="post" th:object="${search}" class="needs-validation" th:novalidate="novalidate" >
                                             <div class="form-row">
                                                 <div class="col-md-4 mb-3" style="display: none">
-                                                    <label for="destination">Destination</label>
+                                                    <label for="destination" style="color: black;">Destination</label>
                                                     <input th:field="*{destination}" type="text" id="rentalLocation" class=" form-control" placeholder="Where are you going?" th:required="required" />
                                                     <div class="invalid-feedback">
                                                         Invalid entry
@@ -364,14 +370,14 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-3 mb-3">
-                                                    <label for="departure">Pick up day</label>
+                                                    <label for="departure" style="color: black;">Pick up day</label>
                                                     <input th:field="*{start_date}" type="date" id="pickUp" class="form-control" aria-describedby="emailHelp" placeholder="Select a departure date" th:required="required"/>
                                                     <div class="invalid-feedback">
                                                         Invalid entry
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
-                                                    <label for="returnDate">Return Date</label>
+                                                    <label for="returnDate" style="color: black;">Return Date</label>
                                                     <input th:field="*{end_date}" type="date" id="dropOff" class="form-control"  placeholder="Select a return date" th:required="required"/>
                                                     <div class="invalid-feedback">
                                                         Invalid entry
