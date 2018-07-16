@@ -13,7 +13,7 @@
 
 <body id="travel-bg">
 
-  <div class="container" th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+  <div class="container padd" th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
         <span th:case="${false}">
             <form class="login-form" th:action="@{/login}" method="post">
               <div class="login-wrap">
