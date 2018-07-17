@@ -109,7 +109,7 @@
                                 </h4>
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
-                                <div class="panel-body">
+                                <div class="panel-body" style="overflow-x:auto;">
                                     <div class="container ">
                                         <div>
                                             <form  th:action="@{/search/saveEdit}" id="editionForm" th:object="${mySearch}" method="post" class="hidden">
@@ -179,7 +179,7 @@
                                                 <button type="submit" class="subbtn btn btn-primary">Save changes</button>
                                             </form>
                                         </div>
-                                        <table class="table table-striped table-advance table-hover" id="dash">
+                                        <table class="table table-striped table-advance table-hover"  id="dash">
                                             <tbody>
                                             <tr>
                                                 <th><i class="icon_datareport"></i> Origin</th>
@@ -241,25 +241,20 @@
                     <section class="panel">
                         <header class="panel-heading tab-bg-info">
                             <ul class="nav nav-tabs">
-                                <li class="active">
+                                <li class="active col-sm-4 p-0">
                                     <a data-toggle="tab" href="#recent-activity">
                                         <i class="icon-home"></i>
                                         Manage your trip
                                     </a>
                                 </li>
-                                <li id="hotel-tag">
+                                <li class="col-sm-4 p-0" id="hotel-tag" >
                                     <a data-toggle="tab" href="#dash-hotel">
                                         <i class="icon-user"></i>
                                         Find hotels
                                     </a>
                                 </li>
-                                <li class="" id="car-rental-tag"  style="display: none">
-                                    <a data-toggle="tab" href="#dash-rental">
-                                        <i class="icon-envelope"></i>
-                                        Find car rentals
-                                    </a>
-                                </li>
-                                <li class="" id="dash-poi-tag">
+
+                                <li class="col-sm-4 p-0" id="dash-poi-tag">
                                     <a data-toggle="tab" href="#dash-poi" >
                                         <i class="icon-envelope"></i>
                                         Find entertainment

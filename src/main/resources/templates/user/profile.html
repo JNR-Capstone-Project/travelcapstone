@@ -110,13 +110,13 @@
               <header class="panel-heading tab-bg-info">
                 <ul class="nav nav-tabs">
 
-                  <li  class="active">
+                  <li  class="active col-sm-4 p-0">
                     <a data-toggle="tab" href="#profile">
                                           <i class="icon-user"></i>
                                           Profile
                                       </a>
                   </li>
-                  <li class="">
+                  <li class=" col-sm-4 p-0">
                     <a data-toggle="tab" href="#edit-profile">
                                           <i class="icon-envelope"></i>
                                           Edit Profile
@@ -134,7 +134,7 @@
                         Hello <span th:text="${user.username}"></span>
                       </div>
                       <div class="panel-body bio-graph-info">
-                        <h1>Bio Graph</h1>
+                        <h1>Account Details</h1>
                         <div class="row">
                           <div class="bio-row">
                             <p>Username: <span th:text="${user.username}"></span> </p>

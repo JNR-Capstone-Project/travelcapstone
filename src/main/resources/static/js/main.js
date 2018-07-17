@@ -210,6 +210,7 @@ $(function () {
             var location = airportCode;
             var checkIn = $("#checkIn").val();
             var checkOut = $("#checkOut").val();
+            $(".loading").show();
             console.log(checkOut);
 
 
