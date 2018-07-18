@@ -61,7 +61,7 @@ public class SearchController {
         search.setSimpleDateStart(search.getStart_date().substring(0, 10));
         search.setSimpleDateEnd(search.getEnd_date().substring(0, 10));
         searchRepository.save(search);
-        return "redirect:/";
+        return "redirect:/dashboard";
     }
 
     @PostMapping("/search/edit")
