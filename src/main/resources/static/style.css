@@ -49,8 +49,7 @@
 }
 .bg-image{
     background-image: url("https://images.pexels.com/photos/210307/pexels-photo-210307.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500");
-    height: 100%;
-    width: 100%;
+    background-size: cover;
 }
 .padd{
     padding-top: 10%;
