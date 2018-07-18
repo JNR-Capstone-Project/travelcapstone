@@ -102,11 +102,7 @@ public class UserController {
         User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user1=users.findUsersById(userSession.getId());
         boolean isAMatch =(newPassword.equals(confirmNewPassword));
-        System.out.println(user1.getUsername());
-        user1.setPhonenumber(user.getPhonenumber());
-        user1.setEmail(user.getEmail());
-        user1.setUsername(user.getUsername());
-        if (!user.getPassword().equals(user1.getPassword())){
+        if (!newPassword.equals("")&&!confirmNewPassword.equals("")) {
             if (isAMatch){
                 user1.setPassword(passwordEncoder.encode(newPassword));
             }
@@ -114,10 +110,13 @@ public class UserController {
                 return "user/profile";
             }
         }
-        else {
-            return "user/profile";
+        if(newPassword.equals("")&&confirmNewPassword.equals("")) {
+            user1.setPassword(user1.getPassword());
         }
 
+        user1.setEmail(user.getEmail());
+        user1.setUsername(user.getUsername());
+        user1.setPhonenumber(user.getPhonenumber());
         users.save(user1);
         return "user/profile";
     }
